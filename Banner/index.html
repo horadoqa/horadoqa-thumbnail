@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Banner YouTube — Identidade Editorial Técnica</title> <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --green-deep: #0F3D2E;
+            --green-moss: #3F6F52;
+            --green-signal: #8FE3B0;
+            --gold: #C99A44;
+            --ivory: #F3EFE6;
+            --ink: #12201A;
+            --safe-width: 1546px;
+            --safe-height: 423px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            min-height: 100%;
+            background: #202823;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            font-family: "Manrope", sans-serif;
+        }
+
+        /* ========================================================== CANVAS 2560 x 1440 ========================================================== */
+        .youtube-banner {
+            position: relative;
+            width: 2560px;
+            height: 1440px;
+            overflow: hidden;
+            color: var(--ivory);
+            background: radial-gradient(circle at 75% 45%, rgba(63, 111, 82, 0.22), transparent 32%), linear-gradient(135deg, var(--green-deep) 0%, #0c3024 55%, var(--ink) 100%);
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.35);
+        }
+
+        /* ========================================================== TEXTURA / GRID ========================================================== */
+        .grid {
+            position: absolute;
+            inset: 0;
+            opacity: 0.13;
+            background-image: linear-gradient(rgba(143, 227, 176, 0.18) 1px, transparent 1px), linear-gradient(90deg, rgba(143, 227, 176, 0.18) 1px, transparent 1px);
+            background-size: 80px 80px;
+            mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
+        }
+
+        /* Pequena textura orgânica para evitar aparência excessivamente digital. */
+        .texture {
+            position: absolute;
+            inset: 0;
+            opacity: 0.035;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.8) 0.5px, transparent 0.5px);
+            background-size: 7px 7px;
+            pointer-events: none;
+        }
+
+        /* ========================================================== ELEMENTOS DECORATIVOS ========================================================== */
+        .corner-mark {
+            position: absolute;
+            width: 110px;
+            height: 110px;
+            border-top: 1px solid rgba(143, 227, 176, 0.45);
+            border-left: 1px solid rgba(143, 227, 176, 0.45);
+            top: 130px;
+            left: 180px;
+        }
+
+        .corner-mark::after {
+            content: "";
+            position: absolute;
+            width: 7px;
+            height: 7px;
+            background: var(--green-signal);
+            top: -4px;
+            left: -4px;
+            border-radius: 50%;
+        }
+
+        .vertical-line {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, rgba(143, 227, 176, 0.14) 30%, rgba(143, 227, 176, 0.14) 70%, transparent);
+        }
+
+        /* ========================================================== SAFE AREA ========================================================== 1546 x 423 px Centralizada no canvas de 2560 x 1440. X: (2560 - 1546) / 2 = 507px Y: (1440 - 423) / 2 = 508.5px */
+        .safe-area {
+            position: absolute;
+            width: 1546px;
+            height: 423px;
+            left: 507px;
+            top: 508px;
+            border: 1px dashed rgba(143, 227, 176, 0.28);
+            pointer-events: none;
+        }
+
+        .safe-label {
+            position: absolute;
+            top: -30px;
+            left: 0;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 15px;
+            letter-spacing: 0.08em;
+            color: rgba(143, 227, 176, 0.55);
+        }
+
+        /* ========================================================== CONTEÚDO PRINCIPAL Todo conteúdo importante permanece dentro da safe area. ========================================================== */
+        .content {
+            position: absolute;
+            left: 507px;
+            top: 508px;
+            width: 1546px;
+            height: 423px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 72px;
+        }
+
+        /* ========================================================== BLOCO ESQUERDO ========================================================== */
+        .identity {
+            max-width: 850px;
+        }
+
+        .eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 19px;
+            font-weight: 500;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--green-signal);
+        }
+
+        .status-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--green-signal);
+            box-shadow: 0 0 0 5px rgba(143, 227, 176, 0.08);
+        }
+
+        /* Wordmark / nome do canal */
+        .brand {
+            margin: 0;
+            font-family: "Newsreader", serif;
+            font-size: 92px;
+            font-weight: 500;
+            line-height: 0.92;
+            letter-spacing: -0.045em;
+            color: var(--ivory);
+        }
+
+        .brand em {
+            color: var(--green-signal);
+            font-style: italic;
+        }
+
+        /* Descrição curta */
+        .description {
+            margin-top: 28px;
+            max-width: 730px;
+            font-family: "Manrope", sans-serif;
+            font-size: 24px;
+            font-weight: 500;
+            line-height: 1.45;
+            color: rgba(243, 239, 230, 0.78);
+        }
+
+        /* ========================================================== BLOCO DIREITO — TERMINAL / RELATÓRIO ========================================================== */
+        .system-card {
+            width: 330px;
+            padding: 22px 24px;
+            border: 1px solid rgba(143, 227, 176, 0.22);
+            background: rgba(8, 28, 21, 0.48);
+            backdrop-filter: blur(8px);
+        }
+
+        .system-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 14px;
+            margin-bottom: 18px;
+            border-bottom: 1px solid rgba(143, 227, 176, 0.12);
+        }
+
+        .system-title {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 13px;
+            letter-spacing: 0.08em;
+            color: rgba(243, 239, 230, 0.5);
+        }
+
+        .system-version {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 12px;
+            color: var(--gold);
+        }
+
+        .system-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 12px 0;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 14px;
+        }
+
+        .system-row .label {
+            color: rgba(243, 239, 230, 0.48);
+        }
+
+        .system-row .value {
+            color: var(--ivory);
+        }
+
+        .system-row .pass {
+            color: var(--green-signal);
+        }
+
+        /* ========================================================== RODAPÉ / METADADOS ========================================================== */
+        .meta {
+            position: absolute;
+            left: 507px;
+            bottom: 78px;
+            width: 1546px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 14px;
+            color: rgba(243, 239, 230, 0.42);
+        }
+
+        .meta-left {
+            display: flex;
+            gap: 26px;
+        }
+
+        .meta span::before {
+            content: "// ";
+            color: var(--green-moss);
+        }
+
+        .meta-accent {
+            color: var(--gold);
+        }
+
+        /* ========================================================== LINHA DE SINALIZAÇÃO ========================================================== */
+        .signal {
+            position: absolute;
+            left: 507px;
+            top: 958px;
+            width: 1546px;
+            height: 2px;
+            background: linear-gradient(90deg, var(--green-signal) 0%, rgba(143, 227, 176, 0.2) 25%, transparent 70%);
+        }
+
+        /* ========================================================== RESPONSIVIDADE PARA VISUALIZAÇÃO ========================================================== */
+        @media (max-width: 1600px) {
+            body {
+                padding: 20px;
+            }
+
+            .youtube-banner {
+                transform-origin: center;
+                transform: scale(calc((100vw - 40px) / 2560));
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="youtube-banner">
+        <!-- Textura -->
+        <div class="grid"></div>
+        <div class="texture"></div>
+
+        <!-- Elementos gráficos -->
+        <div class="corner-mark"></div>
+        <div class="vertical-line"></div>
+
+        <!-- Área segura -->
+        <div class="safe-area">
+            <span class="safe-label">
+                SAFE AREA · 1546 × 423
+            </span>
+        </div>
+
+        <!-- Conteúdo -->
+        <section class="content">
+
+            <div class="identity">
+
+                <div class="eyebrow">
+                    <span class="status-dot"></span>
+                    STATUS: TESTED
+                </div>
+
+                <h1 class="brand">
+                    Hora do <em>QA</em>
+                </h1>
+
+                <p class="description">
+                    Tecnologia, produto e ideias —
+                    testados com curiosidade,
+                    precisão e contexto.
+                </p>
+
+            </div>
+
+
+            <!-- Card técnico -->
+
+            <aside class="system-card">
+
+                <header class="system-header">
+
+                    <span class="system-title">
+                        CHANNEL_REPORT
+                    </span>
+
+                    <span class="system-version">
+                        v2.4
+                    </span>
+
+                </header>
+
+                <div class="system-row">
+                    <span class="label">CONTENT</span>
+                    <span class="value">TECH</span>
+                </div>
+
+                <div class="system-row">
+                    <span class="label">RESEARCH</span>
+                    <span class="value pass">PASS</span>
+                </div>
+
+                <div class="system-row">
+                    <span class="label">OPINION</span>
+                    <span class="value">HUMAN</span>
+                </div>
+
+                <div class="system-row">
+                    <span class="label">STATUS</span>
+                    <span class="value pass">ACTIVE</span>
+                </div>
+
+            </aside>
+
+        </section>
+
+
+        <!-- Linha de sinalização -->
+
+        <div class="signal"></div>
+
+
+        <!-- Metadados -->
+
+        <footer class="meta">
+
+            <div class="meta-left">
+
+                <span>BUILD 042</span>
+                <span>TESTED</span>
+                <span>DOCUMENTED</span>
+
+            </div>
+
+            <span class="meta-accent">
+                2026
+            </span>
+
+        </footer>
+
+    </main>
+</body>
+
+</html>
