@@ -1,6 +1,4 @@
-# Thumbnail para YouTube
-
-## Identidade visual
+# Identidade visual para YouTube
 
 Uma identidade visual editorial, técnica e humana, pensada para thumbnails de YouTube que precisam transmitir **credibilidade, personalidade e precisão** sem cair em uma estética genérica de tecnologia.
 
