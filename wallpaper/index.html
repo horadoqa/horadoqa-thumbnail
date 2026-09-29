@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Hora do QA — Wallpaper</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+
+    :root {
+      --deep-green: #0F3D2E;
+      --moss: #3F6F52;
+      --signal: #8FE3B0;
+      --gold: #C99A44;
+      --ivory: #F3EFE6;
+      --ink: #12201A;
+
+      --grid: rgba(243, 239, 230, 0.045);
+      --line: rgba(143, 227, 176, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+    }
+
+    body {
+      overflow: hidden;
+      background: var(--deep-green);
+      color: var(--ivory);
+      font-family: "Manrope", sans-serif;
+    }
+
+    /* =========================
+       BACKGROUND
+    ========================= */
+
+    .wallpaper {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+      isolation: isolate;
+
+      background:
+        radial-gradient(
+          circle at 74% 35%,
+          rgba(63, 111, 82, 0.24),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 18% 80%,
+          rgba(201, 154, 68, 0.08),
+          transparent 24%
+        ),
+        var(--deep-green);
+    }
+
+    /* Grid técnico muito sutil */
+    .wallpaper::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+
+      background-size: 64px 64px;
+
+      mask-image: linear-gradient(
+        to bottom,
+        transparent,
+        black 15%,
+        black 85%,
+        transparent
+      );
+    }
+
+    /* Textura orgânica */
+    .wallpaper::after {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      z-index: -2;
+      pointer-events: none;
+
+      opacity: 0.08;
+
+      background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
+
+      mix-blend-mode: overlay;
+    }
+
+    /* =========================
+       DECORATIVE ELEMENTS
+    ========================= */
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(1px);
+    }
+
+    .orb-one {
+      width: 420px;
+      height: 420px;
+      top: -230px;
+      right: -80px;
+
+      border: 1px solid rgba(143, 227, 176, 0.12);
+      box-shadow:
+        0 0 100px rgba(143, 227, 176, 0.05),
+        inset 0 0 80px rgba(143, 227, 176, 0.025);
+    }
+
+    .orb-two {
+      width: 720px;
+      height: 720px;
+      bottom: -580px;
+      left: -300px;
+
+      border: 1px solid rgba(201, 154, 68, 0.10);
+    }
+
+    .crosshair {
+      position: absolute;
+      width: 38px;
+      height: 38px;
+      opacity: 0.65;
+    }
+
+    .crosshair::before,
+    .crosshair::after {
+      content: "";
+      position: absolute;
+      background: var(--signal);
+      opacity: 0.35;
+    }
+
+    .crosshair::before {
+      width: 1px;
+      height: 100%;
+      left: 50%;
+      top: 0;
+    }
+
+    .crosshair::after {
+      height: 1px;
+      width: 100%;
+      left: 0;
+      top: 50%;
+    }
+
+    .crosshair-a {
+      top: 15%;
+      left: 8%;
+    }
+
+    .crosshair-b {
+      right: 9%;
+      bottom: 17%;
+    }
+
+    /* =========================
+       MAIN LAYOUT
+    ========================= */
+
+    .content {
+      position: relative;
+      width: min(1400px, 86vw);
+      height: 100%;
+      margin: 0 auto;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    /* =========================
+       TOP BAR
+    ========================= */
+
+    .topbar {
+      position: absolute;
+      top: 7%;
+      left: 0;
+      right: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(243, 239, 230, 0.52);
+    }
+
+    .brand-code {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-code::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      background: var(--signal);
+      border-radius: 50%;
+      box-shadow: 0 0 12px rgba(143, 227, 176, 0.45);
+    }
+
+    .top-status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .top-status span:last-child {
+      color: var(--signal);
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      position: relative;
+      max-width: 1050px;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+
+      margin-bottom: 22px;
+
+      font-family: "JetBrains Mono", monospace;
+      font-size: clamp(10px, 0.8vw, 13px);
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+
+      color: var(--signal);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 42px;
+      height: 1px;
+      background: var(--signal);
+      opacity: 0.7;
+    }
+
+    h1 {
+      margin: 0;
+
+      color: var(--ivory);
+
+      font-family: "Newsreader", Georgia, serif;
+      font-size: clamp(76px, 12vw, 190px);
+      font-weight: 400;
+      font-style: italic;
+      line-height: 0.82;
+      letter-spacing: -0.055em;
+
+      text-wrap: balance;
+    }
+
+    h1 span {
+      display: block;
+    }
+
+    h1 .accent {
+      color: var(--signal);
+    }
+
+    .subtitle {
+      max-width: 530px;
+      margin-top: 38px;
+      margin-left: 8px;
+
+      font-size: clamp(13px, 1.1vw, 17px);
+      line-height: 1.7;
+      color: rgba(243, 239, 230, 0.58);
+    }
+
+    /* =========================
+       TECH PANEL
+    ========================= */
+
+    .tech-panel {
+      position: absolute;
+      right: 0;
+      bottom: 12%;
+
+      width: min(300px, 23vw);
+      min-width: 220px;
+
+      padding: 20px;
+
+      border: 1px solid rgba(143, 227, 176, 0.16);
+      background: rgba(18, 32, 26, 0.28);
+      backdrop-filter: blur(12px);
+
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      letter-spacing: 0.04em;
+
+      box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.12),
+        inset 0 1px rgba(243, 239, 230, 0.025);
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 15px;
+      margin-bottom: 15px;
+
+      border-bottom: 1px solid rgba(243, 239, 230, 0.08);
+
+      color: rgba(243, 239, 230, 0.4);
+      text-transform: uppercase;
+    }
+
+    .panel-header strong {
+      color: var(--signal);
+      font-weight: 500;
+    }
+
+    .metric {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+
+      padding: 8px 0;
+
+      color: rgba(243, 239, 230, 0.42);
+    }
+
+    .metric strong {
+      color: rgba(243, 239, 230, 0.8);
+      font-weight: 500;
+    }
+
+    .metric.pass strong {
+      color: var(--signal);
+    }
+
+    .metric.gold strong {
+      color: var(--gold);
+    }
+
+    /* =========================
+       BOTTOM BAR
+    ========================= */
+
+    .bottom {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 7%;
+
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+      color: rgba(243, 239, 230, 0.34);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .build {
+      display: flex;
+      gap: 22px;
+    }
+
+    .build strong {
+      color: rgba(243, 239, 230, 0.65);
+      font-weight: 500;
+    }
+
+    .coordinates {
+      text-align: right;
+    }
+
+    /* =========================
+       GOLD DETAIL
+    ========================= */
+
+    .gold-line {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+
+      width: 80px;
+      height: 2px;
+
+      background: var(--gold);
+      opacity: 0.75;
+    }
+
+    .corner {
+      position: absolute;
+      width: 90px;
+      height: 90px;
+      opacity: 0.25;
+    }
+
+    .corner::before,
+    .corner::after {
+      content: "";
+      position: absolute;
+      background: var(--ivory);
+    }
+
+    .corner::before {
+      width: 1px;
+      height: 90px;
+    }
+
+    .corner::after {
+      width: 90px;
+      height: 1px;
+    }
+
+    .corner-tl {
+      top: 4%;
+      left: 4%;
+    }
+
+    .corner-br {
+      right: 4%;
+      bottom: 4%;
+      transform: rotate(180deg);
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 900px) {
+      .content {
+        width: 84vw;
+      }
+
+      .tech-panel {
+        display: none;
+      }
+
+      h1 {
+        font-size: clamp(70px, 16vw, 130px);
+      }
+
+      .subtitle {
+        max-width: 450px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .wallpaper {
+        min-height: 500px;
+      }
+
+      .content {
+        width: 82vw;
+      }
+
+      .topbar {
+        top: 5%;
+      }
+
+      .top-status {
+        display: none;
+      }
+
+      .hero {
+        margin-top: -5vh;
+      }
+
+      h1 {
+        font-size: clamp(64px, 18vw, 105px);
+      }
+
+      .subtitle {
+        margin-top: 28px;
+        font-size: 12px;
+      }
+
+      .bottom {
+        bottom: 5%;
+      }
+
+      .coordinates {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="wallpaper">
+
+    <div class="orb orb-one"></div>
+    <div class="orb orb-two"></div>
+
+    <div class="crosshair crosshair-a"></div>
+    <div class="crosshair crosshair-b"></div>
+
+    <div class="corner corner-tl"></div>
+    <div class="corner corner-br"></div>
+
+    <div class="content">
+
+      <!-- TOPO -->
+      <header class="topbar">
+
+        <div class="brand-code">
+          QA / EDITORIAL SYSTEM
+        </div>
+
+        <div class="top-status">
+          <span>ENVIRONMENT:</span>
+          <span>STABLE</span>
+        </div>
+
+      </header>
+
+
+      <!-- HERO -->
+      <section class="hero">
+
+        <div class="eyebrow">
+          quality assurance / signal detected
+        </div>
+
+        <h1>
+          <span>Hora</span>
+          <span>do <span class="accent">QA</span></span>
+        </h1>
+
+        <p class="subtitle">
+          Testar. Questionar. Encontrar.<br>
+          Porque qualidade não acontece por acaso.
+        </p>
+
+      </section>
+
+
+      <!-- TECHNICAL PANEL -->
+      <aside class="tech-panel">
+
+        <div class="panel-header">
+          <span>Test Report</span>
+          <strong>PASS</strong>
+        </div>
+
+        <div class="metric pass">
+          <span>STATUS</span>
+          <strong>PASS</strong>
+        </div>
+
+        <div class="metric">
+          <span>BUILD</span>
+          <strong>042</strong>
+        </div>
+
+        <div class="metric">
+          <span>TESTS</span>
+          <strong>128</strong>
+        </div>
+
+        <div class="metric pass">
+          <span>CRITICAL</span>
+          <strong>0</strong>
+        </div>
+
+        <div class="metric gold">
+          <span>VERSION</span>
+          <strong>v2.4.1</strong>
+        </div>
+
+      </aside>
+
+
+      <!-- BOTTOM -->
+      <footer class="bottom">
+
+        <div class="build">
+          <span>QA_SIGNAL</span>
+          <strong>ONLINE</strong>
+        </div>
+
+        <div class="coordinates">
+          <div>PRECISION / CURIOSITY / QUALITY</div>
+          <div>0x03 — SYSTEM READY</div>
+        </div>
+
+      </footer>
+
+      <div class="gold-line"></div>
+
+    </div>
+
+  </main>
+
+</body>
+</html>
