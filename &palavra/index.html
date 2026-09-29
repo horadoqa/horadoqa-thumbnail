@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jornada da Qualidade</title>
+
+  <!-- Fonte moderna -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #121212;
+      color: #ffffff;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      font-family: 'Inter', sans-serif;
+    }
+
+    .jogo {
+      width: 90%;
+      max-width: 900px;
+
+      display: flex;
+      flex-direction: column;
+
+      text-align: center;
+    }
+
+    .etapa {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      /* Espaço entre palavra e descrição */
+      gap: 12px;
+
+      /* Espaçamento externo */
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+
+    .palavra {
+      font-size: 80px;
+      font-weight: 700;
+      line-height: 1;
+
+      letter-spacing: -3px;
+
+      color: #ffffff;
+
+      text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.12),
+        0 0 30px rgba(255, 255, 255, 0.05);
+
+      transition: all 0.3s ease;
+    }
+
+    .descricao {
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.5;
+
+      color: #999999;
+
+      max-width: 650px;
+    }
+
+    .palavra:hover {
+      transform: scale(1.04);
+
+      color: #00e5ff;
+
+      text-shadow:
+        0 0 10px rgba(0, 229, 255, 0.5),
+        0 0 30px rgba(0, 229, 255, 0.25);
+    }
+
+    /* Responsividade */
+    @media (max-width: 600px) {
+
+      .etapa {
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+
+      .palavra {
+        font-size: 48px;
+      }
+
+      .descricao {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="jogo">
+
+    <div class="etapa">
+      <div class="palavra">&definir</div>
+      <div class="descricao">
+        Entender requisitos e critérios de qualidade.
+      </div>
+    </div>
+
+    <div class="etapa">
+      <div class="palavra">&testar</div>
+      <div class="descricao">
+        Verificar se o software atende ao esperado.
+      </div>
+    </div>
+
+    <div class="etapa">
+      <div class="palavra">&corrigir</div>
+      <div class="descricao">
+        Tratar os problemas encontrados.
+      </div>
+    </div>
+
+    <div class="etapa">
+      <div class="palavra">&melhorar</div>
+      <div class="descricao">
+        Aprimorar continuamente o produto e o processo.
+      </div>
+    </div>
+
+    <div class="etapa">
+      <div class="palavra">&entregar</div>
+      <div class="descricao">
+        Disponibilizar uma versão com qualidade.
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
