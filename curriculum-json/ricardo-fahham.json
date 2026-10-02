@@ -1,0 +1,258 @@
+{
+    "nome": "Ricardo Fahham",
+    "titulo": "Analista de Qualidade de Software | QA | QA Automation",
+    "localizacao": "Rio de Janeiro",
+    "telefone": "21 98002-5474",
+    "email": "rfahham@gmail.com",
+    "linkedin": "https://www.linkedin.com/in/ricardo-fahham/",
+    "github": "https://github.com/ricardo-fahham",
+    "youtube": "https://www.youtube.com/@horadoqa",
+    "perfil_profissional": "Profissional de Qualidade de Software com experiência em análise, planejamento, execução e automação de testes, atuando em ambientes ágeis e projetos de grande relevância.",
+    "objetivo": "Atuar como Analista de Qualidade de Software, QA Automation ou Quality Engineer, contribuindo para a entrega de aplicações confiáveis, seguras e de alta qualidade.",
+    "experiencias": [
+      {
+        "empresa": "Banco BTG",
+        "cargo": "Analista de Teste Sênior",
+        "periodo": "08/2025 – 02/2026",
+        "localizacao": "Rio de Janeiro / Remoto",
+        "cloud": "AWS",
+        "atividades": [
+          "Planejamento, elaboração e execução de cenários e casos de teste",
+          "Testes funcionais, regressivos, exploratórios, integração e UAT",
+          "Validação de regras de negócio e critérios de aceite",
+          "Identificação, documentação e acompanhamento de defeitos",
+          "Testes automatizados utilizando Cypress",
+          "Testes de API utilizando Postman",
+          "Validação de dados utilizando SQL e DBeaver",
+          "Investigação de falhas utilizando logs, evidências e análise de causa raiz",
+          "Participação em cerimônias Scrum",
+          "Colaboração com equipes de Desenvolvimento e Produto"
+        ],
+        "projetos": [
+          "Onboarding de Conta Individual e Conjunta",
+          "Inclusão de Motivos de Rejeição de Documentação — Carteira Administrada",
+          "Revisão Cadastral de Clientes",
+          "Adieu — Sistema de Encerramento de Conta",
+          "Abertura de Conta Kids com representantes legais",
+          "BCB 475/2025 — Segurança do usuário"
+        ],
+        "ferramentas": [
+          "AWS",
+          "Postman",
+          "SQL",
+          "DBeaver",
+          "Helm",
+          "Painel de Administração"
+        ]
+      },
+      {
+        "empresa": "Globo Comunicação e Participações",
+        "cargo": "Analista de Teste Sênior",
+        "periodo": "10/2014 – 02/2024",
+        "localizacao": "Rio de Janeiro / Remoto",
+        "cloud": "GCP",
+        "atividades": [
+          "Planejamento, elaboração e execução de cenários e casos de teste",
+          "Testes funcionais, regressivos, exploratórios e de integração",
+          "Identificação, documentação e acompanhamento de defeitos",
+          "Validação de regras de negócio e critérios de aceite",
+          "Testes de API utilizando cURL, Postman e k6",
+          "Validação de dados utilizando SQL",
+          "Investigação de falhas por meio de logs e análise de causa raiz",
+          "Integração dos testes ao processo de CI/CD",
+          "Participação em cerimônias Scrum",
+          "Colaboração com Desenvolvimento e Produto"
+        ],
+        "projetos": [
+          {
+            "nome": "Globoplay",
+            "descricao": "Testes de performance para o BBB, com objetivo de alcançar 42 milhões de acessos simultâneos"
+          },
+          {
+            "nome": "Cartola",
+            "descricao": "Execução de testes periódicos visando prevenção de erros em produção"
+          },
+          {
+            "nome": "GLIVE",
+            "descricao": "Testes na plataforma de autenticação e autorização de assinantes"
+          },
+          {
+            "nome": "Votação",
+            "descricao": "Testes no sistema de votação utilizado em projetos como BBB e The Voice Brasil"
+          },
+          {
+            "nome": "ENEM",
+            "descricao": "Testes dos resultados das provas desde a criação até produção"
+          },
+          {
+            "nome": "G1",
+            "descricao": "Testes para avaliar acessos simultâneos em eleições e grandes eventos"
+          }
+        ]
+      }
+    ],
+    "projetos_portfolio": [
+      {
+        "nome": "Hora do QA",
+        "cargo": "Criador de Conteúdo Técnico e Educador em Qualidade de Software",
+        "periodo": "2024 – Atual",
+        "descricao": "Canal dedicado ao ensino e compartilhamento de conhecimento sobre QA, testes de software e automação.",
+        "tecnologias": [
+          "Playwright",
+          "Cypress",
+          "Robot Framework",
+          "Postman",
+          "JMeter",
+          "Grafana k6"
+        ],
+        "youtube": "https://www.youtube.com/@horadoqa",
+        "github": "https://github.com/horadoqa"
+      },
+      {
+        "nome": "Projeto de Automação Web",
+        "tecnologias": [
+          "Playwright",
+          "JavaScript",
+          "Git",
+          "CI/CD"
+        ],
+        "recursos": [
+          "Page Object Model",
+          "Cenários positivos, negativos e de exceção",
+          "Testes em diferentes navegadores",
+          "Geração de evidências e relatórios",
+          "Integração com pipeline CI/CD"
+        ]
+      },
+      {
+        "nome": "Projeto de Testes de API",
+        "tecnologias": [
+          "Postman",
+          "REST",
+          "JSON",
+          "SQL"
+        ],
+        "recursos": [
+          "Testes de APIs REST",
+          "Validação de status codes, headers e payloads",
+          "Cenários positivos e negativos",
+          "Validação de dados persistidos no banco",
+          "Automação da execução dos testes"
+        ]
+      }
+    ],
+    "formacao": [
+      {
+        "curso": "Análise e Desenvolvimento de Sistemas",
+        "instituicao": "PUC-RJ",
+        "status": "Concluído",
+        "ano": 1994
+      }
+    ],
+    "certificacoes": [
+      "Formação DevOps — Alura",
+      "Product Owner & Scrum Master — Serratech",
+      "QA — FAST"
+    ],
+    "idiomas": {
+      "portugues": "Nativo",
+      "ingles": "Intermediário"
+    },
+    "competencias": {
+      "qualidade_estrategia": [
+        "Quality Engineering",
+        "Shift-Left Testing",
+        "Planejamento e Estratégia de Testes",
+        "Análise de Risco",
+        "Causa Raiz",
+        "Critérios de Aceite",
+        "Gestão de Defeitos",
+        "Investigação de Falhas",
+        "Análise de Requisitos"
+      ],
+      "automacao": [
+        "Playwright",
+        "Cypress",
+        "Selenium",
+        "Robot Framework",
+        "JavaScript",
+        "TypeScript",
+        "Python",
+        "Page Object Model",
+        "Fixtures",
+        "Assertions",
+        "Test Data",
+        "Paralelização",
+        "Flaky Tests"
+      ],
+      "testes": [
+        "Funcionais",
+        "Regressão",
+        "Exploratórios",
+        "Integração",
+        "End-to-End",
+        "Aceitação/UAT",
+        "API",
+        "Contrato",
+        "Microsserviços",
+        "Mensageria",
+        "Usabilidade"
+      ],
+      "api_dados": [
+        "REST",
+        "GraphQL",
+        "gRPC",
+        "HTTP/HTTPS",
+        "JSON/XML",
+        "Postman",
+        "Swagger/OpenAPI",
+        "cURL",
+        "OAuth/Tokens",
+        "Validação de Payloads/Status Codes",
+        "SQL",
+        "PostgreSQL",
+        "MySQL",
+        "MongoDB"
+      ],
+      "devops_infraestrutura": [
+        "Git",
+        "GitHub/GitLab",
+        "Pull Requests",
+        "Code Review",
+        "CI/CD",
+        "GitHub Actions",
+        "Azure DevOps",
+        "Jenkins",
+        "GitLab CI",
+        "Docker",
+        "Kubernetes",
+        "Helm",
+        "Linux",
+        "Bash/Shell Script",
+        "SSH"
+      ],
+      "performance_seguranca_observabilidade": [
+        "Grafana k6",
+        "JMeter",
+        "Locust",
+        "Testes de Carga/Stress/Resiliência",
+        "OWASP Top 10",
+        "WCAG/Acessibilidade",
+        "Logs & Traces",
+        "Prometheus",
+        "Grafana"
+      ],
+      "metodologias_ferramentas": [
+        "Scrum",
+        "Kanban",
+        "Agile",
+        "BDD",
+        "Gherkin",
+        "Definition of Done",
+        "Refinamento de Requisitos",
+        "Planejamento de Sprint",
+        "Retrospectivas",
+        "Jira"
+      ]
+    }
+  }
