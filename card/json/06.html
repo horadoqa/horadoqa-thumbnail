@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>JSON — Resposta da API — Hora do QA</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style-card-centralizado.css">
+
+</head>
+
+<body>
+    <main class="page">
+
+
+        <!-- ========================= HEADER ========================= -->
+
+        <header>
+
+            <div class="logo" aria-label="Espaço reservado para o logo">
+
+                <img src="logo.png" alt="Logo">
+
+            </div>
+
+
+            <div class="brand">
+
+                <span class="eyebrow">
+                    Software Quality / API
+                </span>
+
+                <span class="brand-name">
+                    Hora do QA
+                </span>
+
+            </div>
+
+
+            <div class="status">
+
+                <span class="status-indicator"></span>
+
+                <span>
+                    STATUS: TESTED
+                </span>
+
+            </div>
+
+        </header>
+
+
+        <!-- ========================= HERO ========================= -->
+
+        <section class="hero">
+
+            <div class="hero-label">
+                Formato de dados
+            </div>
+
+
+            <h1> Resposta<br> da API </h1>
+            <p class="hero-description">
+                Uma API também pode retornar dados em JSON como
+                resposta a uma requisição. Para o QA, essa resposta
+                deve ser validada considerando sua estrutura,
+                campos, tipos, valores e regras esperadas.
+
+            </p>
+
+        </section>
+
+
+        <!-- ========================= CONCEITOS ========================= -->
+
+        <section class="concepts">
+
+
+            <!-- ========================= JSON / 06 ========================= -->
+
+            <article class="concept">
+
+
+                <div class="concept-top">
+
+                    <span class="concept-number">
+                        JSON / 06
+                    </span>
+
+
+                    <span class="concept-status">
+                        RESPONSE
+                    </span>
+
+                </div>
+
+
+                <div>
+
+
+                    <h2>
+
+                        Resposta da API
+
+                        <span>
+                            response
+                        </span>
+
+                    </h2>
+
+
+                    <p>
+
+                        A API também pode devolver os dados em JSON.
+                        O QA pode validar
+                        <strong>
+                            campos, valores, tipos, estrutura e regras
+                            de negócio
+                        </strong>.
+
+                    </p>
+
+
+                    <!-- ========================= CODE ========================= -->
+
+                    <div class="code-card">
+
+
+                        <div class="code-header">
+
+                            <span>
+                                HTTP 200
+                            </span>
+
+                            <span>
+                                response body
+                            </span>
+
+                        </div>
+
+
+                        <div class="code-content">
+
+
+                            <!--
+                            Os números das linhas são
+                            gerados automaticamente pelo script.js.
+                        -->
+
+                            <div class="line-numbers"></div>
+
+
+                            <!--
+                            Exemplo de resposta JSON
+                            retornada por uma API.
+                        -->
+
+                            <pre><code>{
+    <span class="key">"nome"</span>: <span class="string">"Hora do QA"</span>,
+    <span class="key">"email"</span>: <span class="string">"horadoqa@test.com"</span>,
+    <span class="key">"password"</span>: <span class="string">"1q2w3e4r"</span>,
+    <span class="key">"administrador"</span>: <span class="boolean">true</span>,
+    <span class="key">"_id"</span>: <span class="string">"0v37HHrUp4Jmoyik"</span>
+}</code></pre>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </article>
+
+
+        </section>
+
+
+        <!-- ========================= FOOTER ========================= -->
+
+        <footer>
+
+
+            <div class="footer-brand">
+
+                Hora do QA
+
+            </div>
+
+
+            <div class="footer-meta">
+
+
+                <span>
+                    QA-JSON / 006
+                </span>
+
+
+                <span>
+                    API NOTES
+                </span>
+
+
+                <span class="footer-pass">
+                    PASS
+                </span>
+
+
+            </div>
+
+        </footer>
+
+
+    </main>
+
+
+    <!-- ========================= JAVASCRIPT ========================= -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

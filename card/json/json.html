@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSON — Hora do QA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style-cards.css" />
+
+</head>
+
+<body>
+    <main class="page">
+
+        <!-- ========================= HEADER ========================= -->
+
+        <header>
+
+            <div class="logo" aria-label="Espaço reservado para o logo">
+                <img src="logo.png" alt="Logo">
+            </div>
+
+            <div class="brand">
+
+                <span class="eyebrow">
+                    Software Quality / API
+                </span>
+
+                <span class="brand-name">
+                    Hora do QA
+                </span>
+
+            </div>
+
+            <div class="status">
+
+                <span class="status-indicator"></span>
+
+                <span>
+                    STATUS: TESTED
+                </span>
+
+            </div>
+
+        </header>
+
+        <!-- ========================= HERO ========================= -->
+
+        <section class="hero">
+
+            <div class="hero-label">
+                Formato de dados
+            </div>
+
+            <h1>
+                O que é<br>
+                JSON?
+            </h1>
+
+            <p class="hero-description">
+                JSON, ou JavaScript Object Notation, é um formato leve e
+                estruturado usado para representar e trocar dados entre
+                sistemas. É muito utilizado em APIs porque é simples para
+                pessoas lerem e fácil para máquinas processarem.
+            </p>
+
+        </section>
+
+        <!-- ========================= CONCEITOS ========================= -->
+
+        <section class="concepts">
+
+            <!-- ========================= 01 ========================= -->
+
+            <article class="concept">
+
+                <div class="concept-top">
+
+                    <span class="concept-number">
+                        JSON / 01
+                    </span>
+
+                    <span class="concept-status">
+                        CONCEITO
+                    </span>
+
+                </div>
+
+                <div>
+
+                    <h2>
+                        Estrutura
+                        <span>objeto</span>
+                    </h2>
+
+                    <p>
+                        Um objeto JSON é formado por
+                        <strong>pares de chave e valor</strong>.
+                        As chaves ficam entre aspas duplas e são
+                        separadas dos valores por dois pontos.
+                    </p>
+
+                    <div class="code-card">
+
+                        <div class="code-header">
+                            <span>usuario.json</span>
+                            <span>object</span>
+                        </div>
+
+                        <div class="code-content">
+
+                            <div class="line-numbers"></div>
+
+                            <pre><code>{
+    <span class="key">"nome"</span>: <span class="string">"Ana"</span>,
+    <span class="key">"idade"</span>: <span class="number">28</span>,
+    <span class="key">"ativo"</span>: <span class="boolean">true</span>
+}</code></pre>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+            <!-- ========================= 02 ========================= -->
+
+            <article class="concept">
+
+                <div class="concept-top">
+
+                    <span class="concept-number">
+                        JSON / 02
+                    </span>
+
+                    <span class="concept-status">
+                        TIPOS
+                    </span>
+
+                </div>
+
+                <div>
+
+                    <h2>
+                        Tipos de dados
+                        <span>values</span>
+                    </h2>
+
+                    <p>
+                        JSON possui tipos básicos como
+                        <strong>string, number, boolean, null, object
+                            e array</strong>.
+                        Eles permitem representar diferentes informações.
+                    </p>
+
+                    <div class="code-card">
+
+                        <div class="code-header">
+                            <span>tipos.json</span>
+                            <span>values</span>
+                        </div>
+
+                        <div class="code-content">
+
+                            <div class="line-numbers"></div>
+
+                            <pre><code>{
+    <span class="key">"nome"</span>: <span class="string">"Carlos"</span>,
+    <span class="key">"idade"</span>: <span class="number">32</span>,
+    <span class="key">"admin"</span>: <span class="boolean">false</span>,
+    <span class="key">"telefone"</span>: <span class="null">null</span>
+}</code></pre>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+            <!-- ========================= 03 ========================= -->
+
+            <article class="concept">
+
+                <div class="concept-top">
+
+                    <span class="concept-number">
+                        JSON / 03
+                    </span>
+
+                    <span class="concept-status">
+                        ARRAY
+                    </span>
+
+                </div>
+
+                <div>
+
+                    <h2>
+                        Listas
+                        <span>array</span>
+                    </h2>
+
+                    <p>
+                        Arrays representam
+                        <strong>listas de valores</strong>.
+                        Eles são delimitados por colchetes e seus elementos
+                        são separados por vírgulas.
+                    </p>
+
+                    <div class="code-card">
+
+                        <div class="code-header">
+                            <span>produtos.json</span>
+                            <span>array</span>
+                        </div>
+
+                        <div class="code-content">
+
+                            <div class="line-numbers"></div>
+
+                            <pre><code>{
+    <span class="key">"produtos"</span>: [
+    <span class="string">"Notebook"</span>,
+    <span class="string">"Mouse"</span>,
+    <span class="string">"Teclado"</span>
+    ]
+}</code></pre>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+            <!-- ========================= 04 ========================= -->
+
+            <article class="concept">
+
+                <div class="concept-top">
+
+                    <span class="concept-number">
+                        JSON / 04
+                    </span>
+
+                    <span class="concept-status">
+                        NESTED
+                    </span>
+
+                </div>
+
+                <div>
+
+                    <h2>
+                        Objetos aninhados
+                        <span>nested</span>
+                    </h2>
+
+                    <p>
+                        Um objeto pode conter outros objetos ou arrays.
+                        Isso permite representar
+                        <strong>estruturas de dados mais complexas</strong>.
+                    </p>
+
+                    <div class="code-card">
+
+                        <div class="code-header">
+                            <span>cliente.json</span>
+                            <span>nested object</span>
+                        </div>
+
+                        <div class="code-content">
+
+                            <div class="line-numbers"></div>
+
+                            <pre><code>{
+    <span class="key">"nome"</span>: <span class="string">"Maria"</span>,
+    <span class="key">"endereco"</span>: {
+    <span class="key">"cidade"</span>: <span class="string">"Rio de Janeiro"</span>,
+    <span class="key">"uf"</span>: <span class="string">"RJ"</span>
+    }
+}</code></pre>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+            <!-- ========================= 05 ========================= -->
+
+            <article class="concept">
+
+                <div class="concept-top">
+
+                    <span class="concept-number">
+                        JSON / 05
+                    </span>
+
+                    <span class="concept-status">
+                        API
+                    </span>
+
+                </div>
+
+                <div>
+
+                    <h2>
+                        JSON em APIs
+                        <span>request</span>
+                    </h2>
+
+                    <p>
+                        APIs frequentemente recebem JSON no corpo de uma
+                        requisição. Em um cadastro, por exemplo, o cliente
+                        pode enviar os dados de um novo usuário.
+                    </p>
+
+                    <div class="code-card">
+
+                        <div class="code-header">
+                            <span>POST /usuarios</span>
+                            <span>request body</span>
+                        </div>
+
+                        <div class="code-content">
+
+                            <div class="line-numbers"></div>
+
+                            <pre><code>{
+    <span class="key">"nome"</span>: <span class="string">"João"</span>,
+    <span class="key">"email"</span>: <span class="string">"joao@email.com"</span>,
+    <span class="key">"idade"</span>: <span class="number">25</span>
+}</code></pre>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+            <!-- ========================= 06 ========================= -->
+
+            <article class="concept">
+
+                <div class="concept-top">
+
+                    <span class="concept-number">
+                        JSON / 06
+                    </span>
+
+                    <span class="concept-status">
+                        RESPONSE
+                    </span>
+
+                </div>
+
+                <div>
+
+                    <h2>
+                        Resposta da API
+                        <span>response</span>
+                    </h2>
+
+                    <p>
+                        A API também pode devolver os dados em JSON.
+                        O QA pode validar
+                        <strong>campos, valores, tipos, estrutura e regras
+                            de negócio</strong>.
+                    </p>
+
+                    <div class="code-card">
+
+                        <div class="code-header">
+                            <span>HTTP 200</span>
+                            <span>response body</span>
+                        </div>
+
+                        <div class="code-content">
+
+                            <div class="line-numbers"></div>
+
+                            <pre><code>{
+    <span class="key">"id"</span>: <span class="number">101</span>,
+    <span class="key">"nome"</span>: <span class="string">"João"</span>,
+    <span class="key">"ativo"</span>: <span class="boolean">true</span>
+}</code></pre>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+            <!-- ========================= 07 ========================= -->
+
+            <article class="concept">
+
+                <div class="concept-top">
+
+                    <span class="concept-number">
+                        JSON / 07
+                    </span>
+
+                    <span class="concept-status">
+                        QA
+                    </span>
+
+                </div>
+
+                <div>
+
+                    <h2>
+                        O que testar?
+                        <span>validation</span>
+                    </h2>
+
+                    <p>
+                        Ao testar uma API, não basta verificar o status HTTP.
+                        Também é importante validar o
+                        <strong>JSON retornado e enviado</strong>.
+                    </p>
+
+                    <div class="tip">
+
+                        <strong>Checklist QA:</strong><br>
+
+                        ✓ Campos obrigatórios<br>
+                        ✓ Tipos de dados<br>
+                        ✓ Valores esperados<br>
+                        ✓ Campos extras ou ausentes<br>
+                        ✓ Estrutura do JSON<br>
+                        ✓ Regras de negócio
+
+                    </div>
+
+                </div>
+
+            </article>
+
+            <!-- ========================= 08 ========================= -->
+
+            <article class="concept">
+
+                <div class="concept-top">
+
+                    <span class="concept-number">
+                        JSON / 08
+                    </span>
+
+                    <span class="concept-status">
+                        ATENÇÃO
+                    </span>
+
+                </div>
+
+                <div>
+
+                    <h2>
+                        JSON válido
+                        <span>syntax</span>
+                    </h2>
+
+                    <p>
+                        JSON possui regras de sintaxe. Uma vírgula ou aspas
+                        colocadas incorretamente podem tornar o documento
+                        inválido.
+                    </p>
+
+                    <div class="code-card">
+
+                        <div class="code-header">
+                            <span>válido.json</span>
+                            <span>syntax</span>
+                        </div>
+
+                        <div class="code-content">
+
+                            <div class="line-numbers"></div>
+
+                            <pre><code>{
+    <span class="key">"nome"</span>: <span class="string">"Ana"</span>,
+    <span class="key">"idade"</span>: <span class="number">30</span>
+}</code></pre>
+
+                        </div>
+
+                    </div>
+
+                    <div class="tip">
+
+                        <strong>Importante:</strong>
+                        em JSON, os nomes das propriedades devem usar
+                        aspas duplas.
+
+                    </div>
+
+                </div>
+
+            </article>
+
+        </section>
+
+        <!-- ========================= FOOTER ========================= -->
+
+        <footer>
+
+            <div class="footer-brand">
+                Hora do QA
+            </div>
+
+            <div class="footer-meta">
+
+                <span>
+                    QA-JSON / 008
+                </span>
+
+                <span>
+                    API NOTES
+                </span>
+
+                <span class="footer-pass">
+                    PASS
+                </span>
+
+            </div>
+
+        </footer>
+
+    </main>
+
+    <!-- ========================= JAVASCRIPT ========================= -->
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
