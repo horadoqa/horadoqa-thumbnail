@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Método PUT — Hora do QA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --verde-profundo: #0F3D2E;
+            --verde-musgo: #3F6F52;
+            --verde-sinal: #8FE3B0;
+            --dourado: #C99A44;
+            --marfim: #F3EFE6;
+            --tinta: #12201A;
+            --branco: #ffffff;
+            --radius: 18px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--marfim);
+            color: var(--tinta);
+            font-family: "Manrope", sans-serif;
+            display: flex;
+            justify-content: center;
+            padding: 42px 24px;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 1180px;
+            min-height: calc(100vh - 84px);
+            background: var(--marfim);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ========================= HEADER ========================= */
+        header {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: 92px 1fr auto;
+            align-items: center;
+            gap: 28px;
+            padding: 12px 0 42px;
+            border-bottom: 1px solid rgba(15, 61, 46, 0.16);
+        }
+
+        .logo {
+            width: 78px;
+            height: 78px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .eyebrow {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--verde-musgo);
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .brand-name {
+            font-family: "Newsreader", serif;
+            font-size: 25px;
+            font-style: italic;
+            color: var(--verde-profundo);
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            color: var(--verde-profundo);
+            white-space: nowrap;
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            background: var(--verde-sinal);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(143, 227, 176, 0.18);
+        }
+
+        img {
+            width: 78px;
+            height: 78px;
+        }
+
+        /* ========================= HERO ========================= */
+        .hero {
+            position: relative;
+            z-index: 1;
+            padding: 64px 0 48px;
+            max-width: 900px;
+        }
+
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--verde-musgo);
+            margin-bottom: 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .hero-label::before {
+            content: "03";
+            color: var(--marfim);
+            background: var(--verde-profundo);
+            padding: 5px 8px;
+            border-radius: 5px;
+            font-size: 10px;
+        }
+
+        h1 {
+            color: var(--verde-profundo);
+            font-family: "Newsreader", serif;
+            font-size: clamp(54px, 7vw, 86px);
+            font-weight: 500;
+            font-style: italic;
+            line-height: 0.95;
+            letter-spacing: -0.045em;
+        }
+
+        .hero-description {
+            margin-top: 24px;
+            font-size: 16px;
+            line-height: 1.7;
+            color: rgba(18, 32, 26, 0.72);
+        }
+
+        /* ========================= CARDS ========================= */
+        .concepts {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+            flex: 1;
+        }
+
+        .concept {
+            background: var(--verde-profundo);
+            border: 1px solid var(--verde-profundo);
+            border-radius: var(--radius);
+            padding: 28px;
+            min-height: 245px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            transition: border-color 180ms ease, background 180ms ease;
+        }
+
+        .concept:hover {
+            background: #124A38;
+            border-color: var(--verde-musgo);
+        }
+
+        /* ========================= TOPO ========================= */
+        .concept-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .concept-number {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--verde-sinal);
+            letter-spacing: 0.05em;
+        }
+
+        .concept-status {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 9px;
+            color: var(--verde-sinal);
+            border: 1px solid rgba(143, 227, 176, 0.35);
+            padding: 5px 7px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        /* ========================= TÍTULOS ========================= */
+        .concept h2 {
+            margin-top: 28px;
+            color: var(--marfim);
+            font-family: "Newsreader", serif;
+            font-size: 31px;
+            font-weight: 500;
+            line-height: 1;
+        }
+
+        .concept h2 span {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 12px;
+            font-weight: 500;
+            font-style: normal;
+            color: rgba(143, 227, 176, 0.75);
+            margin-left: 7px;
+            white-space: nowrap;
+        }
+
+        /* ========================= TEXTO ========================= */
+        .concept p {
+            position: relative;
+            z-index: 1;
+            margin-top: 17px;
+            font-size: 14px;
+            line-height: 1.7;
+            color: rgba(243, 239, 230, 0.76);
+        }
+
+        .concept strong {
+            color: var(--verde-sinal);
+            font-weight: 700;
+        }
+
+        /* ========================= CÓDIGO ========================= */
+        .code {
+            margin-top: 20px;
+            background: #09291F;
+            border: 1px solid rgba(143, 227, 176, 0.18);
+            border-radius: 10px;
+            padding: 16px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 12px;
+            line-height: 1.7;
+            color: var(--marfim);
+            overflow-x: auto;
+        }
+
+        .method {
+            color: var(--verde-sinal);
+            font-weight: 700;
+        }
+
+        .url {
+            color: #F1C978;
+        }
+
+        .property {
+            color: #8FE3B0;
+        }
+
+        .string {
+            color: #F3EFE6;
+        }
+
+        .comment {
+            color: rgba(243, 239, 230, 0.45);
+        }
+
+        /* ========================= REMOVE DECORAÇÕES ========================= */
+        .concept::before,
+        .concept::after {
+            display: none;
+        }
+
+        /* ========================= FOOTER ========================= */
+        footer {
+            position: relative;
+            z-index: 1;
+            margin-top: 38px;
+            padding: 22px 0 5px;
+            border-top: 1px solid rgba(15, 61, 46, 0.16);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .footer-brand {
+            font-family: "Newsreader", serif;
+            font-size: 21px;
+            font-style: italic;
+            color: var(--verde-profundo);
+        }
+
+        .footer-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 10px;
+            color: var(--verde-musgo);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .footer-pass {
+            color: var(--verde-profundo);
+            background: var(--verde-sinal);
+            padding: 7px 10px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        /* ========================= RESPONSIVO ========================= */
+        @media (max-width: 760px) {
+            body {
+                padding: 24px 16px;
+            }
+
+            .page {
+                min-height: calc(100vh - 48px);
+            }
+
+            header {
+                grid-template-columns: 70px 1fr;
+                gap: 18px;
+            }
+
+            .logo {
+                width: 62px;
+                height: 62px;
+            }
+
+            .status {
+                grid-column: 2;
+                margin-top: -8px;
+            }
+
+            .hero {
+                padding: 48px 0 36px;
+            }
+
+            h1 {
+                font-size: clamp(48px, 14vw, 70px);
+            }
+
+            .concepts {
+                grid-template-columns: 1fr;
+            }
+
+            .concept {
+                min-height: auto;
+            }
+
+            footer {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .footer-meta {
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .concept {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="page">
+        <!-- HEADER -->
+        <header>
+
+            <div class="logo" aria-label="Espaço reservado para o logo">
+                <img src="logo.png" alt="Logo">
+            </div>
+
+            <div class="brand">
+                <span class="eyebrow">
+                    Software Quality / HTTP
+                </span>
+
+                <span class="brand-name">
+                    Hora do QA
+                </span>
+            </div>
+
+            <div class="status">
+                <span class="status-indicator"></span>
+                <span>STATUS: TESTED</span>
+            </div>
+
+        </header>
+
+
+        <!-- HERO -->
+        <section class="hero">
+
+            <div class="hero-label">
+                Método HTTP
+            </div>
+
+            <h1>
+                PUT
+            </h1>
+
+            <p class="hero-description">
+                O método PUT é utilizado para <strong>atualizar ou substituir
+                    um recurso existente</strong>. Neste exemplo, vamos atualizar
+                o nome de um usuário cadastrado na API ServeRest.
+            </p>
+
+        </section>
+
+
+        <!-- CONCEITOS -->
+        <section class="concepts">
+
+            <!-- O QUE É -->
+            <article class="concept">
+
+                <div class="concept-top">
+                    <span class="concept-number">
+                        CONCEITO / 01
+                    </span>
+
+                    <span class="concept-status">
+                        UPDATE
+                    </span>
+                </div>
+
+                <div>
+
+                    <h2>
+                        O que é?
+                        <span>PUT</span>
+                    </h2>
+
+                    <p>
+                        O <strong>PUT envia uma nova representação do recurso</strong>
+                        para o servidor. Ele é utilizado quando queremos atualizar
+                        os dados de um recurso existente.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- ENDPOINT -->
+            <article class="concept">
+
+                <div class="concept-top">
+                    <span class="concept-number">
+                        SERVEREST / 02
+                    </span>
+
+                    <span class="concept-status">
+                        ENDPOINT
+                    </span>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Atualizar usuário
+                        <span>API</span>
+                    </h2>
+
+                    <p>
+                        Para atualizar um usuário específico, o
+                        <strong>id do usuário é informado na URL</strong>.
+                    </p>
+
+                    <div class="code">
+                        <span class="method">PUT</span>
+                        <span class="url">https://serverest.dev/usuarios/0uxuPY0cbmQhpEz1</span>
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- REQUEST BODY -->
+            <article class="concept">
+
+                <div class="concept-top">
+                    <span class="concept-number">
+                        REQUEST / 03
+                    </span>
+
+                    <span class="concept-status">
+                        BODY
+                    </span>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Novo nome
+                        <span>JSON</span>
+                    </h2>
+
+                    <p>
+                        Neste exemplo, vamos atualizar o campo
+                        <strong>nome</strong> do usuário para
+                        <strong>"Hora do QA - Atualizado"</strong>.
+                    </p>
+
+                    <div class="code">
+                        {<br>
+                        &nbsp;&nbsp;<span class="property">"nome"</span>:
+                        <span class="string">"Hora do QA - Atualizado"</span>,<br>
+                        &nbsp;&nbsp;<span class="property">"email"</span>:
+                        <span class="string">"horadoqa@teste.com"</span>,<br>
+                        &nbsp;&nbsp;<span class="property">"password"</span>:
+                        <span class="string">"1q2w3e4r"</span>,<br>
+                        &nbsp;&nbsp;<span class="property">"administrador"</span>:
+                        <span class="string">"true"</span><br>
+                        }
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- RESPONSE -->
+            <article class="concept">
+
+                <div class="concept-top">
+                    <span class="concept-number">
+                        RESPONSE / 04
+                    </span>
+
+                    <span class="concept-status">
+                        UPDATED
+                    </span>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Resposta
+                        <span>200 OK</span>
+                    </h2>
+
+                    <p>
+                        Se a atualização for realizada com sucesso, a API retorna
+                        uma resposta indicando que o <strong>registro foi alterado</strong>.
+                    </p>
+
+                    <div class="code">
+                        {<br>
+                        &nbsp;&nbsp;<span class="property">"message"</span>:
+                        <span class="string">"Registro alterado com sucesso"</span><br>
+                        }
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- ANTES E DEPOIS -->
+            <article class="concept">
+
+                <div class="concept-top">
+                    <span class="concept-number">
+                        EXEMPLO / 05
+                    </span>
+
+                    <span class="concept-status">
+                        CHANGE
+                    </span>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Antes → Depois
+                        <span>nome</span>
+                    </h2>
+
+                    <p>
+                        O principal objetivo do teste é confirmar que o valor
+                        anterior foi substituído pelo novo valor enviado
+                        na requisição.
+                    </p>
+
+                    <div class="code">
+                        <span class="comment">// ANTES</span><br>
+                        <span class="property">"nome"</span>:
+                        <span class="string">"Hora do QA"</span><br><br>
+
+                        <span class="comment">// DEPOIS</span><br>
+                        <span class="property">"nome"</span>:
+                        <span class="string">"Hora do QA - Atualizado"</span>
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- QA -->
+            <article class="concept">
+
+                <div class="concept-top">
+                    <span class="concept-number">
+                        QA / 06
+                    </span>
+
+                    <span class="concept-status">
+                        VALIDATION
+                    </span>
+                </div>
+
+                <div>
+
+                    <h2>
+                        O que testar?
+                        <span>QA</span>
+                    </h2>
+
+                    <p>
+                        Valide o <strong>status code</strong>, a mensagem retornada
+                        e, principalmente, se o usuário realmente foi atualizado.
+                        Depois do PUT, utilize um GET para confirmar o novo nome.
+                    </p>
+
+                    <div class="code">
+                        <span class="method">GET</span>
+                        <span class="url">/usuarios/0uxuPY0cbmQhpEz1</span><br><br>
+
+                        <span class="comment">// Esperado:</span><br>
+                        <span class="property">"nome"</span>:
+                        <span class="string">"Hora do QA -  Atualizado"</span>
+                    </div>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer>
+
+            <div class="footer-brand">
+                Hora do QA
+            </div>
+
+            <div class="footer-meta">
+
+                <span>
+                    QA-HTTP / PUT
+                </span>
+
+                <span>
+                    SERVEREST
+                </span>
+
+                <span class="footer-pass">
+                    PASS
+                </span>
+
+            </div>
+
+        </footer>
+
+    </main>
+</body>
+
+</html>
