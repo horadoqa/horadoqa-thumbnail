@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Top 10 — Playlists mais acessadas | Hora do QA</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap"
+    rel="stylesheet">
+
+  <style>
+    :root {
+      --verde-profundo: #0F3D2E;
+      --verde-musgo: #3F6F52;
+      --verde-sinal: #8FE3B0;
+      --dourado: #C99A44;
+      --marfim: #F3EFE6;
+      --tinta: #12201A;
+      --branco: #ffffff;
+
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--marfim);
+      color: var(--tinta);
+      font-family: "Manrope", sans-serif;
+
+      display: flex;
+      justify-content: center;
+
+      padding: 42px 24px;
+    }
+
+    .page {
+      width: 100%;
+      max-width: 1180px;
+      min-height: calc(100vh - 84px);
+
+      position: relative;
+
+      display: flex;
+      flex-direction: column;
+    }
+
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+      display: grid;
+      grid-template-columns: 92px 1fr auto;
+      align-items: center;
+
+      gap: 28px;
+
+      padding: 12px 0 42px;
+
+      border-bottom: 1px solid rgba(15, 61, 46, 0.16);
+    }
+
+    .logo {
+      width: 78px;
+      height: 78px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      overflow: hidden;
+    }
+
+    .logo img {
+      width: 78px;
+      height: 78px;
+
+      object-fit: contain;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .eyebrow {
+      font-family: "JetBrains Mono", monospace;
+
+      font-size: 11px;
+      font-weight: 600;
+
+      color: var(--verde-musgo);
+
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .brand-name {
+      font-family: "Newsreader", serif;
+
+      font-size: 25px;
+      font-style: italic;
+
+      color: var(--verde-profundo);
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+
+      font-family: "JetBrains Mono", monospace;
+
+      font-size: 11px;
+
+      color: var(--verde-profundo);
+
+      white-space: nowrap;
+    }
+
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+
+      background: var(--verde-sinal);
+
+      border-radius: 50%;
+
+      box-shadow:
+        0 0 0 4px rgba(143, 227, 176, 0.18);
+    }
+
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      padding: 78px 0 70px;
+    }
+
+    .hero-content {
+      width: 100%;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+
+      margin-bottom: 26px;
+
+      font-family: "JetBrains Mono", monospace;
+
+      font-size: 11px;
+      font-weight: 600;
+
+      color: var(--verde-musgo);
+
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-label::before {
+      content: "TOP 10";
+
+      color: var(--marfim);
+      background: var(--verde-profundo);
+
+      padding: 5px 9px;
+
+      border-radius: 5px;
+
+      font-size: 10px;
+    }
+
+    h1 {
+      max-width: 1000px;
+
+      color: var(--verde-profundo);
+
+      font-family: "Newsreader", serif;
+
+      font-size: clamp(54px, 7.5vw, 100px);
+      font-weight: 500;
+      font-style: italic;
+
+      line-height: 0.94;
+
+      letter-spacing: -0.055em;
+    }
+
+    h1 .highlight {
+      color: var(--verde-musgo);
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+
+      margin: 42px 0 26px;
+
+      background: rgba(15, 61, 46, 0.16);
+    }
+
+    .supporting-text {
+      max-width: 700px;
+
+      font-size: 16px;
+      line-height: 1.75;
+
+      color: rgba(18, 32, 26, 0.68);
+    }
+
+    .supporting-text strong {
+      color: var(--verde-profundo);
+      font-weight: 700;
+    }
+
+
+    /* =========================
+       PLAYLISTS
+    ========================= */
+
+    .playlists {
+      margin-top: 58px;
+
+      border-top: 1px solid rgba(15, 61, 46, 0.16);
+    }
+
+    .playlist {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+
+      align-items: center;
+
+      gap: 28px;
+
+      min-height: 100px;
+
+      padding: 18px 0;
+
+      border-bottom: 1px solid rgba(15, 61, 46, 0.13);
+
+      transition:
+        padding 0.25s ease,
+        background 0.25s ease;
+    }
+
+    .playlist:hover {
+      padding-left: 14px;
+      padding-right: 14px;
+
+      background: rgba(143, 227, 176, 0.08);
+    }
+
+    .playlist-position {
+      font-family: "Newsreader", serif;
+
+      font-size: 48px;
+      font-style: italic;
+
+      line-height: 1;
+
+      color: rgba(63, 111, 82, 0.28);
+    }
+
+    .playlist:first-child .playlist-position {
+      color: var(--verde-profundo);
+    }
+
+    .playlist-info {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .playlist-title {
+      color: var(--verde-profundo);
+
+      font-family: "Newsreader", serif;
+
+      font-size: 27px;
+      font-weight: 500;
+      font-style: italic;
+
+      line-height: 1.1;
+    }
+
+    .playlist-description {
+      font-size: 12px;
+      line-height: 1.5;
+
+      color: rgba(18, 32, 26, 0.58);
+    }
+
+    .playlist-access {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+
+      gap: 5px;
+
+      font-family: "JetBrains Mono", monospace;
+
+      white-space: nowrap;
+    }
+
+    .access-number {
+      color: var(--verde-profundo);
+
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .access-label {
+      color: var(--verde-musgo);
+
+      font-size: 9px;
+
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .top-badge {
+      display: inline-block;
+
+      width: fit-content;
+
+      margin-top: 2px;
+
+      padding: 4px 7px;
+
+      color: var(--verde-profundo);
+      background: var(--verde-sinal);
+
+      border-radius: 4px;
+
+      font-family: "JetBrains Mono", monospace;
+
+      font-size: 8px;
+      font-weight: 700;
+
+      letter-spacing: 0.05em;
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      margin-top: 65px;
+
+      padding: 22px 0 5px;
+
+      border-top: 1px solid rgba(15, 61, 46, 0.16);
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 20px;
+    }
+
+    .footer-brand {
+      font-family: "Newsreader", serif;
+
+      font-size: 21px;
+      font-style: italic;
+
+      color: var(--verde-profundo);
+    }
+
+    .footer-meta {
+      display: flex;
+      align-items: center;
+
+      gap: 20px;
+
+      font-family: "JetBrains Mono", monospace;
+
+      font-size: 10px;
+
+      color: var(--verde-musgo);
+
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .footer-pass {
+      color: var(--verde-profundo);
+
+      background: var(--verde-sinal);
+
+      padding: 7px 10px;
+
+      border-radius: 4px;
+
+      font-weight: 700;
+    }
+
+
+    /* =========================
+       RESPONSIVO
+    ========================= */
+
+    @media (max-width: 760px) {
+
+      body {
+        padding: 24px 16px;
+      }
+
+      .page {
+        min-height: calc(100vh - 48px);
+      }
+
+      header {
+        grid-template-columns: 62px 1fr;
+
+        gap: 18px;
+
+        padding-bottom: 30px;
+      }
+
+      .logo {
+        width: 62px;
+        height: 62px;
+      }
+
+      .logo img {
+        width: 62px;
+        height: 62px;
+      }
+
+      .status {
+        grid-column: 2;
+
+        margin-top: -8px;
+      }
+
+      .hero {
+        padding: 60px 0 45px;
+      }
+
+      h1 {
+        font-size: clamp(50px, 14vw, 76px);
+      }
+
+      .supporting-text {
+        font-size: 15px;
+      }
+
+      .playlists {
+        margin-top: 45px;
+      }
+
+      .playlist {
+        grid-template-columns: 52px 1fr;
+
+        gap: 16px;
+
+        padding: 18px 0;
+      }
+
+      .playlist-position {
+        font-size: 38px;
+      }
+
+      .playlist-title {
+        font-size: 23px;
+      }
+
+      .playlist-description {
+        font-size: 11px;
+      }
+
+      .playlist-access {
+        grid-column: 2;
+
+        align-items: flex-start;
+
+        flex-direction: row;
+
+        gap: 10px;
+      }
+
+      .access-label {
+        align-self: center;
+      }
+
+      footer {
+        align-items: flex-start;
+
+        flex-direction: column;
+      }
+
+      .footer-meta {
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        scroll-behavior: auto;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="page">
+
+    <!-- HEADER -->
+    <header>
+
+      <div class="logo" aria-label="Logo Hora do QA">
+        <img src="logo.png" alt="Logo Hora do QA">
+      </div>
+
+      <div class="brand">
+
+        <span class="eyebrow">
+          Software Quality / Playlists
+        </span>
+
+        <span class="brand-name">
+          Hora do QA
+        </span>
+
+      </div>
+
+      <div class="status">
+
+        <span class="status-indicator"></span>
+
+        <span>
+          STATUS: TRENDING
+        </span>
+
+      </div>
+
+    </header>
+
+
+    <!-- HERO -->
+    <section class="hero">
+
+      <div class="hero-content">
+
+        <div class="hero-label">
+          As mais acessadas
+        </div>
+
+        <h1>
+          TOP 10 —
+          <span class="highlight">As playlists</span>
+          mais acessadas do Hora do QA.
+        </h1>
+
+        <div class="divider"></div>
+
+        <p class="supporting-text">
+          Uma seleção das playlists que mais despertaram o interesse
+          da comunidade de qualidade de software.
+          <strong>Confira as favoritas da galera do QA.</strong>
+        </p>
+
+
+        <!-- RANKING -->
+        <div class="playlists">
+
+          <article class="playlist">
+
+            <div class="playlist-position">01</div>
+
+            <div class="playlist-info">
+
+              <div class="playlist-title">
+                Playwright
+              </div>
+
+              <div class="playlist-description">
+                Característica, Instalação e execução de testes com Playwright.
+              </div>
+
+              <span class="top-badge">
+                #1 MAIS ACESSADA
+              </span>
+
+            </div>
+
+            <div class="playlist-access">
+
+              <span class="access-number">
+                3.098 acessos
+              </span>
+
+              <span class="access-label">
+                visualizações
+              </span>
+
+            </div>
+
+          </article>
+
+
+          <article class="playlist">
+
+            <div class="playlist-position">02</div>
+
+            <div class="playlist-info">
+
+              <div class="playlist-title">
+                Instação do Cypress
+              </div>
+
+              <div class="playlist-description">
+                Realizando a instalação do Cypress e executando o primeiro teste.
+              </div>
+
+            </div>
+
+            <div class="playlist-access">
+
+              <span class="access-number">
+                10.920 acessos
+              </span>
+
+              <span class="access-label">
+                visualizações
+              </span>
+
+            </div>
+
+          </article>
+
+
+          <article class="playlist">
+
+            <div class="playlist-position">03</div>
+
+            <div class="playlist-info">
+
+              <div class="playlist-title">
+                Testes Manuais e Documentação
+              </div>
+
+              <div class="playlist-description">
+                Tivemos a honra de contar com a participação do Miguel Luiz como convidado, apresentando o projeto que ele desenvolveu.
+              </div>
+
+            </div>
+
+            <div class="playlist-access">
+
+              <span class="access-number">
+                1.959 acessos
+              </span>
+
+              <span class="access-label">
+                visualizações
+              </span>
+
+            </div>
+
+          </article>
+
+
+          <article class="playlist">
+
+            <div class="playlist-position">04</div>
+
+            <div class="playlist-info">
+
+              <div class="playlist-title">
+                API Testing
+              </div>
+
+              <div class="playlist-description">
+                Aprenda a explorar, validar e automatizar testes de APIs.
+              </div>
+
+            </div>
+
+            <div class="playlist-access">
+
+              <span class="access-number">
+                8.740 acessos
+              </span>
+
+              <span class="access-label">
+                visualizações
+              </span>
+
+            </div>
+
+          </article>
+
+
+          <article class="playlist">
+
+            <div class="playlist-position">05</div>
+
+            <div class="playlist-info">
+
+              <div class="playlist-title">
+                Postman para QA
+              </div>
+
+              <div class="playlist-description">
+                Práticas de testes de API utilizando Postman.
+              </div>
+
+            </div>
+
+            <div class="playlist-access">
+
+              <span class="access-number">
+                8.120 acessos
+              </span>
+
+              <span class="access-label">
+                visualizações
+              </span>
+
+            </div>
+
+          </article>
+
+
+          <article class="playlist">
+
+            <div class="playlist-position">06</div>
+
+            <div class="playlist-info">
+
+              <div class="playlist-title">
+                Cypress na Prática
+              </div>
+
+              <div class="playlist-description">
+                Automação de testes web com exemplos práticos.
+              </div>
+
+            </div>
+
+            <div class="playlist-access">
+
+              <span class="access-number">
+                7.680 acessos
+              </span>
+
+              <span class="access-label">
+                visualizações
+              </span>
+
+            </div>
+
+          </article>
+
+
+          <article class="playlist">
+
+            <div class="playlist-position">07</div>
+
+            <div class="playlist-info">
+
+              <div class="playlist-title">
+                Playwright
+              </div>
+
+              <div class="playlist-description">
+                Testes end-to-end modernos utilizando Playwright.
+              </div>
+
+            </div>
+
+            <div class="playlist-access">
+
+              <span class="access-number">
+                7.140 acessos
+              </span>
+
+              <span class="access-label">
+                visualizações
+              </span>
+
+            </div>
+
+          </article>
+
+
+          <article class="playlist">
+
+            <div class="playlist-position">08</div>
+
+            <div class="playlist-info">
+
+              <div class="playlist-title">
+                Carreira em QA
+              </div>
+
+              <div class="playlist-description">
+                Dicas e caminhos para evoluir profissionalmente na área de qualidade.
+              </div>
+
+            </div>
+
+            <div class="playlist-access">
+
+              <span class="access-number">
+                6.530 acessos
+              </span>
+
+              <span class="access-label">
+                visualizações
+              </span>
+
+            </div>
+
+          </article>
+
+
+          <article class="playlist">
+
+            <div class="playlist-position">09</div>
+
+            <div class="playlist-info">
+
+              <div class="playlist-title">
+                SQL para QA
+              </div>
+
+              <div class="playlist-description">
+                Consultas e conceitos de banco de dados para profissionais de QA.
+              </div>
+
+            </div>
+
+            <div class="playlist-access">
+
+              <span class="access-number">
+                5.980 acessos
+              </span>
+
+              <span class="access-label">
+                visualizações
+              </span>
+
+            </div>
+
+          </article>
+
+
+          <article class="playlist">
+
+            <div class="playlist-position">10</div>
+
+            <div class="playlist-info">
+
+              <div class="playlist-title">
+                Inteligência Artificial para QA
+              </div>
+
+              <div class="playlist-description">
+                Como utilizar IA para potencializar testes e processos de qualidade.
+              </div>
+
+            </div>
+
+            <div class="playlist-access">
+
+              <span class="access-number">
+                5.420 acessos
+              </span>
+
+              <span class="access-label">
+                visualizações
+              </span>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+      <div class="footer-brand">
+        Hora do QA
+      </div>
+
+      <div class="footer-meta">
+
+        <span>
+          QA-REF / TOP-010
+        </span>
+
+        <span>
+          PLAYLIST RANKING
+        </span>
+
+        <span class="footer-pass">
+          TOP 10
+        </span>
+
+      </div>
+
+    </footer>
+
+  </main>
+
+</body>
+
+</html>
