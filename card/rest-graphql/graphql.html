@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stack Web — GraphQL API</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --verde-profundo: #0F3D2E;
+            --verde-musgo: #3F6F52;
+            --verde-sinal: #8FE3B0;
+            --dourado: #C99A44;
+            --marfim: #F3EFE6;
+            --tinta: #12201A;
+            --azul: #8FB9E3;
+            --amarelo: #E5C77A;
+
+            --radius: 18px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--marfim);
+            color: var(--tinta);
+            font-family: "Manrope", sans-serif;
+            display: flex;
+            justify-content: center;
+            padding: 42px 24px;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 1180px;
+            min-height: calc(100vh - 84px);
+            background: var(--marfim);
+            display: flex;
+            flex-direction: column;
+        }
+
+        header {
+            display: grid;
+            grid-template-columns: 92px 1fr auto;
+            align-items: center;
+            gap: 28px;
+            padding: 12px 0 42px;
+            border-bottom: 1px solid rgba(15, 61, 46, 0.16);
+        }
+
+        .logo,
+        .logo img {
+            width: 78px;
+            height: 78px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .logo img {
+            object-fit: contain;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .eyebrow,
+        .status,
+        .hero-label,
+        .comparison-title,
+        .example-label,
+        .flow-label,
+        .difference-number,
+        .when-label,
+        .qa-label,
+        .concept-number,
+        .concept-status,
+        .comparison-icon,
+        .flow-step-number,
+        .when-card strong,
+        .qa-check strong,
+        .footer-meta {
+            font-family: "JetBrains Mono", monospace;
+        }
+
+        .eyebrow {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--verde-musgo);
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .brand-name {
+            font-family: "Newsreader", serif;
+            font-size: 25px;
+            font-style: italic;
+            color: var(--verde-profundo);
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-size: 11px;
+            color: var(--verde-profundo);
+            white-space: nowrap;
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            background: var(--verde-sinal);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(143, 227, 176, 0.18);
+        }
+
+        .hero {
+            padding: 64px 0 48px;
+            max-width: 920px;
+        }
+
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--verde-musgo);
+            margin-bottom: 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .hero-label::before {
+            content: "GRAPHQL";
+            color: var(--marfim);
+            background: var(--verde-profundo);
+            padding: 5px 8px;
+            border-radius: 5px;
+            font-size: 10px;
+        }
+
+        h1 {
+            color: var(--verde-profundo);
+            font-family: "Newsreader", serif;
+            font-size: clamp(54px, 7vw, 86px);
+            font-weight: 500;
+            font-style: italic;
+            line-height: 0.95;
+            letter-spacing: -0.045em;
+        }
+
+        .hero-description {
+            margin-top: 24px;
+            font-size: 16px;
+            line-height: 1.7;
+            color: rgba(18, 32, 26, 0.72);
+        }
+
+        .concepts {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .concept {
+            background: var(--verde-profundo);
+            border: 1px solid var(--verde-profundo);
+            border-radius: var(--radius);
+            padding: 28px;
+            min-height: 285px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .concept:hover {
+            background: #124A38;
+            border-color: var(--verde-musgo);
+        }
+
+        .concept-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+        }
+
+        .concept-number {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--verde-sinal);
+            letter-spacing: 0.05em;
+        }
+
+        .concept-status {
+            font-size: 9px;
+            color: var(--verde-sinal);
+            border: 1px solid rgba(143, 227, 176, 0.35);
+            padding: 5px 7px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .concept h2 {
+            margin-top: 28px;
+            color: var(--marfim);
+            font-family: "Newsreader", serif;
+            font-size: 31px;
+            font-weight: 500;
+            line-height: 1;
+        }
+
+        .concept h2 span {
+            display: block;
+            margin-top: 7px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            font-weight: 500;
+            color: rgba(143, 227, 176, 0.75);
+        }
+
+        .concept p {
+            margin-top: 17px;
+            font-size: 13px;
+            line-height: 1.7;
+            color: rgba(243, 239, 230, 0.76);
+        }
+
+        .concept strong {
+            color: var(--verde-sinal);
+        }
+
+        .comparison,
+        .when,
+        .qa-section {
+            margin-top: 38px;
+            padding: 28px;
+            background: rgba(15, 61, 46, 0.05);
+            border-top: 1px solid rgba(15, 61, 46, 0.16);
+            border-bottom: 1px solid rgba(15, 61, 46, 0.16);
+        }
+
+        .comparison-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 22px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--verde-musgo);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .comparison-title::before {
+            content: "01";
+            color: var(--marfim);
+            background: var(--verde-profundo);
+            padding: 5px 8px;
+            border-radius: 5px;
+            font-size: 10px;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .comparison-box {
+            min-height: 260px;
+            padding: 24px;
+            background: var(--verde-profundo);
+            border-radius: 12px;
+        }
+
+        .comparison-icon {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--verde-sinal);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .comparison-box h3 {
+            margin-top: 9px;
+            color: var(--marfim);
+            font-family: "Newsreader", serif;
+            font-size: 28px;
+            font-weight: 500;
+        }
+
+        .comparison-box p {
+            margin-top: 10px;
+            color: rgba(243, 239, 230, 0.70);
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .code-content {
+            display: grid;
+            grid-template-columns: 42px 1fr;
+            margin-top: 17px;
+            background: rgba(0, 0, 0, 0.20);
+            border: 1px solid rgba(143, 227, 176, 0.18);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .line-numbers {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            padding: 16px 10px 16px 8px;
+            background: rgba(0, 0, 0, 0.15);
+            border-right: 1px solid rgba(143, 227, 176, 0.12);
+            color: rgba(243, 239, 230, 0.28);
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            line-height: 1.7;
+            user-select: none;
+        }
+
+        .line-numbers span {
+            height: 18.7px;
+        }
+
+        .code-content pre {
+            margin: 0;
+            min-width: 0;
+            overflow-x: auto;
+        }
+
+        .code-content code {
+            display: block;
+            padding: 16px;
+            color: rgba(243, 239, 230, 0.88);
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            line-height: 1.7;
+            white-space: pre;
+            tab-size: 2;
+        }
+
+        .key {
+            color: var(--azul);
+        }
+
+        .string {
+            color: var(--verde-sinal);
+        }
+
+        .boolean {
+            color: var(--amarelo);
+        }
+
+        .number {
+            color: var(--dourado);
+        }
+
+        .method {
+            color: var(--verde-sinal);
+            font-weight: 700;
+        }
+
+        .endpoint {
+            color: var(--dourado);
+        }
+
+        .examples,
+        .differences {
+            margin-top: 18px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .example-card {
+            background: var(--verde-profundo);
+            border-radius: var(--radius);
+            padding: 28px;
+        }
+
+        .example-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--verde-sinal);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .example-card h3 {
+            margin-top: 14px;
+            color: var(--marfim);
+            font-family: "Newsreader", serif;
+            font-size: 28px;
+            font-weight: 500;
+        }
+
+        .example-card p {
+            margin-top: 12px;
+            color: rgba(243, 239, 230, 0.76);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .flow {
+            margin-top: 38px;
+            padding: 28px;
+            background: var(--verde-profundo);
+            border-radius: var(--radius);
+        }
+
+        .flow-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--verde-sinal);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .flow h2 {
+            margin-top: 12px;
+            color: var(--marfim);
+            font-family: "Newsreader", serif;
+            font-size: 32px;
+            font-weight: 500;
+        }
+
+        .flow-description {
+            margin-top: 12px;
+            max-width: 850px;
+            color: rgba(243, 239, 230, 0.76);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .flow-grid {
+            margin-top: 24px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .flow-step {
+            padding: 17px;
+            background: rgba(143, 227, 176, 0.07);
+            border: 1px solid rgba(143, 227, 176, 0.18);
+            border-radius: 10px;
+        }
+
+        .flow-step-number {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--verde-sinal);
+        }
+
+        .flow-step h3 {
+            margin-top: 8px;
+            color: var(--marfim);
+            font-family: "Newsreader", serif;
+            font-size: 21px;
+            font-weight: 500;
+        }
+
+        .flow-step p {
+            margin-top: 7px;
+            color: rgba(243, 239, 230, 0.68);
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .differences {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .difference {
+            padding: 25px;
+            border-radius: var(--radius);
+            background: var(--marfim);
+            border: 1px solid rgba(15, 61, 46, 0.20);
+            box-shadow: 0 4px 12px rgba(15, 61, 46, 0.04);
+        }
+
+        .difference-number {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--verde-musgo);
+            text-transform: uppercase;
+        }
+
+        .difference h3 {
+            margin-top: 11px;
+            color: var(--verde-profundo);
+            font-family: "Newsreader", serif;
+            font-size: 27px;
+            font-weight: 500;
+        }
+
+        .difference p {
+            margin-top: 10px;
+            color: rgba(18, 32, 26, 0.70);
+            font-size: 12px;
+            line-height: 1.65;
+        }
+
+        .difference-code {
+            display: block;
+            margin-top: 15px;
+            padding: 9px 10px;
+            background: rgba(15, 61, 46, 0.06);
+            border-radius: 5px;
+            color: var(--verde-profundo);
+            font-family: "JetBrains Mono", monospace;
+            font-size: 10px;
+        }
+
+        .when h2,
+        .qa-section h2 {
+            margin-top: 12px;
+            color: var(--verde-profundo);
+            font-family: "Newsreader", serif;
+            font-size: 32px;
+            font-weight: 500;
+        }
+
+        .when-label,
+        .qa-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--verde-musgo);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .when>p,
+        .qa-section>p {
+            margin-top: 12px;
+            max-width: 850px;
+            color: rgba(18, 32, 26, 0.70);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .when-grid {
+            margin-top: 22px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .when-card {
+            padding: 18px;
+            background: var(--verde-profundo);
+            border-radius: 10px;
+        }
+
+        .when-card strong,
+        .qa-check strong {
+            display: block;
+            color: var(--verde-sinal);
+            font-size: 11px;
+        }
+
+        .when-card span,
+        .qa-check span {
+            display: block;
+            margin-top: 7px;
+            color: rgba(243, 239, 230, 0.68);
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .qa-checks {
+            margin-top: 22px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .qa-check {
+            padding: 16px;
+            background: var(--verde-profundo);
+            border-radius: 10px;
+        }
+
+        footer {
+            margin-top: 38px;
+            padding: 22px 0 5px;
+            border-top: 1px solid rgba(15, 61, 46, 0.16);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .footer-brand {
+            font-family: "Newsreader", serif;
+            font-size: 21px;
+            font-style: italic;
+            color: var(--verde-profundo);
+        }
+
+        .footer-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-size: 10px;
+            color: var(--verde-musgo);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .footer-pass {
+            color: var(--verde-profundo);
+            background: var(--verde-sinal);
+            padding: 7px 10px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        @media (max-width: 900px) {
+            .concepts {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .flow-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .differences {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .qa-checks {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 760px) {
+            body {
+                padding: 24px 16px;
+            }
+
+            .page {
+                min-height: calc(100vh - 48px);
+            }
+
+            header {
+                grid-template-columns: 70px 1fr;
+                gap: 18px;
+            }
+
+            .logo,
+            .logo img {
+                width: 62px;
+                height: 62px;
+            }
+
+            .status {
+                grid-column: 2;
+                margin-top: -8px;
+            }
+
+            .hero {
+                padding: 48px 0 36px;
+            }
+
+            h1 {
+                font-size: clamp(48px, 14vw, 70px);
+            }
+
+            .concepts,
+            .examples,
+            .differences,
+            .when-grid,
+            .qa-checks {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-grid,
+            .flow-grid {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .footer-meta {
+                flex-wrap: wrap;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <main class="page">
+        <header>
+
+            <div class="logo">
+                <img src="logo.png" alt="Logo">
+            </div>
+
+            <div class="brand">
+                <span class="eyebrow">
+                    Software Quality / Glossário
+                </span>
+
+                <span class="brand-name">
+                    Hora do QA
+                </span>
+            </div>
+
+            <div class="status">
+                <span class="status-indicator"></span>
+                <span>STATUS: CONNECTED</span>
+            </div>
+
+        </header>
+
+        <section class="hero">
+
+            <div class="hero-label">
+                Arquitetura de APIs
+            </div>
+
+            <h1>
+                GraphQL<br>
+                API
+            </h1>
+
+            <p class="hero-description">
+                GraphQL é uma linguagem de consulta para APIs que permite
+                ao cliente declarar exatamente quais dados deseja receber.
+                Através de um schema tipado, queries, mutations e fields,
+                o consumidor consegue solicitar diferentes combinações
+                de dados usando a mesma API.
+            </p>
+
+        </section>
+
+        <section class="concepts">
+
+            <article class="concept">
+
+                <div class="concept-top">
+                    <span class="concept-number">CONCEITO / 01</span>
+                    <span class="concept-status">SCHEMA</span>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Schema
+                        <span>tipos + campos</span>
+                    </h2>
+
+                    <p>
+                        O schema descreve os
+                        <strong>tipos, campos e operações</strong>
+                        que a API disponibiliza para seus consumidores.
+                    </p>
+
+                </div>
+
+            </article>
+
+            <article class="concept">
+
+                <div class="concept-top">
+                    <span class="concept-number">CONCEITO / 02</span>
+                    <span class="concept-status">QUERY</span>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Query
+                        <span>consulta de dados</span>
+                    </h2>
+
+                    <p>
+                        Uma query permite que o cliente informe exatamente
+                        quais <strong>campos</strong> deseja receber.
+                    </p>
+
+                </div>
+
+            </article>
+
+            <article class="concept">
+
+                <div class="concept-top">
+                    <span class="concept-number">CONCEITO / 03</span>
+                    <span class="concept-status">MUTATION</span>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Mutation
+                        <span>alteração de dados</span>
+                    </h2>
+
+                    <p>
+                        Mutations representam operações que
+                        <strong>criam, alteram ou removem</strong>
+                        informações através da API.
+                    </p>
+
+                </div>
+
+            </article>
+
+        </section>
+
+        <section class="comparison">
+
+            <div class="comparison-title">
+                GraphQL na prática
+            </div>
+
+            <div class="comparison-grid">
+
+                <div class="comparison-box">
+
+                    <span class="comparison-icon">
+                        QUERY
+                    </span>
+
+                    <h3>
+                        Cliente escolhe os campos
+                    </h3>
+
+                    <p>
+                        A aplicação informa exatamente quais informações
+                        precisa receber.
+                    </p>
+
+                    <div class="code-content">
+
+                        <div class="line-numbers"></div>
+
+                        <pre><code>query {
+
+usuario(id: <span class="number">123</span>) {
+nome
+email
+administrador
+}
+}</code></pre>
+
+                    </div>
+
+                </div>
+
+                <div class="comparison-box">
+
+                    <span class="comparison-icon">
+                        RESPONSE
+                    </span>
+
+                    <h3>
+                        Estrutura correspondente
+                    </h3>
+
+                    <p>
+                        A resposta acompanha a estrutura solicitada
+                        pela query.
+                    </p>
+
+                    <div class="code-content">
+
+                        <div class="line-numbers"></div>
+
+                        <pre><code>{
+
+<span class="key">"data"</span>: {
+<span class="key">"usuario"</span>: {
+<span class="key">"nome"</span>: <span class="string">"Hora do QA"</span>,
+<span class="key">"email"</span>: <span class="string">"qa@test.com"</span>,
+<span class="key">"administrador"</span>: <span class="boolean">true</span>
+}
+}
+}</code></pre>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="examples">
+
+            <article class="example-card">
+
+                <span class="example-label">
+                    Exemplo / Query
+                </span>
+
+                <h3>
+                    Selecionando campos
+                </h3>
+
+                <p>
+                    O cliente pode solicitar somente as informações
+                    necessárias para determinada tela.
+                </p>
+
+                <div class="code-content">
+
+                    <div class="line-numbers"></div>
+
+                    <pre><code>query {
+
+usuario(id: <span class="string">"0v37HHrUp4Jmoyik"</span>) {
+nome
+email
+administrador
+}
+}</code></pre>
+
+                </div>
+
+            </article>
+
+            <article class="example-card">
+
+                <span class="example-label">
+                    Exemplo / Mutation
+                </span>
+
+                <h3>
+                    Alterando dados
+                </h3>
+
+                <p>
+                    Uma mutation representa uma operação que modifica
+                    os dados da aplicação.
+                </p>
+
+                <div class="code-content">
+
+                    <div class="line-numbers"></div>
+
+                    <pre><code>mutation {
+
+criarUsuario(
+nome: <span class="string">"Hora do QA"</span>,
+email: <span class="string">"qa@test.com"</span>
+) {
+id
+nome
+}
+}</code></pre>
+
+                </div>
+
+            </article>
+
+        </section>
+
+        <section class="flow">
+
+            <span class="flow-label">
+                Exemplo / Response
+            </span>
+
+            <h2>
+                A resposta acompanha a seleção da query
+            </h2>
+
+            <p class="flow-description">
+                Se a query solicitar apenas nome, email e administrador,
+                o cliente pode receber uma estrutura contendo somente
+                esses campos solicitados.
+            </p>
+
+            <div class="code-content">
+
+                <div class="line-numbers"></div>
+
+                <pre><code>{
+
+<span class="key">"data"</span>: {
+<span class="key">"usuario"</span>: {
+<span class="key">"nome"</span>: <span class="string">"Hora do QA"</span>,
+<span class="key">"email"</span>: <span class="string">"qa@test.com"</span>,
+<span class="key">"administrador"</span>: <span class="boolean">true</span>
+}
+}
+}</code></pre>
+
+            </div>
+
+            <div class="flow-grid">
+
+                <article class="flow-step">
+
+                    <span class="flow-step-number">
+                        01 / CLIENT
+                    </span>
+
+                    <h3>
+                        Front-end
+                    </h3>
+
+                    <p>
+                        A aplicação identifica quais informações
+                        precisa apresentar.
+                    </p>
+
+                </article>
+
+                <article class="flow-step">
+
+                    <span class="flow-step-number">
+                        02 / QUERY
+                    </span>
+
+                    <h3>
+                        Seleção
+                    </h3>
+
+                    <p>
+                        O cliente descreve os campos que deseja receber.
+                    </p>
+
+                </article>
+
+                <article class="flow-step">
+
+                    <span class="flow-step-number">
+                        03 / SCHEMA
+                    </span>
+
+                    <h3>
+                        Validação
+                    </h3>
+
+                    <p>
+                        A operação é validada de acordo com o schema
+                        disponível na API.
+                    </p>
+
+                </article>
+
+                <article class="flow-step">
+
+                    <span class="flow-step-number">
+                        04 / RESPONSE
+                    </span>
+
+                    <h3>
+                        Dados
+                    </h3>
+
+                    <p>
+                        A API devolve os dados correspondentes
+                        à operação solicitada.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+        <section class="differences">
+
+            <article class="difference">
+
+                <span class="difference-number">
+                    GRAPHQL / 01
+                </span>
+
+                <h3>
+                    Schema
+                </h3>
+
+                <p>
+                    O schema define os tipos, campos e operações
+                    disponíveis para os clientes.
+                </p>
+
+                <span class="difference-code">
+                    Types → Fields → Operations
+                </span>
+
+            </article>
+
+            <article class="difference">
+
+                <span class="difference-number">
+                    GRAPHQL / 02
+                </span>
+
+                <h3>
+                    Query
+                </h3>
+
+                <p>
+                    Queries são utilizadas para consultar dados
+                    disponíveis no schema.
+                </p>
+
+                <span class="difference-code">
+                    query → leitura
+                </span>
+
+            </article>
+
+            <article class="difference">
+
+                <span class="difference-number">
+                    GRAPHQL / 03
+                </span>
+
+                <h3>
+                    Mutation
+                </h3>
+
+                <p>
+                    Mutations representam operações que alteram
+                    o estado dos dados.
+                </p>
+
+                <span class="difference-code">
+                    mutation → alteração
+                </span>
+
+            </article>
+
+            <article class="difference">
+
+                <span class="difference-number">
+                    GRAPHQL / 04
+                </span>
+
+                <h3>
+                    Fields
+                </h3>
+
+                <p>
+                    O cliente seleciona quais campos deseja receber
+                    dentro de cada objeto.
+                </p>
+
+                <span class="difference-code">
+                    usuario { nome email }
+                </span>
+
+            </article>
+
+            <article class="difference">
+
+                <span class="difference-number">
+                    GRAPHQL / 05
+                </span>
+
+                <h3>
+                    Tipagem
+                </h3>
+
+                <p>
+                    O schema descreve os tipos esperados para campos,
+                    argumentos e operações.
+                </p>
+
+                <span class="difference-code">
+                    String / Int / Boolean / ID
+                </span>
+
+            </article>
+
+            <article class="difference">
+
+                <span class="difference-number">
+                    GRAPHQL / 06
+                </span>
+
+                <h3>
+                    Flexibilidade
+                </h3>
+
+                <p>
+                    Diferentes clientes podem solicitar diferentes
+                    combinações de campos usando a mesma API.
+                </p>
+
+                <span class="difference-code">
+                    Cliente → seleção de campos
+                </span>
+
+            </article>
+
+        </section>
+
+        <section class="when">
+
+            <span class="when-label">
+                Decisão / Arquitetura
+            </span>
+
+            <h2>
+                Quando pensar em GraphQL?
+            </h2>
+
+            <p>
+                GraphQL pode ser interessante quando diferentes clientes
+                precisam de diferentes combinações de dados ou quando existe
+                uma necessidade maior de flexibilidade nas consultas.
+            </p>
+
+            <div class="when-grid">
+
+                <div class="when-card">
+
+                    <strong>
+                        MÚLTIPLOS CLIENTES
+                    </strong>
+
+                    <span>
+                        Web, mobile e outros consumidores podem precisar
+                        de diferentes conjuntos de informações.
+                    </span>
+
+                </div>
+
+                <div class="when-card">
+
+                    <strong>
+                        DADOS RELACIONADOS
+                    </strong>
+
+                    <span>
+                        Queries podem representar relações entre diferentes
+                        tipos de dados dentro de uma mesma operação.
+                    </span>
+
+                </div>
+
+                <div class="when-card">
+
+                    <strong>
+                        FLEXIBILIDADE
+                    </strong>
+
+                    <span>
+                        O cliente seleciona os campos necessários
+                        para cada tela ou caso de uso.
+                    </span>
+
+                </div>
+
+                <div class="when-card">
+
+                    <strong>
+                        SCHEMA
+                    </strong>
+
+                    <span>
+                        Um contrato tipado permite que os consumidores
+                        conheçam os tipos e operações disponíveis.
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="qa-section">
+
+            <span class="qa-label">
+                QA / GRAPHQL API
+            </span>
+
+            <h2>
+                O que o QA deve testar?
+            </h2>
+
+            <p>
+                Em GraphQL, o QA precisa validar queries, mutations, schema,
+                campos obrigatórios, tipos, erros, autenticação, autorização
+                e regras de negócio.
+            </p>
+
+            <div class="qa-checks">
+
+                <div class="qa-check">
+
+                    <strong>
+                        QUERY
+                    </strong>
+
+                    <span>
+                        Validar se a query retorna corretamente os campos
+                        solicitados.
+                    </span>
+
+                </div>
+
+                <div class="qa-check">
+
+                    <strong>
+                        MUTATION
+                    </strong>
+
+                    <span>
+                        Validar criação, alteração e remoção de dados.
+                    </span>
+
+                </div>
+
+                <div class="qa-check">
+
+                    <strong>
+                        SCHEMA
+                    </strong>
+
+                    <span>
+                        Validar tipos, campos, argumentos e operações
+                        disponíveis.
+                    </span>
+
+                </div>
+
+                <div class="qa-check">
+
+                    <strong>
+                        CAMPOS INVÁLIDOS
+                    </strong>
+
+                    <span>
+                        Verificar o comportamento quando o cliente solicita
+                        campos inexistentes ou incompatíveis.
+                    </span>
+
+                </div>
+
+                <div class="qa-check">
+
+                    <strong>
+                        AUTENTICAÇÃO
+                    </strong>
+
+                    <span>
+                        Validar tokens, credenciais, expiração e acesso
+                        sem autenticação.
+                    </span>
+
+                </div>
+
+                <div class="qa-check">
+
+                    <strong>
+                        AUTORIZAÇÃO
+                    </strong>
+
+                    <span>
+                        Verificar se usuários podem consultar ou alterar
+                        somente os dados permitidos.
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <footer>
+
+            <div class="footer-brand">
+                Hora do QA
+            </div>
+
+            <div class="footer-meta">
+
+                <span>
+                    QA-REF / API-005
+                </span>
+
+                <span>
+                    GRAPHQL API
+                </span>
+
+                <span class="footer-pass">
+                    PASS
+                </span>
+
+            </div>
+
+        </footer>
+
+    </main>
+    <script>
+        document.querySelectorAll(".code-content").forEach(codeBlock => {
+
+            const code = codeBlock.querySelector("code");
+            const lineNumbers = codeBlock.querySelector(".line-numbers");
+
+            if (!code || !lineNumbers) {
+                return;
+            }
+
+            const totalLines = code.textContent.split("\n").length;
+
+            lineNumbers.innerHTML = "";
+
+            for (let line = 1; line <= totalLines; line++) {
+
+                const number = document.createElement("span");
+
+                number.textContent = line;
+
+                lineNumbers.appendChild(number);
+            }
+
+        });
+
+    </script>
+</body>
+
+</html>

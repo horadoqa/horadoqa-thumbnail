@@ -2,12 +2,9 @@
 <html lang="pt-BR">
 
 <head>
-
     <meta charset="UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <title>Stack Web — REST vs GraphQL</title>
+    <title>Stack Web — REST API</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,62 +38,42 @@
 
         body {
             min-height: 100vh;
-
             background: var(--marfim);
             color: var(--tinta);
-
             font-family: "Manrope", sans-serif;
-
             display: flex;
             justify-content: center;
-
             padding: 42px 24px;
         }
 
         .page {
             width: 100%;
             max-width: 1180px;
-
             min-height: calc(100vh - 84px);
-
             background: var(--marfim);
-
             position: relative;
             overflow: hidden;
-
             display: flex;
             flex-direction: column;
         }
 
-
-        /* =========================
-       HEADER
-    ========================= */
-
         header {
             position: relative;
             z-index: 1;
-
             display: grid;
             grid-template-columns: 92px 1fr auto;
-
             align-items: center;
-
             gap: 28px;
-
             padding: 12px 0 42px;
-
             border-bottom: 1px solid rgba(15, 61, 46, 0.16);
         }
 
         .logo {
             width: 78px;
             height: 78px;
-
             display: flex;
             align-items: center;
             justify-content: center;
-
             position: relative;
             overflow: hidden;
         }
@@ -104,444 +81,278 @@
         .logo img {
             width: 78px;
             height: 78px;
-
             object-fit: contain;
         }
 
         .brand {
             display: flex;
             flex-direction: column;
-
             gap: 5px;
         }
 
-        .eyebrow {
+        .eyebrow,
+        .hero-label,
+        .comparison-title,
+        .example-label,
+        .flow-label,
+        .difference-number,
+        .when-label,
+        .qa-label,
+        .status,
+        .concept-number,
+        .concept-status,
+        .comparison-icon,
+        .flow-step-number,
+        .when-card strong,
+        .qa-check strong,
+        .footer-meta {
             font-family: "JetBrains Mono", monospace;
+        }
 
+        .eyebrow {
             font-size: 11px;
             font-weight: 600;
-
             color: var(--verde-musgo);
-
             letter-spacing: 0.14em;
-
             text-transform: uppercase;
         }
 
         .brand-name {
             font-family: "Newsreader", serif;
-
             font-size: 25px;
             font-style: italic;
-
             color: var(--verde-profundo);
         }
 
         .status {
             display: flex;
             align-items: center;
-
             gap: 9px;
-
-            font-family: "JetBrains Mono", monospace;
-
             font-size: 11px;
-
             color: var(--verde-profundo);
-
             white-space: nowrap;
         }
 
         .status-indicator {
             width: 8px;
             height: 8px;
-
             background: var(--verde-sinal);
-
             border-radius: 50%;
-
-            box-shadow:
-                0 0 0 4px rgba(143, 227, 176, 0.18);
+            box-shadow: 0 0 0 4px rgba(143, 227, 176, 0.18);
         }
-
-
-        /* =========================
-       HERO
-    ========================= */
 
         .hero {
             position: relative;
             z-index: 1;
-
             padding: 64px 0 48px;
-
             max-width: 920px;
         }
 
         .hero-label {
             display: inline-flex;
-
             align-items: center;
-
             gap: 10px;
-
-            font-family: "JetBrains Mono", monospace;
-
             font-size: 11px;
             font-weight: 600;
-
             color: var(--verde-musgo);
-
             margin-bottom: 18px;
-
             text-transform: uppercase;
-
             letter-spacing: 0.08em;
         }
 
         .hero-label::before {
-            content: "API";
-
+            content: "REST";
             color: var(--marfim);
-
             background: var(--verde-profundo);
-
             padding: 5px 8px;
-
             border-radius: 5px;
-
             font-size: 10px;
         }
 
         h1 {
             color: var(--verde-profundo);
-
             font-family: "Newsreader", serif;
-
             font-size: clamp(54px, 7vw, 86px);
-
             font-weight: 500;
-
             font-style: italic;
-
             line-height: 0.95;
-
             letter-spacing: -0.045em;
         }
 
         .hero-description {
             margin-top: 24px;
-
             font-size: 16px;
-
             line-height: 1.7;
-
             color: rgba(18, 32, 26, 0.72);
         }
 
-
-        /* =========================
-       CONCEITOS
-    ========================= */
-
         .concepts {
-            position: relative;
-            z-index: 1;
-
             display: grid;
-
             grid-template-columns: repeat(3, 1fr);
-
             gap: 18px;
         }
 
         .concept {
             background: var(--verde-profundo);
-
             border: 1px solid var(--verde-profundo);
-
             border-radius: var(--radius);
-
             padding: 28px;
-
             min-height: 285px;
-
             display: flex;
             flex-direction: column;
-
             justify-content: space-between;
-
             position: relative;
-
             overflow: hidden;
-
-            transition:
-                border-color 180ms ease,
-                background 180ms ease;
+            transition: border-color 180ms ease, background 180ms ease;
         }
 
         .concept:hover {
             background: #124A38;
-
             border-color: var(--verde-musgo);
         }
 
         .concept-top {
             display: flex;
-
             justify-content: space-between;
             align-items: flex-start;
-
             gap: 20px;
         }
 
         .concept-number {
-            font-family: "JetBrains Mono", monospace;
-
             font-size: 11px;
             font-weight: 600;
-
             color: var(--verde-sinal);
-
             letter-spacing: 0.05em;
         }
 
         .concept-status {
-            font-family: "JetBrains Mono", monospace;
-
             font-size: 9px;
-
             color: var(--verde-sinal);
-
             border: 1px solid rgba(143, 227, 176, 0.35);
-
             padding: 5px 7px;
-
             border-radius: 4px;
-
             text-transform: uppercase;
         }
 
         .concept h2 {
             margin-top: 28px;
-
             color: var(--marfim);
-
             font-family: "Newsreader", serif;
-
             font-size: 31px;
             font-weight: 500;
-
             line-height: 1;
         }
 
         .concept h2 span {
             display: block;
-
             margin-top: 7px;
-
             font-family: "JetBrains Mono", monospace;
-
             font-size: 11px;
             font-weight: 500;
-
             font-style: normal;
-
             color: rgba(143, 227, 176, 0.75);
         }
 
         .concept p {
-            position: relative;
-            z-index: 1;
-
             margin-top: 17px;
-
             font-size: 13px;
-
             line-height: 1.7;
-
             color: rgba(243, 239, 230, 0.76);
         }
 
         .concept strong {
             color: var(--verde-sinal);
-
-            font-weight: 700;
         }
 
-
-        /* =========================
-       COMPARAÇÃO
-    ========================= */
-
-        .comparison {
+        .comparison,
+        .when,
+        .qa-section {
             margin-top: 38px;
-
             padding: 28px;
-
             background: rgba(15, 61, 46, 0.05);
-
             border-top: 1px solid rgba(15, 61, 46, 0.16);
-
             border-bottom: 1px solid rgba(15, 61, 46, 0.16);
         }
 
         .comparison-title {
             display: flex;
-
             align-items: center;
-
             gap: 10px;
-
             margin-bottom: 22px;
-
-            font-family: "JetBrains Mono", monospace;
-
             font-size: 11px;
             font-weight: 600;
-
             color: var(--verde-musgo);
-
             text-transform: uppercase;
-
             letter-spacing: 0.08em;
         }
 
         .comparison-title::before {
             content: "01";
-
             color: var(--marfim);
-
             background: var(--verde-profundo);
-
             padding: 5px 8px;
-
             border-radius: 5px;
-
             font-size: 10px;
         }
 
         .comparison-grid {
             display: grid;
-
-            grid-template-columns: 1fr auto 1fr;
-
-            align-items: stretch;
-
-            gap: 14px;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
         }
 
         .comparison-box {
             min-height: 260px;
-
             padding: 24px;
-
             background: var(--verde-profundo);
-
             border: 1px solid var(--verde-profundo);
-
             border-radius: 12px;
-
-            transition:
-                background 180ms ease,
-                border-color 180ms ease;
-        }
-
-        .comparison-box:hover {
-            background: #124A38;
-
-            border-color: var(--verde-musgo);
-        }
-
-        .comparison-icon {
-            font-family: "JetBrains Mono", monospace;
-
-            font-size: 10px;
-            font-weight: 700;
-
-            color: var(--verde-sinal);
-
-            text-transform: uppercase;
-
-            letter-spacing: 0.08em;
         }
 
         .comparison-box h3 {
             margin-top: 9px;
-
             color: var(--marfim);
-
             font-family: "Newsreader", serif;
-
             font-size: 28px;
             font-weight: 500;
         }
 
         .comparison-box p {
             margin-top: 10px;
-
             color: rgba(243, 239, 230, 0.70);
-
             font-size: 12px;
-
             line-height: 1.6;
         }
 
-        .comparison-arrow {
-            display: flex;
-
-            align-items: center;
-
-            font-family: "JetBrains Mono", monospace;
-
-            font-size: 14px;
+        .comparison-icon {
+            font-size: 10px;
             font-weight: 700;
-
-            color: var(--dourado);
+            color: var(--verde-sinal);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
         }
-
-
-        /* =========================
-       CÓDIGO
-    ========================= */
 
         .code-content {
             display: grid;
-
             grid-template-columns: 42px 1fr;
-
             margin-top: 17px;
-
             background: rgba(0, 0, 0, 0.20);
-
             border: 1px solid rgba(143, 227, 176, 0.18);
-
             border-radius: 8px;
-
             overflow: hidden;
         }
 
         .line-numbers {
             display: flex;
-
             flex-direction: column;
-
             align-items: flex-end;
-
             padding: 16px 10px 16px 8px;
-
             background: rgba(0, 0, 0, 0.15);
-
             border-right: 1px solid rgba(143, 227, 176, 0.12);
-
             color: rgba(243, 239, 230, 0.28);
-
             font-family: "JetBrains Mono", monospace;
-
             font-size: 11px;
-
             line-height: 1.7;
-
             user-select: none;
         }
 
@@ -551,570 +362,290 @@
 
         .code-content pre {
             margin: 0;
-
             min-width: 0;
-
             overflow-x: auto;
         }
 
         .code-content code {
             display: block;
-
             padding: 16px;
-
             color: rgba(243, 239, 230, 0.88);
-
             font-family: "JetBrains Mono", monospace;
-
             font-size: 11px;
-
             line-height: 1.7;
-
             white-space: pre;
-
             tab-size: 2;
+        }
+
+        .method,
+        .string {
+            color: var(--verde-sinal);
+        }
+
+        .endpoint,
+        .number {
+            color: var(--dourado);
         }
 
         .key {
             color: var(--azul);
         }
 
-        .string {
-            color: var(--verde-sinal);
-        }
-
         .boolean {
             color: var(--amarelo);
         }
 
-        .number {
-            color: var(--dourado);
-        }
-
-        .method {
-            color: var(--verde-sinal);
-
-            font-weight: 700;
-        }
-
-        .endpoint {
-            color: var(--dourado);
-        }
-
-
-        /* =========================
-       EXEMPLOS
-    ========================= */
-
-        .examples {
+        .examples,
+        .differences {
             margin-top: 18px;
-
             display: grid;
-
-            grid-template-columns: 1fr 1fr;
-
+            grid-template-columns: repeat(2, 1fr);
             gap: 18px;
         }
 
         .example-card {
             background: var(--verde-profundo);
-
             border-radius: var(--radius);
-
             padding: 28px;
         }
 
         .example-label {
-            font-family: "JetBrains Mono", monospace;
-
             font-size: 10px;
             font-weight: 600;
-
             color: var(--verde-sinal);
-
             text-transform: uppercase;
-
             letter-spacing: 0.08em;
         }
 
         .example-card h3 {
             margin-top: 14px;
-
             color: var(--marfim);
-
             font-family: "Newsreader", serif;
-
             font-size: 28px;
             font-weight: 500;
         }
 
         .example-card p {
             margin-top: 12px;
-
             color: rgba(243, 239, 230, 0.76);
-
             font-size: 13px;
-
             line-height: 1.7;
         }
 
-
-        /* =========================
-       FLUXO
-    ========================= */
-
         .flow {
             margin-top: 38px;
-
             padding: 28px;
-
             background: var(--verde-profundo);
-
             border-radius: var(--radius);
         }
 
         .flow-label {
-            font-family: "JetBrains Mono", monospace;
-
             font-size: 10px;
             font-weight: 600;
-
             color: var(--verde-sinal);
-
             text-transform: uppercase;
-
             letter-spacing: 0.08em;
         }
 
-        .flow h2 {
+        .flow h2,
+        .when h2,
+        .qa-section h2 {
             margin-top: 12px;
-
             color: var(--marfim);
-
             font-family: "Newsreader", serif;
-
             font-size: 32px;
-
             font-weight: 500;
         }
 
-        .flow-description {
+        .flow-description,
+        .when>p,
+        .qa-section>p {
             margin-top: 12px;
-
             max-width: 850px;
-
             color: rgba(243, 239, 230, 0.76);
-
             font-size: 14px;
-
             line-height: 1.7;
         }
 
         .flow-grid {
             margin-top: 24px;
-
             display: grid;
-
             grid-template-columns: repeat(4, 1fr);
-
             gap: 10px;
         }
 
         .flow-step {
             padding: 17px;
-
             background: rgba(143, 227, 176, 0.07);
-
             border: 1px solid rgba(143, 227, 176, 0.18);
-
             border-radius: 10px;
         }
 
         .flow-step-number {
-            font-family: "JetBrains Mono", monospace;
-
             font-size: 10px;
             font-weight: 700;
-
             color: var(--verde-sinal);
         }
 
         .flow-step h3 {
             margin-top: 8px;
-
             color: var(--marfim);
-
             font-family: "Newsreader", serif;
-
             font-size: 21px;
-
             font-weight: 500;
         }
 
         .flow-step p {
             margin-top: 7px;
-
             color: rgba(243, 239, 230, 0.68);
-
             font-size: 11px;
-
             line-height: 1.5;
         }
 
-
-        /* =========================
-       DIFERENÇAS
-    ========================= */
-
         .differences {
-            margin-top: 18px;
-
-            display: grid;
-
             grid-template-columns: repeat(3, 1fr);
-
-            gap: 18px;
         }
 
         .difference {
             padding: 25px;
-
             border-radius: var(--radius);
-
             background: var(--marfim);
-
             border: 1px solid rgba(15, 61, 46, 0.20);
-
-            box-shadow:
-                0 4px 12px rgba(15, 61, 46, 0.04);
+            box-shadow: 0 4px 12px rgba(15, 61, 46, 0.04);
         }
 
         .difference-number {
-            font-family: "JetBrains Mono", monospace;
-
             font-size: 10px;
             font-weight: 700;
-
             color: var(--verde-musgo);
-
             text-transform: uppercase;
         }
 
         .difference h3 {
             margin-top: 11px;
-
             color: var(--verde-profundo);
-
             font-family: "Newsreader", serif;
-
             font-size: 27px;
-
             font-weight: 500;
         }
 
         .difference p {
             margin-top: 10px;
-
             color: rgba(18, 32, 26, 0.70);
-
             font-size: 12px;
-
             line-height: 1.65;
         }
 
         .difference-code {
             display: block;
-
             margin-top: 15px;
-
             padding: 9px 10px;
-
             background: rgba(15, 61, 46, 0.06);
-
             border-radius: 5px;
-
             color: var(--verde-profundo);
-
             font-family: "JetBrains Mono", monospace;
-
             font-size: 10px;
         }
 
-
-        /* =========================
-       QUANDO USAR
-    ========================= */
-
-        .when {
-            margin-top: 38px;
-
-            padding: 28px;
-
-            background: rgba(15, 61, 46, 0.05);
-
-            border-top: 1px solid rgba(15, 61, 46, 0.16);
-
-            border-bottom: 1px solid rgba(15, 61, 46, 0.16);
+        .when h2,
+        .qa-section h2 {
+            color: var(--verde-profundo);
         }
 
-        .when-label {
-            font-family: "JetBrains Mono", monospace;
+        .when>p,
+        .qa-section>p {
+            color: rgba(18, 32, 26, 0.70);
+        }
 
+        .when-label,
+        .qa-label {
             font-size: 10px;
             font-weight: 600;
-
             color: var(--verde-musgo);
-
             text-transform: uppercase;
-
             letter-spacing: 0.08em;
-        }
-
-        .when h2 {
-            margin-top: 12px;
-
-            color: var(--verde-profundo);
-
-            font-family: "Newsreader", serif;
-
-            font-size: 32px;
-
-            font-weight: 500;
-        }
-
-        .when>p {
-            margin-top: 12px;
-
-            max-width: 850px;
-
-            color: rgba(18, 32, 26, 0.70);
-
-            font-size: 14px;
-
-            line-height: 1.7;
         }
 
         .when-grid {
             margin-top: 22px;
-
             display: grid;
-
             grid-template-columns: 1fr 1fr;
-
             gap: 12px;
         }
 
         .when-card {
             padding: 18px;
-
             background: var(--verde-profundo);
-
-            border: 1px solid var(--verde-profundo);
-
             border-radius: 10px;
         }
 
-        .when-card strong {
+        .when-card strong,
+        .qa-check strong {
             display: block;
-
             color: var(--verde-sinal);
-
-            font-family: "JetBrains Mono", monospace;
-
             font-size: 11px;
         }
 
-        .when-card span {
+        .when-card span,
+        .qa-check span {
             display: block;
-
             margin-top: 7px;
-
             color: rgba(243, 239, 230, 0.68);
-
             font-size: 11px;
-
             line-height: 1.5;
-        }
-
-
-        /* =========================
-       QA
-    ========================= */
-
-        .qa-section {
-            margin-top: 38px;
-
-            padding: 28px;
-
-            background: rgba(15, 61, 46, 0.05);
-
-            border-top: 1px solid rgba(15, 61, 46, 0.16);
-
-            border-bottom: 1px solid rgba(15, 61, 46, 0.16);
-        }
-
-        .qa-label {
-            font-family: "JetBrains Mono", monospace;
-
-            font-size: 10px;
-            font-weight: 600;
-
-            color: var(--verde-musgo);
-
-            text-transform: uppercase;
-
-            letter-spacing: 0.08em;
-        }
-
-        .qa-section h2 {
-            margin-top: 12px;
-
-            color: var(--verde-profundo);
-
-            font-family: "Newsreader", serif;
-
-            font-size: 32px;
-
-            font-weight: 500;
-        }
-
-        .qa-section>p {
-            margin-top: 12px;
-
-            max-width: 850px;
-
-            color: rgba(18, 32, 26, 0.70);
-
-            font-size: 14px;
-
-            line-height: 1.7;
         }
 
         .qa-checks {
             margin-top: 22px;
-
             display: grid;
-
             grid-template-columns: repeat(3, 1fr);
-
             gap: 12px;
         }
 
         .qa-check {
             padding: 16px;
-
             background: var(--verde-profundo);
-
-            border: 1px solid var(--verde-profundo);
-
             border-radius: 10px;
         }
 
-        .qa-check strong {
-            display: block;
-
-            color: var(--verde-sinal);
-
-            font-family: "JetBrains Mono", monospace;
-
-            font-size: 11px;
-        }
-
-        .qa-check span {
-            display: block;
-
-            margin-top: 7px;
-
-            color: rgba(243, 239, 230, 0.68);
-
-            font-size: 11px;
-
-            line-height: 1.5;
-        }
-
-
-        /* =========================
-       FOOTER
-    ========================= */
-
         footer {
-            position: relative;
-            z-index: 1;
-
             margin-top: 38px;
-
             padding: 22px 0 5px;
-
             border-top: 1px solid rgba(15, 61, 46, 0.16);
-
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
-
             gap: 20px;
         }
 
         .footer-brand {
             font-family: "Newsreader", serif;
-
             font-size: 21px;
-
             font-style: italic;
-
             color: var(--verde-profundo);
         }
 
         .footer-meta {
             display: flex;
-
             align-items: center;
-
             gap: 20px;
-
-            font-family: "JetBrains Mono", monospace;
-
             font-size: 10px;
-
             color: var(--verde-musgo);
-
             text-transform: uppercase;
-
             letter-spacing: 0.08em;
         }
 
         .footer-pass {
             color: var(--verde-profundo);
-
             background: var(--verde-sinal);
-
             padding: 7px 10px;
-
             border-radius: 4px;
-
             font-weight: 700;
         }
 
-
-        /* =========================
-       RESPONSIVO
-    ========================= */
-
         @media (max-width: 900px) {
-
             .concepts {
                 grid-template-columns: 1fr 1fr;
-            }
-
-            .comparison-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .comparison-arrow {
-                justify-content: center;
-
-                transform: rotate(90deg);
             }
 
             .flow-grid {
@@ -1128,12 +659,9 @@
             .qa-checks {
                 grid-template-columns: 1fr 1fr;
             }
-
         }
 
-
         @media (max-width: 760px) {
-
             body {
                 padding: 24px 16px;
             }
@@ -1144,7 +672,6 @@
 
             header {
                 grid-template-columns: 70px 1fr;
-
                 gap: 18px;
             }
 
@@ -1156,7 +683,6 @@
 
             .status {
                 grid-column: 2;
-
                 margin-top: -8px;
             }
 
@@ -1170,581 +696,321 @@
 
             .concepts,
             .examples,
-            .differences {
-                grid-template-columns: 1fr;
-            }
-
-            .flow-grid,
+            .differences,
             .when-grid,
             .qa-checks {
                 grid-template-columns: 1fr;
             }
 
+            .flow-grid {
+                grid-template-columns: 1fr;
+            }
+
             footer {
                 align-items: flex-start;
-
                 flex-direction: column;
             }
 
             .footer-meta {
                 flex-wrap: wrap;
             }
-
         }
 
-
         @media (prefers-reduced-motion: reduce) {
-
-            .concept,
-            .comparison-box {
+            .concept {
                 transition: none;
             }
-
         }
     </style>
 
 </head>
 
-
 <body>
-
     <main class="page">
-
-
-        <!-- =========================
-       HEADER
-  ========================== -->
-
         <header>
-
-            <div class="logo" aria-label="Espaço reservado para o logo">
-
+            <div class="logo">
                 <img src="logo.png" alt="Logo">
-
             </div>
-
 
             <div class="brand">
-
-                <span class="eyebrow">
-                    Software Quality / Glossário
-                </span>
-
-                <span class="brand-name">
-                    Hora do QA
-                </span>
-
+                <span class="eyebrow">Software Quality / Glossário</span>
+                <span class="brand-name">Hora do QA</span>
             </div>
-
 
             <div class="status">
-
                 <span class="status-indicator"></span>
-
-                <span>
-                    STATUS: CONNECTED
-                </span>
-
+                <span>STATUS: CONNECTED</span>
             </div>
-
         </header>
 
-
-        <!-- =========================
-       HERO
-  ========================== -->
-
         <section class="hero">
-
-            <div class="hero-label">
-                Arquitetura de APIs
-            </div>
+            <div class="hero-label">Arquitetura de APIs</div>
 
             <h1>
-                REST vs<br>
-                GraphQL
+                REST<br>
+                API
             </h1>
 
             <p class="hero-description">
-
-                REST e GraphQL são formas diferentes de construir e consumir
-                APIs. Ambos permitem que aplicações troquem dados, mas
-                organizam essa comunicação de maneiras distintas. No REST,
-                a API normalmente expõe diferentes endpoints e métodos HTTP.
-                No GraphQL, o cliente envia uma consulta descrevendo exatamente
-                quais dados deseja receber.
-
+                REST é um estilo arquitetural para construção de APIs baseado
+                principalmente em recursos, URLs e métodos HTTP. O cliente
+                acessa recursos através de endpoints bem definidos e utiliza
+                operações como GET, POST, PUT, PATCH e DELETE para consultar
+                ou modificar dados.
             </p>
-
         </section>
-
-
-        <!-- =========================
-       CONCEITOS
-  ========================== -->
 
         <section class="concepts">
 
-
             <article class="concept">
-
                 <div class="concept-top">
-
-                    <span class="concept-number">
-                        MODELO / 01
-                    </span>
-
-                    <span class="concept-status">
-                        REST
-                    </span>
-
+                    <span class="concept-number">CONCEITO / 01</span>
+                    <span class="concept-status">RECURSOS</span>
                 </div>
-
 
                 <div>
-
                     <h2>
-
-                        API REST
-
-                        <span>
-                            recursos + HTTP
-                        </span>
-
+                        Recursos
+                        <span>representação via URL</span>
                     </h2>
 
-
                     <p>
-
-                        No REST, os recursos são representados por
-                        <strong>URLs ou endpoints</strong>. O cliente utiliza
-                        métodos HTTP como GET, POST, PUT, PATCH e DELETE
-                        para consultar ou modificar esses recursos.
-
+                        Uma API REST organiza os dados como
+                        <strong>recursos</strong>, normalmente identificados
+                        através de URLs.
                     </p>
-
                 </div>
-
             </article>
-
 
             <article class="concept">
-
                 <div class="concept-top">
-
-                    <span class="concept-number">
-                        MODELO / 02
-                    </span>
-
-                    <span class="concept-status">
-                        GRAPHQL
-                    </span>
-
+                    <span class="concept-number">CONCEITO / 02</span>
+                    <span class="concept-status">HTTP</span>
                 </div>
-
 
                 <div>
-
                     <h2>
-
-                        GraphQL
-
-                        <span>
-                            consulta orientada a dados
-                        </span>
-
+                        Métodos HTTP
+                        <span>ações sobre recursos</span>
                     </h2>
 
-
                     <p>
-
-                        No GraphQL, normalmente existe um endpoint que recebe
-                        uma <strong>query ou mutation</strong>. O cliente informa
-                        quais campos deseja e a API retorna os dados de acordo
-                        com essa seleção.
-
+                        Os métodos HTTP indicam a operação desejada:
+                        <strong>GET, POST, PUT, PATCH e DELETE</strong>.
                     </p>
-
                 </div>
-
             </article>
-
 
             <article class="concept">
-
                 <div class="concept-top">
-
-                    <span class="concept-number">
-                        CONCEITO / 03
-                    </span>
-
-                    <span class="concept-status">
-                        CLIENT
-                    </span>
-
+                    <span class="concept-number">CONCEITO / 03</span>
+                    <span class="concept-status">RESPONSE</span>
                 </div>
-
 
                 <div>
-
                     <h2>
-
-                        Quem decide?
-
-                        <span>
-                            servidor × cliente
-                        </span>
-
+                        Resposta
+                        <span>status + dados</span>
                     </h2>
 
-
                     <p>
-
-                        A principal diferença está em como os dados são
-                        solicitados. No REST, a estrutura da resposta é
-                        geralmente definida pelo endpoint. No GraphQL,
-                        o cliente declara <strong>quais campos precisa</strong>.
-
+                        A API normalmente retorna um
+                        <strong>Status Code HTTP</strong> acompanhado,
+                        quando necessário, dos dados solicitados.
                     </p>
-
                 </div>
-
             </article>
-
 
         </section>
-
-
-        <!-- =========================
-       COMPARAÇÃO
-  ========================== -->
 
         <section class="comparison">
 
             <div class="comparison-title">
-                A diferença na prática
+                REST na prática
             </div>
-
 
             <div class="comparison-grid">
 
-
-                <!-- REST -->
-
                 <div class="comparison-box">
 
                     <span class="comparison-icon">
-                        API / REST
+                        REQUEST
                     </span>
 
                     <h3>
-                        Endpoint por recurso
+                        Buscar um usuário
                     </h3>
 
                     <p>
-
-                        Para buscar um usuário, o cliente pode chamar
-                        um endpoint específico. A resposta normalmente
-                        possui uma estrutura definida pelo servidor.
-
+                        O cliente utiliza GET para solicitar o recurso
+                        identificado pelo ID.
                     </p>
 
-
                     <div class="code-content">
-
                         <div class="line-numbers"></div>
 
-                        <pre><code><span class="method">GET</span> <span class="endpoint">/usuarios/123</span>
+                        <pre><code><span class="method">GET</span> <span class="endpoint">/usuarios/0uxuPY0cbmQhpEz1</span>
 
 HTTP/1.1
 Accept: application/json</code></pre>
-
                     </div>
 
                 </div>
-
-
-                <div class="comparison-arrow">
-                    VS
-                </div>
-
-
-                <!-- GRAPHQL -->
 
                 <div class="comparison-box">
 
                     <span class="comparison-icon">
-                        API / GRAPHQL
+                        RESPONSE
                     </span>
 
                     <h3>
-                        Consulta por campos
+                        Dados do usuário
                     </h3>
 
                     <p>
-
-                        O cliente informa quais campos deseja receber
-                        através de uma query.
-
+                        O servidor pode responder com Status Code 200
+                        e o objeto solicitado.
                     </p>
 
-
                     <div class="code-content">
-
                         <div class="line-numbers"></div>
 
-                        <pre><code>query {
-  usuario(id: <span class="number">123</span>) {
-    nome
-    email
-  }
+                        <pre><code>{
+    <span class="key">"nome"</span>: <span class="string">"Hora do QA"</span>,
+    <span class="key">"email"</span>: <span class="string">"horadoqa@test.com"</span>,
+    <span class="key">"password"</span>: <span class="string">"1q2w3e4r"</span>,
+    <span class="key">"administrador"</span>: <span class="string">"true"</span>,
+    <span class="key">"id"</span>: <span class="number">0uxuPY0cbmQhpEz1</span>
 }</code></pre>
-
                     </div>
 
                 </div>
 
-
             </div>
-
         </section>
-
-
-        <!-- =========================
-       EXEMPLOS
-  ========================== -->
 
         <section class="examples">
 
-
-            <!-- REST -->
-
             <article class="example-card">
 
-                <span class="example-label">
-                    Exemplo / REST
-                </span>
+                <span class="example-label">Exemplo / POST</span>
 
-                <h3>
-                    Resposta de usuário
-                </h3>
+                <h3>Criar usuário</h3>
 
                 <p>
-
-                    Em uma API REST, um endpoint de usuários pode retornar
-                    um objeto JSON com os dados disponíveis para aquele recurso.
-
+                    O POST normalmente é utilizado para criar
+                    um novo recurso.
                 </p>
 
-
                 <div class="code-content">
-
                     <div class="line-numbers"></div>
 
-                    <pre><code>{
+                    <pre><code><span class="method">POST</span> <span class="endpoint">/usuarios</span>
+{
     <span class="key">"nome"</span>: <span class="string">"Hora do QA"</span>,
     <span class="key">"email"</span>: <span class="string">"horadoqa@test.com"</span>,
     <span class="key">"password"</span>: <span class="string">"1q2w3e4r"</span>,
-    <span class="key">"administrador"</span>: <span class="boolean">true</span>,
-    <span class="key">"_id"</span>: <span class="string">"0v37HHrUp4Jmoyik"</span>
+    <span class="key">"administrador"</span>: <span class="string">"false"</span>
 }</code></pre>
-
                 </div>
 
             </article>
-
-
-            <!-- GRAPHQL -->
 
             <article class="example-card">
 
-                <span class="example-label">
-                    Exemplo / GraphQL
-                </span>
+                <span class="example-label">Exemplo / PUT</span>
 
-                <h3>
-                    Selecionando os campos
-                </h3>
+                <h3>Atualizar usuário</h3>
 
                 <p>
-
-                    No GraphQL, o cliente pode solicitar somente os campos
-                    necessários para uma determinada tela.
-
+                    O PUT é utilizado para atualizar um recurso existente.
                 </p>
 
-
                 <div class="code-content">
-
                     <div class="line-numbers"></div>
 
-                    <pre><code>query {
-    usuario(id: <span class="string">"0v37HHrUp4Jmoyik"</span>) {
-        nome
-        email
-        administrador
-    }
+                    <pre><code><span class="method">PUT</span> <span class="endpoint">/usuarios/0uxuPY0cbmQhpEz1</span>
+{
+    <span class="key">"nome"</span>: <span class="string">"Hora do QA"</span>,
+    <span class="key">"email"</span>: <span class="string">"horadoqa@test.com"</span>,
+    <span class="key">"password"</span>: <span class="string">"1q2w3e4r"</span>,
+    <span class="key">"administrador"</span>: <span class="string">"true"</span>
 }</code></pre>
+                </div>
 
+                <p>O valor do campo "administrador" é atualizado para "true".</p>
+
+            </article>
+
+        </section>
                 </div>
 
             </article>
 
-
         </section>
-
-
-        <!-- =========================
-       EXEMPLO DE RESPONSE GRAPHQL
-  ========================== -->
 
         <section class="flow">
 
-            <span class="flow-label">
-                Exemplo / Response
-            </span>
+            <span class="flow-label">Fluxo / REST</span>
 
             <h2>
-                O GraphQL devolve exatamente a estrutura solicitada
+                Como uma requisição REST funciona
             </h2>
 
             <p class="flow-description">
-
-                Se a query solicitar apenas nome, email e administrador,
-                a resposta pode conter somente esses campos. Isso é uma
-                das características que diferencia o modelo de consulta
-                do GraphQL.
-
+                O cliente identifica o recurso que precisa acessar,
+                escolhe o método HTTP apropriado e envia a requisição.
+                O servidor processa a operação e devolve uma resposta.
             </p>
-
-
-            <div class="code-content">
-
-                <div class="line-numbers"></div>
-
-                <pre><code>{
-  <span class="key">"data"</span>: {
-    <span class="key">"usuario"</span>: {
-      <span class="key">"nome"</span>: <span class="string">"Hora do QA"</span>,
-      <span class="key">"email"</span>: <span class="string">"horadoqa@test.com"</span>,
-      <span class="key">"administrador"</span>: <span class="boolean">true</span>
-    }
-  }
-}</code></pre>
-
-            </div>
-
 
             <div class="flow-grid">
 
-
                 <article class="flow-step">
-
-                    <span class="flow-step-number">
-                        01 / CLIENT
-                    </span>
-
-                    <h3>
-                        Front-end
-                    </h3>
-
+                    <span class="flow-step-number">01 / CLIENT</span>
+                    <h3>Requisição</h3>
                     <p>
-
-                        A tela identifica quais informações precisa
-                        apresentar ao usuário.
-
+                        O cliente envia uma requisição HTTP para a API.
                     </p>
-
                 </article>
 
-
                 <article class="flow-step">
-
-                    <span class="flow-step-number">
-                        02 / REST
-                    </span>
-
-                    <h3>
-                        Endpoint
-                    </h3>
-
+                    <span class="flow-step-number">02 / ENDPOINT</span>
+                    <h3>Recurso</h3>
                     <p>
-
-                        O cliente chama um recurso específico,
-                        como /usuarios/123.
-
+                        A URL identifica o recurso que será acessado.
                     </p>
-
                 </article>
 
-
                 <article class="flow-step">
-
-                    <span class="flow-step-number">
-                        03 / GRAPHQL
-                    </span>
-
-                    <h3>
-                        Query
-                    </h3>
-
+                    <span class="flow-step-number">03 / METHOD</span>
+                    <h3>Operação</h3>
                     <p>
-
-                        O cliente descreve os campos que deseja
-                        receber na resposta.
-
+                        GET, POST, PUT, PATCH ou DELETE define a ação.
                     </p>
-
                 </article>
 
-
                 <article class="flow-step">
-
-                    <span class="flow-step-number">
-                        04 / RESPONSE
-                    </span>
-
-                    <h3>
-                        Dados
-                    </h3>
-
+                    <span class="flow-step-number">04 / RESPONSE</span>
+                    <h3>Resposta</h3>
                     <p>
-
-                        A API devolve os dados que correspondem
-                        à operação solicitada.
-
+                        A API devolve status HTTP e, quando necessário,
+                        os dados da operação.
                     </p>
-
                 </article>
-
 
             </div>
-
         </section>
-
-
-        <!-- =========================
-       DIFERENÇAS
-  ========================== -->
 
         <section class="differences">
 
-
             <article class="difference">
+                <span class="difference-number">REST / 01</span>
 
-                <span class="difference-number">
-                    REST / 01
-                </span>
-
-                <h3>
-                    Endpoints
-                </h3>
+                <h3>Endpoints</h3>
 
                 <p>
-
-                    Uma API REST normalmente organiza os recursos
-                    em diferentes endpoints.
-
+                    Recursos normalmente são organizados em diferentes
+                    endpoints.
                 </p>
 
                 <span class="difference-code">
@@ -1752,332 +1018,205 @@ Accept: application/json</code></pre>
                     /produtos<br>
                     /pedidos
                 </span>
-
             </article>
 
-
             <article class="difference">
+                <span class="difference-number">REST / 02</span>
 
-                <span class="difference-number">
-                    GRAPHQL / 02
-                </span>
-
-                <h3>
-                    Schema
-                </h3>
+                <h3>Métodos HTTP</h3>
 
                 <p>
-
-                    GraphQL utiliza um schema que descreve os tipos,
-                    campos e operações disponíveis.
-
-                </p>
-
-                <span class="difference-code">
-                    Query → Types → Fields
-                </span>
-
-            </article>
-
-
-            <article class="difference">
-
-                <span class="difference-number">
-                    REQUEST / 03
-                </span>
-
-                <h3>
-                    Quantidade de dados
-                </h3>
-
-                <p>
-
-                    GraphQL permite selecionar campos específicos,
-                    evitando receber informações desnecessárias
-                    para aquela consulta.
-
-                </p>
-
-                <span class="difference-code">
-                    Cliente → campos desejados
-                </span>
-
-            </article>
-
-
-            <article class="difference">
-
-                <span class="difference-number">
-                    REST / 04
-                </span>
-
-                <h3>
-                    HTTP
-                </h3>
-
-                <p>
-
-                    Métodos HTTP possuem papel importante na comunicação
-                    REST, como GET para consulta e POST para criação.
-
+                    Os métodos HTTP representam operações diferentes
+                    sobre os recursos.
                 </p>
 
                 <span class="difference-code">
                     GET / POST / PUT / PATCH / DELETE
                 </span>
-
             </article>
 
-
             <article class="difference">
+                <span class="difference-number">REST / 03</span>
 
-                <span class="difference-number">
-                    GRAPHQL / 05
-                </span>
-
-                <h3>
-                    Query e Mutation
-                </h3>
+                <h3>Status Codes</h3>
 
                 <p>
-
-                    Queries são utilizadas para consultar dados.
-                    Mutations representam operações que alteram dados.
-
+                    O servidor utiliza códigos HTTP para comunicar
+                    o resultado da operação.
                 </p>
 
                 <span class="difference-code">
-                    query → leitura<br>
-                    mutation → alteração
+                    200 / 201 / 400 / 401 / 403 / 404 / 500
                 </span>
-
             </article>
 
-
             <article class="difference">
+                <span class="difference-number">REST / 04</span>
 
-                <span class="difference-number">
-                    DECISÃO / 06
-                </span>
-
-                <h3>
-                    Não existe vencedor
-                </h3>
+                <h3>Headers</h3>
 
                 <p>
-
-                    REST e GraphQL podem atender diferentes necessidades.
-                    A escolha depende da arquitetura, clientes, complexidade
-                    dos dados e requisitos da aplicação.
-
+                    Headers podem transportar informações como
+                    autenticação, conteúdo e preferências.
                 </p>
 
                 <span class="difference-code">
-                    Contexto → decisão técnica
+                    Authorization<br>
+                    Content-Type<br>
+                    Accept
                 </span>
-
             </article>
 
+            <article class="difference">
+                <span class="difference-number">REST / 05</span>
+
+                <h3>JSON</h3>
+
+                <p>
+                    JSON é um formato muito utilizado para representar
+                    os dados enviados e recebidos pela API.
+                </p>
+
+                <span class="difference-code">
+                    Content-Type: application/json
+                </span>
+            </article>
+
+            <article class="difference">
+                <span class="difference-number">REST / 06</span>
+
+                <h3>Stateless</h3>
+
+                <p>
+                    Cada requisição deve conter as informações necessárias
+                    para o servidor processá-la.
+                </p>
+
+                <span class="difference-code">
+                    Request → independente
+                </span>
+            </article>
 
         </section>
 
-
-        <!-- =========================
-       QUANDO USAR
-  ========================== -->
-
         <section class="when">
 
-            <span class="when-label">
-                Decisão / Arquitetura
-            </span>
+            <span class="when-label">Decisão / Arquitetura</span>
 
             <h2>
-                Quando pensar em REST ou GraphQL?
+                Quando utilizar REST?
             </h2>
 
             <p>
-
-                A escolha deve considerar o tipo de aplicação, a quantidade
-                de clientes, a complexidade dos dados e o nível de flexibilidade
-                necessário para o consumo da API.
-
+                REST pode ser uma excelente opção quando os recursos da aplicação
+                são bem definidos, as operações HTTP são claras e a estrutura
+                das respostas é relativamente previsível.
             </p>
-
 
             <div class="when-grid">
 
-
                 <div class="when-card">
-
-                    <strong>
-                        REST
-                    </strong>
-
+                    <strong>RECURSOS CLAROS</strong>
                     <span>
-
-                        Pode ser uma boa escolha quando os recursos são bem
-                        definidos, a API possui operações HTTP claras e a
-                        estrutura das respostas é relativamente previsível.
-
+                        Quando a aplicação possui entidades bem definidas,
+                        como usuários, produtos e pedidos.
                     </span>
-
                 </div>
 
-
                 <div class="when-card">
-
-                    <strong>
-                        GRAPHQL
-                    </strong>
-
+                    <strong>API SIMPLES</strong>
                     <span>
-
-                        Pode ser interessante quando diferentes clientes
-                        precisam de diferentes combinações de dados ou quando
-                        existe uma necessidade maior de flexibilidade nas consultas.
-
+                        Quando os consumidores conseguem trabalhar facilmente
+                        com endpoints e respostas previamente definidas.
                     </span>
-
                 </div>
 
+                <div class="when-card">
+                    <strong>HTTP</strong>
+                    <span>
+                        Quando métodos, Status Codes, headers e cache HTTP
+                        fazem parte importante da arquitetura.
+                    </span>
+                </div>
+
+                <div class="when-card">
+                    <strong>INTEGRAÇÕES</strong>
+                    <span>
+                        Quando diferentes sistemas precisam consumir uma API
+                        utilizando um contrato HTTP simples e conhecido.
+                    </span>
+                </div>
 
             </div>
 
         </section>
 
-
-        <!-- =========================
-       QA
-  ========================== -->
-
         <section class="qa-section">
 
-            <span class="qa-label">
-                QA / Visão de API
-            </span>
+            <span class="qa-label">QA / REST API</span>
 
             <h2>
                 O que o QA deve testar?
             </h2>
 
             <p>
-
-                REST e GraphQL possuem pontos de atenção diferentes.
-                O QA precisa validar não apenas se a API responde, mas
-                também se os dados, regras, erros, contratos e permissões
-                estão funcionando corretamente.
-
+                Em uma API REST, o QA deve validar o contrato, os endpoints,
+                métodos HTTP, parâmetros, autenticação, autorização, Status Codes,
+                payloads e regras de negócio.
             </p>
-
 
             <div class="qa-checks">
 
-
                 <div class="qa-check">
-
-                    <strong>
-                        REST / ENDPOINT
-                    </strong>
-
+                    <strong>ENDPOINT</strong>
                     <span>
-
-                        Validar URL, método HTTP, parâmetros, headers,
-                        autenticação e comportamento do endpoint.
-
+                        Validar URL, parâmetros, path variables e query parameters.
                     </span>
-
                 </div>
 
-
                 <div class="qa-check">
-
-                    <strong>
-                        REST / STATUS
-                    </strong>
-
+                    <strong>MÉTODO HTTP</strong>
                     <span>
-
-                        Validar Status Codes como 200, 201, 400, 401,
-                        403, 404 e 500 conforme o cenário.
-
+                        Verificar se GET, POST, PUT, PATCH e DELETE possuem
+                        o comportamento esperado.
                     </span>
-
                 </div>
 
-
                 <div class="qa-check">
-
-                    <strong>
-                        GRAPHQL / QUERY
-                    </strong>
-
+                    <strong>STATUS CODE</strong>
                     <span>
-
-                        Validar se queries retornam os campos solicitados
-                        e se campos inválidos são tratados corretamente.
-
+                        Validar 200, 201, 400, 401, 403, 404, 409 e 500
+                        conforme o cenário.
                     </span>
-
                 </div>
 
-
                 <div class="qa-check">
-
-                    <strong>
-                        GRAPHQL / MUTATION
-                    </strong>
-
+                    <strong>PAYLOAD</strong>
                     <span>
-
-                        Validar criação, alteração e remoção de dados
-                        através das mutations disponíveis.
-
+                        Validar campos obrigatórios, tipos, valores e estrutura
+                        dos JSONs enviados e recebidos.
                     </span>
-
                 </div>
 
-
                 <div class="qa-check">
-
-                    <strong>
-                        CONTRATO
-                    </strong>
-
+                    <strong>AUTENTICAÇÃO</strong>
                     <span>
-
-                        Verificar tipos, campos obrigatórios, estrutura
-                        da resposta e compatibilidade com o consumidor.
-
+                        Verificar tokens, credenciais, expiração e acesso
+                        sem autenticação.
                     </span>
-
                 </div>
 
-
                 <div class="qa-check">
-
-                    <strong>
-                        SEGURANÇA
-                    </strong>
-
+                    <strong>AUTORIZAÇÃO</strong>
                     <span>
-
-                        Validar autenticação, autorização, acesso indevido
-                        a dados e permissões por usuário.
-
+                        Validar se usuários possuem acesso somente aos recursos
+                        permitidos para seu perfil.
                     </span>
-
                 </div>
-
 
             </div>
 
         </section>
-
-
-        <!-- =========================
-       FOOTER
-  ========================== -->
 
         <footer>
 
@@ -2085,16 +1224,10 @@ Accept: application/json</code></pre>
                 Hora do QA
             </div>
 
-
             <div class="footer-meta">
 
-                <span>
-                    QA-REF / API-004
-                </span>
-
-                <span>
-                    REST VS GRAPHQL
-                </span>
+                <span>QA-REF / API-004</span>
+                <span>REST API</span>
 
                 <span class="footer-pass">
                     PASS
@@ -2104,80 +1237,30 @@ Accept: application/json</code></pre>
 
         </footer>
 
-
     </main>
-
-
-    <!-- =========================
-     JAVASCRIPT
-     NUMERAÇÃO AUTOMÁTICA
-========================== -->
-
-    <script>
-
-        /*
-         * Gera automaticamente os números das linhas
-         * para todos os blocos de código da página.
-         *
-         * Não é necessário informar manualmente:
-         * 1, 2, 3, 4...
-         */
-
-        document.querySelectorAll(".code-content").forEach(codeBlock => {
-
+    <script> document.querySelectorAll(".code-content").forEach(codeBlock => {
             const code = codeBlock.querySelector("code");
-
-            const lineNumbers =
-                codeBlock.querySelector(".line-numbers");
-
+            const lineNumbers = codeBlock.querySelector(".line-numbers");
 
             if (!code || !lineNumbers) {
                 return;
             }
 
-
-            /*
-             * textContent mantém o conteúdo original do código
-             * sem considerar as tags HTML usadas para colorização.
-             */
-
-            const totalLines =
-                code.textContent.split("\n").length;
-
-
-            /*
-             * Limpa a coluna antes de gerar os números.
-             */
+            const totalLines = code.textContent.split("\n").length;
 
             lineNumbers.innerHTML = "";
 
+            for (let line = 1; line <= totalLines; line++) {
 
-            /*
-             * Cria um número para cada linha.
-             */
-
-            for (
-                let line = 1;
-                line <= totalLines;
-                line++
-            ) {
-
-                const number =
-                    document.createElement("span");
-
+                const number = document.createElement("span");
 
                 number.textContent = line;
 
-
                 lineNumbers.appendChild(number);
-
             }
-
         });
 
     </script>
-
-
 </body>
 
 </html>
