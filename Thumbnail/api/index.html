@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>API — Integração entre Sistemas</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap"
+    rel="stylesheet">
+
+  <style>
+
+    :root {
+      --deep-green: #0F3D2E;
+      --moss: #3F6F52;
+      --signal: #8FE3B0;
+      --gold: #C99A44;
+      --ivory: #F3EFE6;
+      --ink: #12201A;
+
+      --line-light: rgba(243, 239, 230, 0.18);
+      --line-dark: rgba(18, 32, 26, 0.18);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+
+      display: grid;
+      place-items: center;
+
+      padding: 32px;
+
+      background: #091a13;
+
+      font-family: "Manrope", sans-serif;
+    }
+
+
+    /* =====================================================
+       THUMBNAIL
+    ====================================================== */
+
+    .thumbnail {
+      position: relative;
+
+      width: min(1280px, 100%);
+
+      aspect-ratio: 16 / 9;
+
+      overflow: hidden;
+
+      isolation: isolate;
+
+      color: var(--ivory);
+
+      background: var(--deep-green);
+
+      box-shadow:
+        0 35px 90px rgba(0, 0, 0, 0.42);
+    }
+
+
+    /* =====================================================
+       FUNDO
+    ====================================================== */
+
+    .thumbnail::before {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      z-index: -3;
+
+      background:
+        linear-gradient(
+          110deg,
+          var(--deep-green) 0%,
+          var(--deep-green) 47%,
+          #315E48 100%
+        );
+    }
+
+
+    /* =====================================================
+       BLOCO MARFIM
+    ====================================================== */
+
+    .thumbnail::after {
+      content: "";
+
+      position: absolute;
+
+      width: 61%;
+      height: 155%;
+
+      right: -19%;
+      top: -26%;
+
+      z-index: -2;
+
+      background: var(--ivory);
+
+      transform: rotate(10deg);
+    }
+
+
+    /* =====================================================
+       GRID TÉCNICO
+    ====================================================== */
+
+    .technical-grid {
+      position: absolute;
+
+      inset: 0;
+
+      z-index: -1;
+
+      opacity: 0.075;
+
+      background-image:
+        linear-gradient(
+          rgba(243, 239, 230, 0.8) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(243, 239, 230, 0.8) 1px,
+          transparent 1px
+        );
+
+      background-size: 46px 46px;
+
+      mask-image:
+        linear-gradient(
+          90deg,
+          black 0%,
+          transparent 72%
+        );
+    }
+
+
+    /* =====================================================
+       HEADER
+    ====================================================== */
+
+    .topbar {
+      position: absolute;
+
+      top: 5.5%;
+      left: 5.2%;
+      right: 5.2%;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      align-items: center;
+
+      font-family: "JetBrains Mono", monospace;
+
+      font-size: clamp(8px, 0.75vw, 12px);
+
+      font-weight: 600;
+
+      letter-spacing: 0.14em;
+
+      text-transform: uppercase;
+    }
+
+    .topbar-left {
+      display: flex;
+
+      align-items: center;
+
+      gap: 9px;
+
+      color: var(--signal);
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+
+      flex-shrink: 0;
+
+      border-radius: 50%;
+
+      background: var(--signal);
+
+      box-shadow:
+        0 0 0 3px rgba(143, 227, 176, 0.12);
+    }
+
+    .topbar-right {
+      color: rgba(243, 239, 230, 0.48);
+    }
+
+
+    /* =====================================================
+       LOGO
+    ====================================================== */
+
+    .logo-wrapper {
+      position: absolute;
+
+      top: 4.5%;
+      right: 5.2%;
+
+      z-index: 5;
+
+      width: clamp(46px, 6vw, 82px);
+
+      aspect-ratio: 1;
+    }
+
+    .logo {
+      width: 100%;
+      height: 100%;
+
+      display: block;
+
+      object-fit: cover;
+
+      border-radius: 50%;
+
+      background: var(--moss);
+
+      border: 2px solid var(--ivory);
+
+      box-shadow:
+        0 0 0 6px rgba(15, 61, 46, 0.25);
+    }
+
+
+    /* =====================================================
+       CONTEÚDO PRINCIPAL
+    ====================================================== */
+
+    .main-content {
+      position: absolute;
+
+      left: 5.2%;
+      top: 23%;
+
+      width: 55%;
+    }
+
+
+    /* =====================================================
+       EYEBROW
+    ====================================================== */
+
+    .eyebrow {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      margin-bottom: 3%;
+
+      color: var(--signal);
+
+      font-family: "JetBrains Mono", monospace;
+
+      font-size: clamp(9px, 0.95vw, 14px);
+
+      font-weight: 600;
+
+      letter-spacing: 0.08em;
+
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+
+      width: 25px;
+      height: 1px;
+
+      background: var(--gold);
+    }
+
+
+    /* =====================================================
+       TÍTULO
+    ====================================================== */
+
+    h1 {
+      margin: 0;
+
+      color: var(--ivory);
+
+      font-family: "Newsreader", serif;
+
+      font-style: italic;
+
+      font-weight: 600;
+
+      font-size: clamp(52px, 8.2vw, 130px);
+
+      line-height: 0.78;
+
+      letter-spacing: -0.06em;
+    }
+
+
+    /* =====================================================
+       SUBTÍTULO
+    ====================================================== */
+
+    .subtitle {
+      max-width: 530px;
+
+      margin: 5% 0 0;
+
+      color: rgba(243, 239, 230, 0.78);
+
+      font-family: "Manrope", sans-serif;
+
+      font-size: clamp(9px, 1vw, 15px);
+
+      font-weight: 700;
+
+      line-height: 1.45;
+
+      letter-spacing: 0.035em;
+
+      text-transform: uppercase;
+    }
+
+
+    /* =====================================================
+       MÉTRICAS API
+    ====================================================== */
+
+    .api-status {
+      position: absolute;
+
+      left: 5.2%;
+      bottom: 7%;
+
+      width: min(54%, 590px);
+
+      padding-top: 13px;
+
+      border-top: 1px solid var(--line-light);
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap: 12px;
+
+      font-family: "JetBrains Mono", monospace;
+
+      font-size: clamp(7px, 0.72vw, 11px);
+
+      color: rgba(243, 239, 230, 0.52);
+
+      text-transform: uppercase;
+    }
+
+    .api-item {
+      min-width: 0;
+    }
+
+    .api-label {
+      display: block;
+
+      margin-bottom: 5px;
+
+      letter-spacing: 0.04em;
+    }
+
+    .api-value {
+      display: block;
+
+      color: var(--ivory);
+
+      font-weight: 600;
+    }
+
+    .api-value.pass {
+      color: var(--signal);
+    }
+
+
+    /* =====================================================
+       ÁREA API
+    ====================================================== */
+
+    .api-area {
+      position: absolute;
+
+      right: 6%;
+      bottom: 10%;
+
+      width: 36%;
+      height: 59%;
+
+      display: grid;
+
+      place-items: center;
+    }
+
+
+    /* =====================================================
+       MOLDURA
+    ====================================================== */
+
+    .api-frame {
+      position: relative;
+
+      width: min(100%, 400px);
+
+      aspect-ratio: 1.08;
+
+      display: grid;
+
+      place-items: center;
+
+      background:
+        rgba(243, 239, 230, 0.55);
+
+      border: 1px solid var(--line-dark);
+
+      transform: rotate(-3deg);
+    }
+
+    .api-frame::before,
+    .api-frame::after {
+      content: "";
+
+      position: absolute;
+
+      width: 30px;
+      height: 30px;
+
+      border-color: var(--gold);
+
+      border-style: solid;
+    }
+
+    .api-frame::before {
+      left: -7px;
+      top: -7px;
+
+      border-width:
+        2px 0 0 2px;
+    }
+
+    .api-frame::after {
+      right: -7px;
+      bottom: -7px;
+
+      border-width:
+        0 2px 2px 0;
+    }
+
+
+    /* =====================================================
+       VISUAL API
+    ====================================================== */
+
+    .api-visual {
+      position: relative;
+
+      width: 82%;
+      height: 82%;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+    }
+
+
+    /* =====================================================
+       CONEXÃO ENTRE SERVIÇOS
+    ====================================================== */
+
+    .api-network {
+      position: absolute;
+
+      top: 5%;
+      left: 0;
+
+      width: 100%;
+      height: 45%;
+    }
+
+    .api-network svg {
+      width: 100%;
+      height: 100%;
+
+      display: block;
+    }
+
+
+    /* =====================================================
+       REQUEST / RESPONSE
+    ====================================================== */
+
+    .request-card {
+      position: absolute;
+
+      left: 0;
+      top: 13%;
+
+      width: 53%;
+
+      padding: 11px 13px;
+
+      background: var(--deep-green);
+
+      border: 1px solid rgba(143, 227, 176, 0.25);
+
+      font-family: "JetBrains Mono", monospace;
+
+      font-size: clamp(6px, 0.65vw, 10px);
+
+      line-height: 1.5;
+
+      box-shadow:
+        6px 6px 0 rgba(63, 111, 82, 0.15);
+
+      transform: rotate(-2deg);
+    }
+
+    .response-card {
+      position: absolute;
+
+      right: 0;
+      top: 38%;
+
+      width: 58%;
+
+      padding: 11px 13px;
+
+      background: var(--deep-green);
+
+      border: 1px solid rgba(143, 227, 176, 0.25);
+
+      font-family: "JetBrains Mono", monospace;
+
+      font-size: clamp(6px, 0.65vw, 10px);
+
+      line-height: 1.5;
+
+      box-shadow:
+        6px 6px 0 rgba(63, 111, 82, 0.15);
+
+      transform: rotate(2deg);
+    }
+
+    .http-method {
+      color: var(--gold);
+
+      font-weight: 700;
+    }
+
+    .endpoint {
+      color: var(--signal);
+    }
+
+    .json-key {
+      color: rgba(243, 239, 230, 0.58);
+    }
+
+    .json-value {
+      color: var(--ivory);
+    }
+
+
+    /* =====================================================
+       STATUS CODE
+    ====================================================== */
+
+    .status-code {
+      position: absolute;
+
+      right: 2%;
+      top: 3%;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      padding: 7px 9px;
+
+      background: var(--deep-green);
+
+      color: var(--signal);
+
+      font-family: "JetBrains Mono", monospace;
+
+      font-size: clamp(7px, 0.7vw, 10px);
+
+      font-weight: 700;
+
+      letter-spacing: 0.04em;
+    }
+
+    .status-code::before {
+      content: "";
+
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: var(--signal);
+    }
+
+
+    /* =====================================================
+       BADGE
+    ====================================================== */
+
+    .verified-badge {
+      position: absolute;
+
+      right: 4%;
+      bottom: 4%;
+
+      padding: 8px 11px;
+
+      background: var(--deep-green);
+
+      color: var(--signal);
+
+      font-family: "JetBrains Mono", monospace;
+
+      font-size: clamp(7px, 0.75vw, 11px);
+
+      font-weight: 700;
+
+      letter-spacing: 0.1em;
+    }
+
+
+    /* =====================================================
+       LABEL VERTICAL
+    ====================================================== */
+
+    .vertical-label {
+      position: absolute;
+
+      right: 5.1%;
+      top: 19%;
+
+      color: rgba(18, 32, 26, 0.48);
+
+      font-family: "JetBrains Mono", monospace;
+
+      font-size: clamp(7px, 0.7vw, 10px);
+
+      font-weight: 600;
+
+      line-height: 1.2;
+
+      letter-spacing: 0.12em;
+
+      writing-mode: vertical-rl;
+
+      text-transform: uppercase;
+    }
+
+
+    /* =====================================================
+       DETALHES
+    ====================================================== */
+
+    .gold-line {
+      position: absolute;
+
+      left: 5.2%;
+      top: 15%;
+
+      width: 55px;
+      height: 2px;
+
+      background: var(--gold);
+    }
+
+    .index {
+      position: absolute;
+
+      left: 5.2%;
+      top: 15%;
+
+      transform: translateX(70px);
+
+      color: rgba(243, 239, 230, 0.4);
+
+      font-family: "JetBrains Mono", monospace;
+
+      font-size: 9px;
+
+      letter-spacing: 0.12em;
+    }
+
+
+    /* =====================================================
+       RESPONSIVIDADE
+    ====================================================== */
+
+    @media (max-width: 700px) {
+
+      body {
+        padding: 10px;
+      }
+
+      .main-content {
+        width: 58%;
+        top: 25%;
+      }
+
+      .api-area {
+        right: 4%;
+        width: 38%;
+      }
+
+      .api-status {
+        width: 58%;
+      }
+
+      .subtitle {
+        max-width: 260px;
+      }
+    }
+
+
+    @media (max-width: 480px) {
+
+      body {
+        padding: 5px;
+      }
+
+      .main-content {
+        top: 27%;
+      }
+
+      .api-status {
+        bottom: 5%;
+        width: 60%;
+      }
+
+      .api-area {
+        right: 3%;
+        bottom: 11%;
+        width: 39%;
+      }
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <main class="thumbnail">
+
+
+    <!-- ===================================================
+         GRID TÉCNICO
+    ==================================================== -->
+
+    <div
+      class="technical-grid"
+      aria-hidden="true">
+    </div>
+
+
+    <!-- ===================================================
+         HEADER
+    ==================================================== -->
+
+    <header class="topbar">
+
+      <div class="topbar-left">
+
+        <span class="status-dot"></span>
+
+        API TESTING
+
+      </div>
+
+
+      <div class="topbar-right">
+
+        HTTP / 002
+
+      </div>
+
+    </header>
+
+
+    <!-- ===================================================
+         LOGO
+    ==================================================== -->
+
+    <div class="logo-wrapper">
+
+      <img
+        class="logo"
+        src="logo.png"
+        alt="Logo">
+
+    </div>
+
+
+    <!-- ===================================================
+         DETALHE EDITORIAL
+    ==================================================== -->
+
+    <div class="gold-line"></div>
+
+
+    <div class="index">
+
+      02 / APPLICATION PROGRAMMING
+
+    </div>
+
+
+    <!-- ===================================================
+         CONTEÚDO PRINCIPAL
+    ==================================================== -->
+
+    <section class="main-content">
+
+
+      <div class="eyebrow">
+
+        Application Programming Interface
+
+      </div>
+
+
+      <h1>
+
+        API<br>
+        Testing
+
+      </h1>
+
+
+      <p class="subtitle">
+
+        Requests. Responses. Endpoints.
+        Contratos validados.
+
+      </p>
+
+    </section>
+
+
+    <!-- ===================================================
+         MÉTRICAS API
+    ==================================================== -->
+
+    <section
+      class="api-status"
+      aria-label="API test execution results">
+
+
+      <div class="api-item">
+
+        <span class="api-label">
+          REQUESTS
+        </span>
+
+        <strong class="api-value">
+          128
+        </strong>
+
+      </div>
+
+
+      <div class="api-item">
+
+        <span class="api-label">
+          ENDPOINTS
+        </span>
+
+        <strong class="api-value">
+          24
+        </strong>
+
+      </div>
+
+
+      <div class="api-item">
+
+        <span class="api-label">
+          PASSED
+        </span>
+
+        <strong class="api-value pass">
+          126
+        </strong>
+
+      </div>
+
+
+      <div class="api-item">
+
+        <span class="api-label">
+          FAILED
+        </span>
+
+        <strong class="api-value">
+          2
+        </strong>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         API VISUAL
+    ==================================================== -->
+
+    <aside
+      class="api-area"
+      aria-label="API request and response illustration">
+
+
+      <div class="api-frame">
+
+
+        <div class="api-visual">
+
+
+          <!-- =================================================
+               CONEXÕES ENTRE SERVIÇOS
+          ================================================== -->
+
+          <div class="api-network">
+
+            <svg
+              viewBox="0 0 400 150"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true">
+
+              <path
+                d="M50 75
+                   C120 10, 170 10, 200 75
+                   C230 140, 280 140, 350 75"
+                fill="none"
+                stroke="#3F6F52"
+                stroke-width="3"
+                stroke-dasharray="8 7"
+                opacity="0.7" />
+
+              <circle
+                cx="50"
+                cy="75"
+                r="18"
+                fill="#0F3D2E"
+                stroke="#3F6F52"
+                stroke-width="3" />
+
+              <circle
+                cx="200"
+                cy="75"
+                r="18"
+                fill="#0F3D2E"
+                stroke="#C99A44"
+                stroke-width="3" />
+
+              <circle
+                cx="350"
+                cy="75"
+                r="18"
+                fill="#0F3D2E"
+                stroke="#8FE3B0"
+                stroke-width="3" />
+
+              <path
+                d="M44 75h12
+                   M200 69v12
+                   M344 75h12"
+                stroke="#F3EFE6"
+                stroke-width="3"
+                stroke-linecap="round" />
+
+            </svg>
+
+          </div>
+
+
+          <!-- =================================================
+               STATUS HTTP
+          ================================================== -->
+
+          <div class="status-code">
+
+            200 OK
+
+          </div>
+
+
+          <!-- =================================================
+               REQUEST
+          ================================================== -->
+
+          <div class="request-card">
+
+            <div>
+              <span class="http-method">GET</span>
+              <span class="endpoint"> /users/42</span>
+            </div>
+
+            <div>
+              <span class="json-key">Authorization:</span>
+              <span class="json-value"> Bearer ***</span>
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+               RESPONSE
+          ================================================== -->
+
+          <div class="response-card">
+
+            <div>
+              <span class="json-key">status</span>:
+              <span class="json-value">200</span>
+            </div>
+
+            <div>
+              <span class="json-key">"id"</span>:
+              <span class="json-value">42</span>
+            </div>
+
+            <div>
+              <span class="json-key">"name"</span>:
+              <span class="json-value">"QA User"</span>
+            </div>
+
+            <div>
+              <span class="json-key">"active"</span>:
+              <span class="json-value">true</span>
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+        <span class="verified-badge">
+
+          ✓ CONTRACT VALID
+
+        </span>
+
+
+      </div>
+
+    </aside>
+
+
+    <!-- ===================================================
+         LABEL VERTICAL
+    ==================================================== -->
+
+    <div class="vertical-label">
+
+      api testing /
+      requests, responses & contracts
+
+    </div>
+
+
+  </main>
+
+</body>
+
+</html>
