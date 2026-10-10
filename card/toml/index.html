@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>JSON vs TOML — Hora do QA</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --verde-profundo: #0F3D2E;
+            --verde-musgo: #3F6F52;
+            --verde-sinal: #8FE3B0;
+            --dourado: #C99A44;
+            --marfim: #F3EFE6;
+            --tinta: #12201A;
+            --branco: #ffffff;
+
+            --radius: 18px;
+        }
+
+        *{
+
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--marfim);
+            color: var(--tinta);
+            font-family: "Manrope", sans-serif;
+            display: flex;
+            justify-content: center;
+            padding: 42px 24px;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 1180px;
+            min-height: calc(100vh - 84px);
+            background: var(--marfim);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ========================= HEADER ========================= */
+
+        header {
+            position: relative;
+            z-index: 1;
+
+            display: grid;
+            grid-template-columns: 92px 1fr auto;
+            align-items: center;
+
+            gap: 28px;
+            padding: 12px 0 42px;
+
+            border-bottom: 1px solid rgba(15, 61, 46, 0.16);
+        }
+
+        .logo {
+            width: 78px;
+            height: 78px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .eyebrow {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            font-weight: 600;
+
+            color: var(--verde-musgo);
+
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .brand-name {
+            font-family: "Newsreader", serif;
+            font-size: 25px;
+            font-style: italic;
+            color: var(--verde-profundo);
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+
+            color: var(--verde-profundo);
+            white-space: nowrap;
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+
+            background: var(--verde-sinal);
+            border-radius: 50%;
+
+            box-shadow: 0 0 0 4px rgba(143, 227, 176, 0.18);
+        }
+
+        img {
+            width: 78px;
+            height: 78px;
+        }
+
+        /* ========================= HERO ========================= */
+
+        .hero {
+            position: relative;
+            z-index: 1;
+
+            padding: 64px 0 48px;
+            max-width: 900px;
+        }
+
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            font-weight: 600;
+
+            color: var(--verde-musgo);
+
+            margin-bottom: 18px;
+
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .hero-label::before {
+            content: "01";
+
+            color: var(--marfim);
+            background: var(--verde-profundo);
+
+            padding: 5px 8px;
+            border-radius: 5px;
+
+            font-size: 10px;
+        }
+
+        h1 {
+            color: var(--verde-profundo);
+
+            font-family: "Newsreader", serif;
+            font-size: clamp(54px, 7vw, 86px);
+            font-weight: 500;
+            font-style: italic;
+
+            line-height: 0.95;
+            letter-spacing: -0.045em;
+        }
+
+        .hero-description {
+            margin-top: 24px;
+
+            font-size: 16px;
+            line-height: 1.7;
+
+            color: rgba(18, 32, 26, 0.72);
+        }
+
+        /* ========================= CONCEITOS ========================= */
+
+        .concepts {
+            position: relative;
+            z-index: 1;
+
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+
+            flex: 1;
+        }
+
+        .concept {
+            background: var(--verde-profundo);
+
+            border: 1px solid var(--verde-profundo);
+            border-radius: var(--radius);
+
+            padding: 28px;
+            min-height: 285px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            position: relative;
+            overflow: hidden;
+
+            transition: border-color 180ms ease, background 180ms ease;
+        }
+
+        .concept:hover {
+            background: #124A38;
+            border-color: var(--verde-musgo);
+        }
+
+        /* ========================= TOPO DOS CARDS ========================= */
+
+        .concept-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            gap: 20px;
+        }
+
+        .concept-number {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            font-weight: 600;
+
+            color: var(--verde-sinal);
+
+            letter-spacing: 0.05em;
+        }
+
+        .concept-status {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 9px;
+
+            color: var(--verde-sinal);
+
+            border: 1px solid rgba(143, 227, 176, 0.35);
+
+            padding: 5px 7px;
+            border-radius: 4px;
+
+            text-transform: uppercase;
+        }
+
+        /* ========================= TÍTULOS ========================= */
+
+        .concept h2 {
+            margin-top: 28px;
+
+            color: var(--marfim);
+
+            font-family: "Newsreader", serif;
+            font-size: 31px;
+            font-weight: 500;
+
+            line-height: 1;
+        }
+
+        .concept h2 span {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 12px;
+            font-weight: 500;
+            font-style: normal;
+
+            color: rgba(143, 227, 176, 0.75);
+
+            margin-left: 7px;
+
+            white-space: nowrap;
+        }
+
+        /* ========================= TEXTO ========================= */
+
+        .concept p {
+            position: relative;
+            z-index: 1;
+
+            margin-top: 17px;
+
+            font-size: 14px;
+            line-height: 1.7;
+
+            color: rgba(243, 239, 230, 0.76);
+        }
+
+        .concept strong {
+            color: var(--verde-sinal);
+            font-weight: 700;
+        }
+
+        .concept::before,
+        .concept::after {
+            display: none;
+        }
+
+        /* ========================= EXEMPLOS DE CÓDIGO ========================= */
+
+        .code-example {
+            margin-top: 18px;
+
+            background: rgba(0, 0, 0, 0.22);
+            border: 1px solid rgba(143, 227, 176, 0.16);
+
+            border-radius: 9px;
+
+            padding: 14px 16px;
+
+            overflow-x: auto;
+        }
+
+        .code-example code {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 12px;
+            line-height: 1.65;
+
+            color: #DDFBE8;
+            white-space: pre;
+        }
+
+        .code-key {
+            color: #8FE3B0;
+        }
+
+        .code-string {
+            color: #F4C978;
+        }
+
+        .code-number {
+            color: #9FD7FF;
+        }
+
+        /* ========================= COMPARAÇÃO ========================= */
+
+        .comparison {
+            margin-top: 18px;
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            gap: 18px;
+        }
+
+        .comparison-box {
+            padding: 22px;
+
+            background: rgba(15, 61, 46, 0.06);
+            border: 1px solid rgba(15, 61, 46, 0.12);
+
+            border-radius: var(--radius);
+        }
+
+        .comparison-box h3 {
+            font-family: "Newsreader", serif;
+            font-size: 25px;
+            font-weight: 500;
+
+            color: var(--verde-profundo);
+
+            margin-bottom: 12px;
+        }
+
+        .comparison-box p {
+            font-size: 14px;
+            line-height: 1.7;
+
+            color: rgba(18, 32, 26, 0.72);
+        }
+
+        /* ========================= RESUMO ========================= */
+
+        .summary {
+            position: relative;
+            z-index: 1;
+
+            margin-top: 18px;
+
+            padding: 28px;
+
+            background: var(--verde-profundo);
+            border-radius: var(--radius);
+
+            color: var(--marfim);
+        }
+
+        .summary-label {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 10px;
+            font-weight: 600;
+
+            color: var(--verde-sinal);
+
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .summary h2 {
+            margin-top: 12px;
+
+            font-family: "Newsreader", serif;
+            font-size: 32px;
+            font-weight: 500;
+            font-style: italic;
+        }
+
+        .summary p {
+            margin-top: 12px;
+
+            max-width: 850px;
+
+            font-size: 14px;
+            line-height: 1.7;
+
+            color: rgba(243, 239, 230, 0.76);
+        }
+
+        /* ========================= FOOTER ========================= */
+
+        footer {
+            position: relative;
+            z-index: 1;
+
+            margin-top: 38px;
+            padding: 22px 0 5px;
+
+            border-top: 1px solid rgba(15, 61, 46, 0.16);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .footer-brand {
+            font-family: "Newsreader", serif;
+            font-size: 21px;
+            font-style: italic;
+
+            color: var(--verde-profundo);
+        }
+
+        .footer-meta {
+            display: flex;
+            align-items: center;
+
+            gap: 20px;
+
+            font-family: "JetBrains Mono", monospace;
+            font-size: 10px;
+
+            color: var(--verde-musgo);
+
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .footer-pass {
+            color: var(--verde-profundo);
+
+            background: var(--verde-sinal);
+
+            padding: 7px 10px;
+            border-radius: 4px;
+
+            font-weight: 700;
+        }
+
+        /* ========================= RESPONSIVO ========================= */
+
+        @media (max-width: 760px) {
+
+            body {
+                padding: 24px 16px;
+            }
+
+            .page {
+                min-height: calc(100vh - 48px);
+            }
+
+            header {
+                grid-template-columns: 70px 1fr;
+                gap: 18px;
+            }
+
+            .logo {
+                width: 62px;
+                height: 62px;
+            }
+
+            .status {
+                grid-column: 2;
+                margin-top: -8px;
+            }
+
+            .hero {
+                padding: 48px 0 36px;
+            }
+
+            h1 {
+                font-size: clamp(48px, 14vw, 70px);
+            }
+
+            .concepts {
+                grid-template-columns: 1fr;
+            }
+
+            .concept {
+                min-height: auto;
+            }
+
+            .comparison {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .footer-meta {
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .concept {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="page">
+
+        <!-- HEADER -->
+        <header>
+
+            <div class="logo" aria-label="Espaço reservado para o logo"> <img src="logo.png" alt="Logo"> </div>
+
+            <div class="brand"> <span class="eyebrow"> Software Quality / Glossário </span>
+
+                <span class="brand-name"> Hora do QA </span>
+            </div>
+
+            <div class="status"> <span class="status-indicator"></span> <span>STATUS: TESTED</span> </div>
+
+        </header>
+
+        <!-- HERO -->
+        <section class="hero">
+
+            <div class="hero-label"> Formatos de dados </div>
+
+            <h1> JSON vs.<br> TOML </h1>
+
+            <p class="hero-description"> Dois formatos de texto usados para representar informações, mas com propostas
+                diferentes. Entenda o significado de cada um, como funcionam e quando faz sentido utilizar JSON ou TOML.
+            </p>
+
+        </section>
+
+        <!-- CONCEITOS -->
+        <section class="concepts">
+
+            <!-- JSON -->
+            <article class="concept">
+
+                <div class="concept-top"> <span class="concept-number"> FORMATO / 01 </span>
+
+                    <span class="concept-status"> DATA </span>
+                </div>
+
+                <div>
+
+                    <h2> JSON <span>.json</span> </h2>
+
+                    <p> <strong>JavaScript Object Notation</strong> — ou "Notação de Objetos JavaScript". É um formato
+                        leve para representar e transportar dados estruturados. Apesar do nome, pode ser utilizado por
+                        praticamente qualquer linguagem de programação. </p>
+
+                    <div class="code-example">
+                        <code>{ <span class="code-key">"nome"</span>: <span class="code-string">"Ana"</span>, <span class="code-key">"idade"</span>: <span class="code-number">28</span>, <span class="code-key">"ativo"</span>: <span class="code-string">true</span> }</code>
+                    </div>
+
+                </div>
+
+            </article>
+
+            <!-- TOML -->
+            <article class="concept">
+
+                <div class="concept-top"> <span class="concept-number"> FORMATO / 02 </span>
+
+                    <span class="concept-status"> CONFIG </span>
+                </div>
+
+                <div>
+
+                    <h2> TOML <span>.toml</span> </h2>
+
+                    <p> <strong>Tom's Obvious, Minimal Language</strong> — "Linguagem Óbvia e Minimalista do Tom". Foi
+                        projetado para ser simples de ler e escrever, sendo especialmente útil para arquivos de
+                        configuração. </p>
+
+                    <div class="code-example">
+                        <code><span class="code-key">nome</span> = <span class="code-string">"Ana"</span> <span class="code-key">idade</span> = <span class="code-number">28</span> <span class="code-key">ativo</span> = <span class="code-string">true</span></code>
+                    </div>
+
+                </div>
+
+            </article>
+
+            <!-- ESTRUTURA -->
+            <article class="concept">
+
+                <div class="concept-top"> <span class="concept-number"> CONCEITO / 03 </span>
+
+                    <span class="concept-status"> STRUCTURE </span>
+                </div>
+
+                <div>
+
+                    <h2> Estrutura <span>syntax</span> </h2>
+
+                    <p> No <strong>JSON</strong>, objetos são delimitados por chaves e propriedades utilizam dois-pontos
+                        e vírgulas. No <strong>TOML</strong>, configurações simples podem ser escritas diretamente como
+                        pares <strong>chave = valor</strong>. </p>
+
+                    <div class="code-example"> <code><span class="code-key">JSON</span> { <span class="code-key">"porta"</span>: <span class="code-number">8080</span> }
+
+<span class="code-key">TOML</span> <span class="code-key">porta</span> = <span class="code-number">8080</span></code>
+                    </div>
+
+                </div>
+
+            </article>
+
+            <!-- CONFIGURAÇÃO -->
+            <article class="concept">
+
+                <div class="concept-top"> <span class="concept-number"> CONCEITO / 04 </span>
+
+                    <span class="concept-status"> PURPOSE </span>
+                </div>
+
+                <div>
+
+                    <h2> Finalidade <span>use case</span> </h2>
+
+                    <p> JSON é muito comum na <strong>comunicação entre sistemas e APIs</strong>. TOML é especialmente
+                        interessante para <strong>configurações mantidas manualmente</strong>, onde a legibilidade é uma
+                        prioridade. </p>
+
+                    <div class="code-example"> <code><span class="code-key">JSON</span> → APIs / dados / integração
+
+<span class="code-key">TOML</span> → Configuração / ferramentas / projetos</code> </div>
+
+                </div>
+
+            </article>
+
+        </section>
+
+        <!-- COMPARAÇÃO -->
+        <section class="comparison">
+
+            <div class="comparison-box">
+
+                <h3> Quando usar JSON? </h3>
+
+                <p> Prefira JSON quando o objetivo principal for representar dados estruturados ou realizar a
+                    comunicação entre aplicações. Ele é extremamente comum em APIs, aplicações web e sistemas
+                    distribuídos. </p>
+
+            </div>
+
+            <div class="comparison-box">
+
+                <h3> Quando usar TOML? </h3>
+
+                <p> Prefira TOML quando estiver criando um arquivo de configuração que será lido e editado
+                    frequentemente por pessoas. Sua sintaxe foi pensada para ser clara e fácil de compreender. </p>
+
+            </div>
+
+        </section>
+
+        <!-- RESUMO -->
+        <section class="summary">
+
+            <div class="summary-label"> QA-REF / RESUMO </div>
+
+            <h2> A diferença em uma frase. </h2>
+
+            <p> <strong>JSON</strong> é muito utilizado para representar e transportar dados entre sistemas, enquanto o
+                <strong>TOML</strong> é especialmente voltado para arquivos de configuração simples, legíveis e fáceis
+                de editar. </p>
+
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+
+            <div class="footer-brand"> Hora do QA </div>
+
+            <div class="footer-meta">
+
+                <span> QA-REF / 005 </span>
+
+                <span> DATA FORMATS </span>
+
+                <span class="footer-pass"> PASS </span>
+
+            </div>
+
+        </footer>
+
+    </main>
+
+</body>
+
+</html>
