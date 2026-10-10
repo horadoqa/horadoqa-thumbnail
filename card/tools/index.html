@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Ferramentas de QA — Hora do QA</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --verde-profundo: #0F3D2E;
+            --verde-musgo: #3F6F52;
+            --verde-sinal: #8FE3B0;
+            --dourado: #C99A44;
+            --marfim: #F3EFE6;
+            --tinta: #12201A;
+            --branco: #ffffff;
+
+            --radius: 18px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--marfim);
+            color: var(--tinta);
+            font-family: "Manrope", sans-serif;
+            display: flex;
+            justify-content: center;
+            padding: 42px 24px;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 1180px;
+            background: var(--marfim);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* =========================
+       HEADER
+    ========================= */
+
+        header {
+            display: grid;
+            grid-template-columns: 92px 1fr auto;
+            align-items: center;
+            gap: 28px;
+            padding: 12px 0 42px;
+            border-bottom: 1px solid rgba(15, 61, 46, 0.16);
+        }
+
+        .logo {
+            width: 78px;
+            height: 78px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .logo img {
+            width: 78px;
+            height: 78px;
+            object-fit: contain;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .eyebrow {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--verde-musgo);
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .brand-name {
+            font-family: "Newsreader", serif;
+            font-size: 25px;
+            font-style: italic;
+            color: var(--verde-profundo);
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            color: var(--verde-profundo);
+            white-space: nowrap;
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            background: var(--verde-sinal);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(143, 227, 176, 0.18);
+        }
+
+        /* =========================
+       HERO
+    ========================= */
+
+        .hero {
+            padding: 64px 0 48px;
+            max-width: 940px;
+        }
+
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--verde-musgo);
+            margin-bottom: 18px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .hero-label::before {
+            content: "01";
+            color: var(--marfim);
+            background: var(--verde-profundo);
+            padding: 5px 8px;
+            border-radius: 5px;
+            font-size: 10px;
+        }
+
+        h1 {
+            color: var(--verde-profundo);
+            font-family: "Newsreader", serif;
+            font-size: clamp(54px, 7vw, 86px);
+            font-weight: 500;
+            font-style: italic;
+            line-height: 0.95;
+            letter-spacing: -0.045em;
+        }
+
+        .hero-description {
+            margin-top: 24px;
+            max-width: 800px;
+            font-size: 16px;
+            line-height: 1.8;
+            color: rgba(18, 32, 26, 0.72);
+        }
+
+        /* =========================
+       RESUMO DAS CATEGORIAS
+    ========================= */
+
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 28px;
+        }
+
+        .category-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 12px;
+            border: 1px solid rgba(15, 61, 46, 0.18);
+            border-radius: 6px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 10px;
+            color: var(--verde-profundo);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .category-tag::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            background: var(--verde-musgo);
+            border-radius: 50%;
+        }
+
+        /* =========================
+       GRID DE FERRAMENTAS
+    ========================= */
+
+        .tools {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+        }
+
+        .tool {
+            background: var(--verde-profundo);
+            border: 1px solid var(--verde-profundo);
+            border-radius: var(--radius);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            transition:
+                background 180ms ease,
+                border-color 180ms ease,
+                transform 180ms ease;
+        }
+
+        .tool:hover {
+            background: #124A38;
+            border-color: var(--verde-musgo);
+            transform: translateY(-3px);
+        }
+
+        .tool-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .tool-number {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--verde-sinal);
+            letter-spacing: 0.05em;
+        }
+
+        .tool-category {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 9px;
+            line-height: 1.5;
+            color: var(--verde-sinal);
+            border: 1px solid rgba(143, 227, 176, 0.35);
+            padding: 5px 7px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        /* =========================
+       TÍTULO E DESCRIÇÃO
+    ========================= */
+
+        .tool h2 {
+            margin-top: 28px;
+            color: var(--marfim);
+            font-family: "Newsreader", serif;
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+        }
+
+        .tool-description {
+            margin-top: 14px;
+            font-size: 13px;
+            line-height: 1.75;
+            color: rgba(243, 239, 230, 0.78);
+        }
+
+        .tool-description strong {
+            color: var(--verde-sinal);
+            font-weight: 700;
+        }
+
+        /* =========================
+       FUNCIONALIDADES
+    ========================= */
+
+        .tool-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 23px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(243, 239, 230, 0.16);
+        }
+
+        .tool-features li {
+            position: relative;
+            padding-left: 16px;
+            font-size: 12px;
+            line-height: 1.7;
+            color: rgba(243, 239, 230, 0.82);
+        }
+
+        .tool-features li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 5px;
+            height: 5px;
+            background: var(--verde-sinal);
+            border-radius: 1px;
+        }
+
+        .tool-features strong {
+            color: var(--verde-sinal);
+            font-weight: 600;
+        }
+
+        /* =========================
+       DESTAQUE DA FERRAMENTA
+    ========================= */
+
+        .tool-purpose {
+            margin-top: auto;
+            padding-top: 24px;
+        }
+
+        .tool-purpose-label {
+            display: block;
+            margin-bottom: 8px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 9px;
+            color: var(--verde-sinal);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .tool-purpose-text {
+            display: inline-block;
+            padding: 7px 9px;
+            border-radius: 4px;
+            background: rgba(143, 227, 176, 0.1);
+            color: var(--marfim);
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        /* =========================
+       FOOTER
+    ========================= */
+
+        footer {
+            margin-top: 38px;
+            padding: 22px 0 5px;
+            border-top: 1px solid rgba(15, 61, 46, 0.16);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .footer-brand {
+            font-family: "Newsreader", serif;
+            font-size: 21px;
+            font-style: italic;
+            color: var(--verde-profundo);
+        }
+
+        .footer-meta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            font-family: "JetBrains Mono", monospace;
+            font-size: 10px;
+            color: var(--verde-musgo);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .footer-pass {
+            color: var(--verde-profundo);
+            background: var(--verde-sinal);
+            padding: 7px 10px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        /* =========================
+       RESPONSIVO
+    ========================= */
+
+        @media (max-width: 980px) {
+            .tools {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 760px) {
+            body {
+                padding: 24px 16px;
+            }
+
+            header {
+                grid-template-columns: 70px 1fr;
+                gap: 18px;
+                padding-bottom: 28px;
+            }
+
+            .logo,
+            .logo img {
+                width: 62px;
+                height: 62px;
+            }
+
+            .status {
+                grid-column: 2;
+                margin-top: -8px;
+            }
+
+            .hero {
+                padding: 48px 0 36px;
+            }
+
+            h1 {
+                font-size: clamp(48px, 14vw, 70px);
+            }
+
+            .hero-description {
+                font-size: 14px;
+            }
+
+            .tools {
+                grid-template-columns: 1fr;
+            }
+
+            .tool {
+                padding: 26px;
+            }
+
+            .tool h2 {
+                font-size: 34px;
+            }
+
+            .tool-description {
+                font-size: 14px;
+            }
+
+            .tool-features li {
+                font-size: 13px;
+            }
+
+            footer {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .footer-meta {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .tool {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="page">
+
+        <!-- HEADER -->
+        <header>
+
+            <div class="logo" aria-label="Logo Hora do QA">
+                <img src="logo.png" alt="Logo Hora do QA">
+            </div>
+
+            <div class="brand">
+                <span class="eyebrow">
+                    Software Quality / Tools
+                </span>
+
+                <span class="brand-name">
+                    Hora do QA
+                </span>
+            </div>
+
+            <div class="status">
+                <span class="status-indicator"></span>
+                <span>QA TOOLKIT / 009</span>
+            </div>
+
+        </header>
+
+        <!-- HERO -->
+        <section class="hero">
+
+            <div class="hero-label">
+                Ferramentas fundamentais
+            </div>
+
+            <h1>
+                O Arsenal<br>
+                do QA
+            </h1>
+
+            <p class="hero-description">
+                Nove ferramentas que fazem parte do universo de qualidade
+                de software. Da automação de interfaces aos testes de APIs,
+                passando por BDD e performance, cada tecnologia tem um papel
+                específico na construção de aplicações mais confiáveis.
+            </p>
+
+            <div class="categories" aria-label="Categorias de ferramentas">
+                <span class="category-tag">UI / E2E</span>
+                <span class="category-tag">API Testing</span>
+                <span class="category-tag">Performance</span>
+                <span class="category-tag">BDD</span>
+            </div>
+
+        </section>
+
+        <!-- FERRAMENTAS -->
+        <section class="tools" aria-label="Ferramentas de qualidade de software">
+
+            <!-- 01 SELENIUM -->
+            <article class="tool">
+
+                <div class="tool-top">
+                    <span class="tool-number">TOOL / 01</span>
+                    <span class="tool-category">UI AUTOMATION</span>
+                </div>
+
+                <div>
+                    <h2>Selenium</h2>
+
+                    <p class="tool-description">
+                        Ferramenta de <strong>automação de testes web</strong>
+                        que simula interações do usuário com navegadores para
+                        validar o funcionamento das aplicações.
+                    </p>
+
+                    <ul class="tool-features">
+                        <li>Ideal para testes de interface de usuário (UI).</li>
+                        <li>Suporta Chrome, Firefox, Edge e outros navegadores compatíveis.</li>
+                        <li>Oferece suporte a Java, Python, C# e JavaScript, entre outras linguagens e bindings.</li>
+                    </ul>
+                </div>
+
+                <div class="tool-purpose">
+                    <span class="tool-purpose-label">Principal aplicação</span>
+                    <span class="tool-purpose-text">Testes automatizados de navegador</span>
+                </div>
+
+            </article>
+
+            <!-- 02 POSTMAN -->
+            <article class="tool">
+
+                <div class="tool-top">
+                    <span class="tool-number">TOOL / 02</span>
+                    <span class="tool-category">API TESTING</span>
+                </div>
+
+                <div>
+                    <h2>Postman</h2>
+
+                    <p class="tool-description">
+                        Plataforma para desenvolvimento e testes de APIs,
+                        permitindo enviar requisições HTTP, validar respostas
+                        e verificar o comportamento de serviços.
+                    </p>
+
+                    <ul class="tool-features">
+                        <li>Cria e envia requisições <strong>GET, POST, PUT e DELETE</strong>.</li>
+                        <li>Organiza requisições em coleções e permite criar testes automatizados.</li>
+                        <li>Integra execuções automatizadas a pipelines de CI/CD.</li>
+                    </ul>
+                </div>
+
+                <div class="tool-purpose">
+                    <span class="tool-purpose-label">Principal aplicação</span>
+                    <span class="tool-purpose-text">Desenvolvimento e validação de APIs</span>
+                </div>
+
+            </article>
+
+            <!-- 03 REST ASSURED -->
+            <article class="tool">
+
+                <div class="tool-top">
+                    <span class="tool-number">TOOL / 03</span>
+                    <span class="tool-category">JAVA / API</span>
+                </div>
+
+                <div>
+                    <h2>RestAssured</h2>
+
+                    <p class="tool-description">
+                        Biblioteca Java que simplifica a automação de testes
+                        de <strong>APIs RESTful</strong>, integrando requisições
+                        HTTP e validações diretamente ao código de teste.
+                    </p>
+
+                    <ul class="tool-features">
+                        <li>Automatiza chamadas HTTP dentro de testes Java.</li>
+                        <li>Valida códigos de status, cabeçalhos e conteúdo das respostas.</li>
+                        <li>Integra-se a frameworks como <strong>JUnit e TestNG</strong>.</li>
+                    </ul>
+                </div>
+
+                <div class="tool-purpose">
+                    <span class="tool-purpose-label">Principal aplicação</span>
+                    <span class="tool-purpose-text">Testes de API com Java</span>
+                </div>
+
+            </article>
+
+            <!-- 04 JMETER -->
+            <article class="tool">
+
+                <div class="tool-top">
+                    <span class="tool-number">TOOL / 04</span>
+                    <span class="tool-category">PERFORMANCE</span>
+                </div>
+
+                <div>
+                    <h2>JMeter</h2>
+
+                    <p class="tool-description">
+                        Ferramenta de testes de desempenho utilizada para avaliar
+                        a <strong>performance, estabilidade e capacidade</strong>
+                        de aplicações, APIs e serviços sob diferentes níveis de carga.
+                    </p>
+
+                    <ul class="tool-features">
+                        <li>Simula múltiplas requisições simultâneas em serviços REST e SOAP.</li>
+                        <li>Permite realizar testes de carga, estresse e capacidade.</li>
+                        <li>Gera métricas de tempo de resposta, vazão e erros.</li>
+                    </ul>
+                </div>
+
+                <div class="tool-purpose">
+                    <span class="tool-purpose-label">Principal aplicação</span>
+                    <span class="tool-purpose-text">Desempenho e testes de carga</span>
+                </div>
+
+            </article>
+
+            <!-- 05 SOAPUI -->
+            <article class="tool">
+
+                <div class="tool-top">
+                    <span class="tool-number">TOOL / 05</span>
+                    <span class="tool-category">WEB SERVICES</span>
+                </div>
+
+                <div>
+                    <h2>SoapUI</h2>
+
+                    <p class="tool-description">
+                        Ferramenta para testes funcionais e de desempenho em
+                        <strong>web services SOAP e REST</strong>, com recursos
+                        visuais para criação e execução de cenários de teste.
+                    </p>
+
+                    <ul class="tool-features">
+                        <li>Permite criar e executar testes de APIs por uma interface visual.</li>
+                        <li>Valida respostas, status HTTP, estruturas de dados e regras de negócio.</li>
+                        <li>Oferece recursos para automatizar sequências de validações.</li>
+                    </ul>
+                </div>
+
+                <div class="tool-purpose">
+                    <span class="tool-purpose-label">Principal aplicação</span>
+                    <span class="tool-purpose-text">Testes funcionais de serviços SOAP e REST</span>
+                </div>
+
+            </article>
+
+            <!-- 06 CUCUMBER -->
+            <article class="tool">
+
+                <div class="tool-top">
+                    <span class="tool-number">TOOL / 06</span>
+                    <span class="tool-category">BDD</span>
+                </div>
+
+                <div>
+                    <h2>Cucumber</h2>
+
+                    <p class="tool-description">
+                        Ferramenta de automação baseada em
+                        <strong>Behavior-Driven Development (BDD)</strong>,
+                        que conecta cenários descritos em linguagem legível
+                        a implementações automatizadas.
+                    </p>
+
+                    <ul class="tool-features">
+                        <li>Utiliza Gherkin para descrever cenários em formato legível por humanos.</li>
+                        <li>Facilita a comunicação entre QA, desenvolvimento e negócio.</li>
+                        <li>Pode ser integrado a ferramentas como Selenium e RestAssured, conforme a configuração do
+                            projeto.</li>
+                    </ul>
+                </div>
+
+                <div class="tool-purpose">
+                    <span class="tool-purpose-label">Principal aplicação</span>
+                    <span class="tool-purpose-text">Cenários de negócio e BDD</span>
+                </div>
+
+            </article>
+
+            <!-- 07 K6 -->
+            <article class="tool">
+
+                <div class="tool-top">
+                    <span class="tool-number">TOOL / 07</span>
+                    <span class="tool-category">LOAD TESTING</span>
+                </div>
+
+                <div>
+                    <h2>k6</h2>
+
+                    <p class="tool-description">
+                        Ferramenta de testes de desempenho voltada para APIs
+                        e aplicações web, utilizada para simular carga e analisar
+                        <strong>tempo de resposta, vazão e taxa de erros</strong>.
+                    </p>
+
+                    <ul class="tool-features">
+                        <li>Permite criar cenários de teste com scripts JavaScript.</li>
+                        <li>Suporta testes de carga e avaliação dos limites de desempenho.</li>
+                        <li>Integra-se a pipelines de CI/CD e permite definir limites de aprovação por métricas.</li>
+                    </ul>
+                </div>
+
+                <div class="tool-purpose">
+                    <span class="tool-purpose-label">Principal aplicação</span>
+                    <span class="tool-purpose-text">Performance automatizada em pipelines</span>
+                </div>
+
+            </article>
+
+            <!-- 08 CYPRESS -->
+            <article class="tool">
+
+                <div class="tool-top">
+                    <span class="tool-number">TOOL / 08</span>
+                    <span class="tool-category">E2E / COMPONENTS</span>
+                </div>
+
+                <div>
+                    <h2>Cypress</h2>
+
+                    <p class="tool-description">
+                        Framework de automação para aplicações web, utilizado
+                        principalmente em testes <strong>end-to-end e de componentes</strong>,
+                        validando funcionalidades e interações no navegador.
+                    </p>
+
+                    <ul class="tool-features">
+                        <li>Simula ações do usuário e verifica elementos da interface.</li>
+                        <li>Oferece execução interativa e ferramentas de depuração.</li>
+                        <li>Suporta testes automatizados com JavaScript e TypeScript.</li>
+                    </ul>
+                </div>
+
+                <div class="tool-purpose">
+                    <span class="tool-purpose-label">Principal aplicação</span>
+                    <span class="tool-purpose-text">Testes web e de componentes</span>
+                </div>
+
+            </article>
+
+            <!-- 09 PLAYWRIGHT -->
+            <article class="tool">
+
+                <div class="tool-top">
+                    <span class="tool-number">TOOL / 09</span>
+                    <span class="tool-category">CROSS-BROWSER</span>
+                </div>
+
+                <div>
+                    <h2>Playwright</h2>
+
+                    <p class="tool-description">
+                        Framework de automação web que permite executar testes
+                        end-to-end em diferentes navegadores e validar funcionalidades
+                        por meio de <strong>interações automatizadas</strong>.
+                    </p>
+
+                    <ul class="tool-features">
+                        <li>Suporta Chromium, Firefox e WebKit.</li>
+                        <li>Permite testar diferentes dispositivos e tamanhos de tela.</li>
+                        <li>Oferece execução paralela, screenshots, gravação de vídeos e integração com CI/CD.</li>
+                    </ul>
+                </div>
+
+                <div class="tool-purpose">
+                    <span class="tool-purpose-label">Principal aplicação</span>
+                    <span class="tool-purpose-text">Testes E2E em múltiplos navegadores</span>
+                </div>
+
+            </article>
+
+
+            <!-- 09 ROBOT FRAMEWORK -->
+            <article class="tool">
+
+                <div class="tool-top">
+                    <span class="tool-number">TOOL / 09</span>
+                    <span class="tool-category">AUTOMAÇÃO DE TESTES</span>
+                </div>
+
+                <div>
+                    <h2>Robot Framework</h2>
+
+                    <p class="tool-description">
+                        Framework de automação de testes baseado em palavras-chave
+                        (keyword-driven), que permite automatizar testes funcionais,
+                        de aceitação e end-to-end, utilizando uma sintaxe simples
+                        e legível.
+                    </p>
+
+                    <ul class="tool-features">
+                        <li>Possui sintaxe baseada em palavras-chave e utiliza arquivos de teste legíveis.</li>
+                        <li>Permite automação web com SeleniumLibrary e Browser Library, baseada em Playwright.</li>
+                        <li>Oferece relatórios, logs detalhados, reutilização de keywords e integração com CI/CD.</li>
+                    </ul>
+                </div>
+
+                <div class="tool-purpose">
+                    <span class="tool-purpose-label">Principal aplicação</span>
+                    <span class="tool-purpose-text">Automação de testes funcionais e E2E</span>
+                </div>
+
+            </article>
+
+
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+
+            <div class="footer-brand">
+                Hora do QA
+            </div>
+
+            <div class="footer-meta">
+                <span>QA-REF / 009</span>
+                <span>QUALITY TOOLKIT</span>
+                <span class="footer-pass">TEST READY</span>
+            </div>
+
+        </footer>
+
+    </main>
+
+</body>
+
+</html>
