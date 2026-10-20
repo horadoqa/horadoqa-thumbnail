@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Gherkin — Hora do QA</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <main class="page">
+
+        <!-- HEADER -->
+        <header>
+
+            <div class="logo" aria-label="Espaço reservado para o logo">
+                <img src="../assets/images/logo.png" alt="Logo">
+            </div>
+
+            <div class="brand">
+                <span class="eyebrow">
+                    Software Quality / BDD
+                </span>
+
+                <span class="brand-name">
+                    Hora do QA
+                </span>
+            </div>
+
+            <div class="status">
+                <span class="status-indicator"></span>
+                <span>STATUS: TESTED</span>
+            </div>
+
+        </header>
+
+
+        <!-- HERO -->
+        <section class="hero">
+
+            <div class="hero-label">
+                Linguagem de especificação
+            </div>
+
+            <h1>
+                O que é<br>
+                Gherkin?
+            </h1>
+
+            <p class="hero-description">
+                Uma linguagem estruturada e legível que transforma requisitos
+                de negócio em cenários de comportamento — criando uma ponte
+                comum entre produto, desenvolvimento e qualidade.
+            </p>
+
+        </section>
+
+
+        <!-- CONCEITOS -->
+        <section class="concepts">
+
+            <!-- DEFINIÇÃO -->
+            <article class="concept">
+
+                <div class="concept-top">
+                    <span class="concept-number">
+                        CONCEITO / 01
+                    </span>
+
+                    <span class="concept-status">
+                        LANGUAGE
+                    </span>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Gherkin
+                        <span>specification</span>
+                    </h2>
+
+                    <p>
+                        É uma <strong>linguagem estruturada</strong> usada para
+                        descrever o comportamento esperado de uma aplicação de
+                        maneira que pessoas técnicas e não técnicas consigam
+                        compreender.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- BDD -->
+            <article class="concept">
+
+                <div class="concept-top">
+                    <span class="concept-number">
+                        CONCEITO / 02
+                    </span>
+
+                    <span class="concept-status">
+                        BDD
+                    </span>
+                </div>
+
+                <div>
+
+                    <h2>
+                        BDD
+                        <span>behavior</span>
+                    </h2>
+
+                    <p>
+                        Gherkin é frequentemente utilizado em práticas de
+                        <strong>Behavior-Driven Development</strong>. O foco deixa
+                        de ser apenas como o sistema funciona e passa a ser
+                        <strong>qual comportamento deve acontecer</strong>.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- PALAVRAS-CHAVE -->
+            <article class="concept">
+
+                <div class="concept-top">
+                    <span class="concept-number">
+                        CONCEITO / 03
+                    </span>
+
+                    <span class="concept-status">
+                        KEYWORDS
+                    </span>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Given / When / Then
+                        <span>estrutura</span>
+                    </h2>
+
+                    <p>
+                        Os cenários normalmente seguem uma sequência:
+                        <strong>Given</strong> define o contexto,
+                        <strong>When</strong> representa a ação e
+                        <strong>Then</strong> descreve o resultado esperado.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- BENEFÍCIO -->
+            <article class="concept">
+
+                <div class="concept-top">
+                    <span class="concept-number">
+                        CONCEITO / 04
+                    </span>
+
+                    <span class="concept-status">
+                        COLLABORATION
+                    </span>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Linguagem comum
+                        <span>shared</span>
+                    </h2>
+
+                    <p>
+                        O principal objetivo é criar um <strong>entendimento
+                            compartilhado</strong> sobre o comportamento esperado,
+                        reduzindo ambiguidades entre negócio, desenvolvimento e
+                        QA antes mesmo da execução dos testes.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- EXEMPLO -->
+            <article class="gherkin-example">
+
+                <div>
+
+                    <div class="example-label">
+                        Exemplo / cenário
+                    </div>
+
+                    <p class="example-description">
+                        Um cenário Gherkin descreve uma situação real de negócio
+                        usando uma estrutura simples e próxima da linguagem humana.
+                    </p>
+
+                </div>
+
+                <div class="gherkin-code">
+
+                    <div>
+                        <span class="keyword">Feature:</span>
+                        <span class="string">Login do usuário</span>
+                    </div>
+
+                    <br>
+
+                    <div>
+                        <span class="keyword">Scenario:</span>
+                        <span class="string">Login com credenciais válidas</span>
+                    </div>
+
+                    <div>
+                        <span class="keyword">Given</span>
+                        <span class="string">que o usuário está na tela de login</span>
+                    </div>
+
+                    <div>
+                        <span class="keyword">And</span>
+                        <span class="string">possui credenciais válidas</span>
+                    </div>
+
+                    <div>
+                        <span class="keyword">When</span>
+                        <span class="string">informa usuário e senha corretamente</span>
+                    </div>
+
+                    <div>
+                        <span class="keyword">And</span>
+                        <span class="string">clica em "Entrar"</span>
+                    </div>
+
+                    <div>
+                        <span class="keyword">Then</span>
+                        <span class="string">deve acessar a página inicial</span>
+                    </div>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer>
+
+            <div class="footer-brand">
+                Hora do QA
+            </div>
+
+            <div class="footer-meta">
+
+                <span>
+                    QA-REF / 005
+                </span>
+
+                <span>
+                    BDD NOTES
+                </span>
+
+                <span class="footer-pass">
+                    PASS
+                </span>
+
+            </div>
+
+        </footer>
+
+    </main>
+
+</body>
+
+</html>
