@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta
+    name="description"
+    content="Bugou. Corrigiu. Seguiu. Uma reflexão sobre erros, aprendizado e evolução no universo da qualidade de software."
+  />
+
+  <title>Bugou. Corrigiu. Seguiu. — Hora do QA</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root {
+      --verde-profundo: #0F3D2E;
+      --verde-musgo: #3F6F52;
+      --verde-sinal: #8FE3B0;
+      --dourado: #C99A44;
+      --marfim: #F3EFE6;
+      --tinta: #12201A;
+      --branco: #ffffff;
+
+      --radius: 18px;
+    }
+
+    /* =========================
+       RESET
+    ========================= */
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      background: var(--marfim);
+      color: var(--tinta);
+      font-family: "Manrope", sans-serif;
+
+      display: flex;
+      justify-content: center;
+
+      padding: 42px 24px;
+    }
+
+    img {
+      display: block;
+      width: 78px;
+      height: 78px;
+      object-fit: contain;
+    }
+
+    /* =========================
+       PAGE
+    ========================= */
+
+    .page {
+      width: 100%;
+      max-width: 1180px;
+      min-height: calc(100vh - 84px);
+
+      background: var(--marfim);
+
+      position: relative;
+      overflow: hidden;
+
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+      position: relative;
+      z-index: 1;
+
+      display: grid;
+      grid-template-columns: 92px 1fr auto;
+      align-items: center;
+
+      gap: 28px;
+      padding: 12px 0 42px;
+
+      border-bottom: 1px solid rgba(15, 61, 46, 0.16);
+    }
+
+    .logo {
+      width: 78px;
+      height: 78px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .eyebrow {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 600;
+
+      color: var(--verde-musgo);
+
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .brand-name {
+      font-family: "Newsreader", serif;
+      font-size: 25px;
+      font-style: italic;
+
+      color: var(--verde-profundo);
+    }
+
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+
+      color: var(--verde-profundo);
+      white-space: nowrap;
+    }
+
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+      flex-shrink: 0;
+
+      background: var(--verde-sinal);
+      border-radius: 50%;
+
+      box-shadow: 0 0 0 4px rgba(143, 227, 176, 0.18);
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      position: relative;
+      z-index: 1;
+
+      padding: 64px 0 48px;
+      max-width: 900px;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 600;
+
+      color: var(--verde-musgo);
+
+      margin-bottom: 18px;
+
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .hero-label::before {
+      content: "01";
+
+      color: var(--marfim);
+      background: var(--verde-profundo);
+
+      padding: 5px 8px;
+      border-radius: 5px;
+
+      font-size: 10px;
+    }
+
+    h1 {
+      color: var(--verde-profundo);
+
+      font-family: "Newsreader", serif;
+      font-size: clamp(54px, 7vw, 86px);
+      font-weight: 500;
+      font-style: italic;
+
+      line-height: 0.95;
+      letter-spacing: -0.045em;
+    }
+
+    .hero-description {
+      margin-top: 24px;
+      max-width: 700px;
+
+      font-size: 16px;
+      line-height: 1.8;
+
+      color: rgba(18, 32, 26, 0.72);
+    }
+
+    /* =========================
+       CONCEPTS GRID
+    ========================= */
+
+    .concepts {
+      position: relative;
+      z-index: 1;
+
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+
+      flex: 1;
+    }
+
+    /* =========================
+       CONCEPT CARDS
+    ========================= */
+
+    .concept {
+      background: var(--verde-profundo);
+      border: 1px solid var(--verde-profundo);
+      border-radius: var(--radius);
+
+      padding: 28px;
+      min-height: 245px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      position: relative;
+      overflow: hidden;
+
+      transition:
+        border-color 180ms ease,
+        background 180ms ease;
+    }
+
+    .concept:hover {
+      background: #124A38;
+      border-color: var(--verde-musgo);
+    }
+
+    .concept-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      gap: 20px;
+    }
+
+    .concept-number {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 600;
+
+      color: var(--verde-sinal);
+
+      letter-spacing: 0.05em;
+    }
+
+    .concept-status {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 9px;
+
+      color: var(--verde-sinal);
+
+      border: 1px solid rgba(143, 227, 176, 0.35);
+
+      padding: 5px 7px;
+      border-radius: 4px;
+
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* =========================
+       CARD TITLES
+    ========================= */
+
+    .concept h2 {
+      margin-top: 28px;
+
+      color: var(--marfim);
+
+      font-family: "Newsreader", serif;
+      font-size: 31px;
+      font-weight: 500;
+
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .concept h2 span {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 11px;
+      font-weight: 500;
+      font-style: normal;
+
+      color: rgba(143, 227, 176, 0.75);
+
+      margin-left: 7px;
+
+      white-space: nowrap;
+    }
+
+    /* =========================
+       CARD DESCRIPTIONS
+    ========================= */
+
+    .concept p {
+      position: relative;
+      z-index: 1;
+
+      margin-top: 17px;
+
+      font-size: 14px;
+      line-height: 1.8;
+
+      color: rgba(243, 239, 230, 0.76);
+    }
+
+    .concept strong {
+      color: var(--verde-sinal);
+      font-weight: 700;
+    }
+
+    /* =========================
+       REMOVE DECORATIONS
+    ========================= */
+
+    .concept::before,
+    .concept::after {
+      display: none;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      position: relative;
+      z-index: 1;
+
+      margin-top: 38px;
+      padding: 22px 0 5px;
+
+      border-top: 1px solid rgba(15, 61, 46, 0.16);
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 20px;
+    }
+
+    .footer-brand {
+      font-family: "Newsreader", serif;
+      font-size: 21px;
+      font-style: italic;
+
+      color: var(--verde-profundo);
+    }
+
+    .footer-meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+
+      gap: 20px;
+
+      font-family: "JetBrains Mono", monospace;
+      font-size: 10px;
+
+      color: var(--verde-musgo);
+
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .footer-pass {
+      color: var(--verde-profundo);
+      background: var(--verde-sinal);
+
+      padding: 7px 10px;
+      border-radius: 4px;
+
+      font-weight: 700;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 760px) {
+      body {
+        padding: 24px 16px;
+      }
+
+      .page {
+        min-height: calc(100vh - 48px);
+      }
+
+      header {
+        grid-template-columns: 70px 1fr;
+        gap: 18px;
+
+        padding-bottom: 28px;
+      }
+
+      .logo {
+        width: 62px;
+        height: 62px;
+      }
+
+      .logo img {
+        width: 62px;
+        height: 62px;
+      }
+
+      .brand-name {
+        font-size: 23px;
+      }
+
+      .status {
+        grid-column: 2;
+        margin-top: -8px;
+      }
+
+      .hero {
+        padding: 48px 0 36px;
+      }
+
+      h1 {
+        font-size: clamp(48px, 14vw, 70px);
+      }
+
+      .hero-description {
+        font-size: 15px;
+        line-height: 1.75;
+      }
+
+      .concepts {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .concept {
+        min-height: auto;
+        padding: 25px;
+      }
+
+      .concept h2 {
+        font-size: 29px;
+      }
+
+      .concept p {
+        font-size: 14px;
+      }
+
+      footer {
+        align-items: flex-start;
+        flex-direction: column;
+
+        margin-top: 30px;
+        gap: 16px;
+      }
+
+      .footer-meta {
+        gap: 12px;
+      }
+    }
+
+    /* =========================
+       ACCESSIBILITY
+    ========================= */
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .concept {
+        transition: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="page">
+
+    <!-- HEADER -->
+    <header>
+
+      <div
+        class="logo"
+        role="img"
+        aria-label="Logo Hora do QA"
+      >
+        <img src="logo.png" alt="Logo Hora do QA">
+      </div>
+
+      <div class="brand">
+        <span class="eyebrow">
+          Software Quality / Mentalidade
+        </span>
+
+        <span class="brand-name">
+          Hora do QA
+        </span>
+      </div>
+
+      <div class="status">
+        <span
+          class="status-indicator"
+          aria-hidden="true"
+        ></span>
+
+        <span>STATUS: LEARNING</span>
+      </div>
+
+    </header>
+
+
+    <!-- HERO -->
+    <section
+      class="hero"
+      aria-labelledby="main-title"
+    >
+
+      <div class="hero-label">
+        Mentalidade de QA
+      </div>
+
+      <h1 id="main-title">
+        Bugou.<br>
+        Corrigiu.<br>
+        Seguiu.
+      </h1>
+
+      <p class="hero-description">
+        Nem todo erro diz alguma coisa sobre a nossa
+        competência. Nem toda versão precisa ser definitiva.
+        Às vezes você só errou mesmo...
+        Corrige o bug, aprende alguma coisa e segue o deploy.
+      </p>
+
+    </section>
+
+
+    <!-- REFLEXÕES -->
+    <section
+      class="concepts"
+      aria-label="Quatro reflexões sobre erros e aprendizado"
+    >
+
+      <!-- CARD 01: BUGOU -->
+      <article class="concept">
+
+        <div class="concept-top">
+          <span class="concept-number">
+            REFLEXÃO / 01
+          </span>
+
+          <span class="concept-status">
+            PERSPECTIVE
+          </span>
+        </div>
+
+        <div>
+          <h2>
+            Bugou.
+            <span>acontece</span>
+          </h2>
+
+          <p>
+            Nem todo erro diz alguma coisa sobre a nossa
+            <strong>competência</strong>. Um resultado inesperado
+            não apaga o conhecimento que você tem.
+            Errar faz parte de construir, testar e descobrir
+            o que precisa ser melhorado.
+          </p>
+        </div>
+
+      </article>
+
+
+      <!-- CARD 02: CORRIGIU -->
+      <article class="concept">
+
+        <div class="concept-top">
+          <span class="concept-number">
+            REFLEXÃO / 02
+          </span>
+
+          <span class="concept-status">
+            EVOLUTION
+          </span>
+        </div>
+
+        <div>
+          <h2>
+            Corrigiu.
+            <span>aprendizado</span>
+          </h2>
+
+          <p>
+            Nem toda versão precisa ser
+            <strong>definitiva</strong>. O importante é
+            identificar o problema, entender sua causa
+            e fazer o próximo ajuste com mais consciência.
+            Evoluir também é melhorar uma entrega de cada vez.
+          </p>
+        </div>
+
+      </article>
+
+
+      <!-- CARD 03: ACONTECE -->
+      <article class="concept">
+
+        <div class="concept-top">
+          <span class="concept-number">
+            REFLEXÃO / 03
+          </span>
+
+          <span class="concept-status">
+            REALITY CHECK
+          </span>
+        </div>
+
+        <div>
+          <h2>
+            Acontece.
+            <span>sem drama</span>
+          </h2>
+
+          <p>
+            Às vezes, você só errou mesmo.
+            <strong>E tudo bem reconhecer isso.</strong>
+            Nem todo problema precisa virar uma crise
+            de confiança. Assuma o erro, entenda o que
+            aconteceu e concentre sua energia na solução.
+          </p>
+        </div>
+
+      </article>
+
+
+      <!-- CARD 04: SEGUIU -->
+      <article class="concept">
+
+        <div class="concept-top">
+          <span class="concept-number">
+            REFLEXÃO / 04
+          </span>
+
+          <span class="concept-status">
+            NEXT DEPLOY
+          </span>
+        </div>
+
+        <div>
+          <h2>
+            Seguiu.
+            <span>keep shipping</span>
+          </h2>
+
+          <p>
+            Corrige o bug, aprende alguma coisa e segue
+            o deploy. <strong>Transforme o erro em experiência,
+            não em um peso.</strong> Faça os testes necessários,
+            valide a correção e continue construindo.
+            O próximo ciclo também faz parte da evolução.
+          </p>
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+      <div class="footer-brand">
+        Hora do QA
+      </div>
+
+      <div class="footer-meta">
+
+        <span>
+          QA-MINDSET / 001
+        </span>
+
+        <span>
+          LEARN &amp; SHIP
+        </span>
+
+        <span class="footer-pass">
+          NEXT DEPLOY
+        </span>
+
+      </div>
+
+    </footer>
+
+  </main>
+
+</body>
+
+</html>

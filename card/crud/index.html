@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="description"
+        content="Entenda o que é CRUD e como testar operações de criação, consulta, atualização e exclusão em APIs REST." />
+
+    <title>CRUD — Hora do QA</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --verde-profundo: #0F3D2E;
+            --verde-musgo: #3F6F52;
+            --verde-sinal: #8FE3B0;
+            --dourado: #C99A44;
+            --marfim: #F3EFE6;
+            --tinta: #12201A;
+            --branco: #ffffff;
+
+            --radius: 18px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            background: var(--marfim);
+            color: var(--tinta);
+            font-family: "Manrope", sans-serif;
+
+            display: flex;
+            justify-content: center;
+
+            padding: 42px 24px;
+        }
+
+        .page {
+            width: 100%;
+            max-width: 1180px;
+            min-height: calc(100vh - 84px);
+
+            background: var(--marfim);
+            position: relative;
+            overflow: hidden;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* HEADER */
+
+        header {
+            position: relative;
+            z-index: 1;
+
+            display: grid;
+            grid-template-columns: 92px 1fr auto;
+            align-items: center;
+
+            gap: 28px;
+            padding: 12px 0 42px;
+
+            border-bottom: 1px solid rgba(15, 61, 46, 0.16);
+        }
+
+        .logo {
+            width: 78px;
+            height: 78px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+        }
+
+        .logo img {
+            width: 78px;
+            height: 78px;
+            object-fit: contain;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .eyebrow {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            font-weight: 600;
+
+            color: var(--verde-musgo);
+
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .brand-name {
+            font-family: "Newsreader", serif;
+            font-size: 25px;
+            font-style: italic;
+
+            color: var(--verde-profundo);
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+
+            color: var(--verde-profundo);
+            white-space: nowrap;
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+
+            background: var(--verde-sinal);
+            border-radius: 50%;
+
+            box-shadow: 0 0 0 4px rgba(143, 227, 176, 0.18);
+        }
+
+        /* HERO */
+
+        .hero {
+            position: relative;
+            z-index: 1;
+
+            padding: 64px 0 48px;
+            max-width: 900px;
+        }
+
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            font-weight: 600;
+
+            color: var(--verde-musgo);
+
+            margin-bottom: 18px;
+
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .hero-label::before {
+            content: "02";
+
+            color: var(--marfim);
+            background: var(--verde-profundo);
+
+            padding: 5px 8px;
+            border-radius: 5px;
+
+            font-size: 10px;
+        }
+
+        h1 {
+            color: var(--verde-profundo);
+
+            font-family: "Newsreader", serif;
+            font-size: clamp(58px, 8vw, 94px);
+            font-weight: 500;
+            font-style: italic;
+
+            line-height: 0.95;
+            letter-spacing: -0.045em;
+        }
+
+        .hero-description {
+            margin-top: 24px;
+
+            max-width: 760px;
+
+            font-size: 16px;
+            line-height: 1.8;
+
+            color: rgba(18, 32, 26, 0.72);
+        }
+
+        .hero-description strong {
+            color: var(--verde-profundo);
+        }
+
+        /* OPERAÇÕES */
+
+        .concepts {
+            position: relative;
+            z-index: 1;
+
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 18px;
+
+            flex: 1;
+        }
+
+        .concept {
+            background: var(--verde-profundo);
+
+            border: 1px solid var(--verde-profundo);
+            border-radius: var(--radius);
+
+            padding: 28px;
+            min-height: 250px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            position: relative;
+            overflow: hidden;
+
+            transition:
+                border-color 180ms ease,
+                background 180ms ease;
+        }
+
+        .concept:hover {
+            background: #124A38;
+            border-color: var(--verde-musgo);
+        }
+
+        .concept-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            gap: 20px;
+        }
+
+        .concept-number {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            font-weight: 600;
+
+            color: var(--verde-sinal);
+            letter-spacing: 0.05em;
+        }
+
+        .concept-status {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 9px;
+
+            color: var(--verde-sinal);
+
+            border: 1px solid rgba(143, 227, 176, 0.35);
+
+            padding: 5px 7px;
+            border-radius: 4px;
+
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .concept h2 {
+            margin-top: 28px;
+
+            color: var(--marfim);
+
+            font-family: "Newsreader", serif;
+            font-size: 34px;
+            font-weight: 500;
+
+            line-height: 1;
+        }
+
+        .concept h2 span {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 12px;
+            font-weight: 500;
+            font-style: normal;
+
+            color: rgba(143, 227, 176, 0.75);
+
+            margin-left: 7px;
+            white-space: nowrap;
+        }
+
+        .concept p {
+            margin-top: 17px;
+
+            font-size: 14px;
+            line-height: 1.8;
+
+            color: rgba(243, 239, 230, 0.76);
+        }
+
+        .concept strong {
+            color: var(--verde-sinal);
+            font-weight: 700;
+        }
+
+        /* EXEMPLO DE API */
+
+        .api-section {
+            margin-top: 58px;
+        }
+
+        .section-label {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            font-weight: 600;
+
+            color: var(--verde-musgo);
+
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: "Newsreader", serif;
+            font-size: clamp(32px, 5vw, 46px);
+            font-weight: 500;
+            font-style: italic;
+
+            line-height: 1.05;
+            letter-spacing: -0.025em;
+
+            color: var(--verde-profundo);
+        }
+
+        .section-description {
+            max-width: 760px;
+            margin-top: 16px;
+
+            font-size: 14px;
+            line-height: 1.8;
+
+            color: rgba(18, 32, 26, 0.72);
+        }
+
+        .api-panel {
+            margin-top: 24px;
+
+            background: var(--verde-profundo);
+            border-radius: var(--radius);
+
+            padding: 28px;
+            color: var(--marfim);
+        }
+
+        .api-panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 16px;
+            flex-wrap: wrap;
+
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(243, 239, 230, 0.18);
+        }
+
+        .api-panel-title {
+            font-family: "Newsreader", serif;
+            font-size: 26px;
+            font-weight: 500;
+        }
+
+        .api-panel-tag {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 10px;
+
+            color: var(--verde-sinal);
+
+            border: 1px solid rgba(143, 227, 176, 0.35);
+            border-radius: 4px;
+
+            padding: 6px 8px;
+        }
+
+        .api-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .api-row {
+            display: grid;
+            grid-template-columns: 92px minmax(0, 1fr);
+            gap: 20px;
+
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(243, 239, 230, 0.14);
+        }
+
+        .api-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .method {
+            align-self: start;
+
+            text-align: center;
+
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            font-weight: 700;
+
+            padding: 8px 6px;
+            border-radius: 5px;
+
+            background: rgba(143, 227, 176, 0.12);
+            color: var(--verde-sinal);
+        }
+
+        .api-content h3 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--marfim);
+        }
+
+        .api-content p {
+            margin-top: 6px;
+
+            font-size: 13px;
+            line-height: 1.7;
+
+            color: rgba(243, 239, 230, 0.7);
+        }
+
+        code {
+            font-family: "JetBrains Mono", monospace;
+            font-size: 0.92em;
+
+            color: var(--verde-sinal);
+            overflow-wrap: anywhere;
+        }
+
+        .api-content code {
+            display: inline-block;
+            margin-top: 8px;
+        }
+
+        /* EXEMPLO PRÁTICO */
+
+        .example {
+            margin-top: 58px;
+        }
+
+        .example-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+
+            margin-top: 24px;
+        }
+
+        .example-card {
+            border: 1px solid rgba(15, 61, 46, 0.18);
+            border-radius: var(--radius);
+
+            padding: 24px;
+            min-width: 0;
+        }
+
+        .example-card h3 {
+            font-family: "Newsreader", serif;
+            font-size: 25px;
+            font-weight: 500;
+
+            color: var(--verde-profundo);
+        }
+
+        .example-card p {
+            margin-top: 12px;
+
+            font-size: 13px;
+            line-height: 1.8;
+
+            color: rgba(18, 32, 26, 0.76);
+        }
+
+        .code-block {
+            margin-top: 16px;
+
+            padding: 16px;
+
+            background: var(--verde-profundo);
+            border-radius: 10px;
+
+            overflow-x: auto;
+        }
+
+        .code-block pre {
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+
+            font-family: "JetBrains Mono", monospace;
+            font-size: 11px;
+            line-height: 1.9;
+
+            color: var(--marfim);
+        }
+
+        .code-block .comment {
+            color: var(--verde-sinal);
+        }
+
+        .code-block .key {
+            color: #E8C47B;
+        }
+
+        /* VISÃO DE QA */
+
+        .qa-note {
+            margin-top: 24px;
+
+            padding: 26px 28px;
+
+            border-left: 4px solid var(--dourado);
+            background: rgba(201, 154, 68, 0.09);
+
+            border-radius: 0 var(--radius) var(--radius) 0;
+        }
+
+        .qa-note h3 {
+            font-family: "Newsreader", serif;
+            font-size: 25px;
+            font-weight: 500;
+
+            color: var(--verde-profundo);
+        }
+
+        .qa-note p {
+            margin-top: 10px;
+
+            font-size: 13px;
+            line-height: 1.8;
+
+            color: rgba(18, 32, 26, 0.8);
+        }
+
+        .qa-note strong {
+            color: var(--verde-profundo);
+        }
+
+        .qa-checklist {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px 24px;
+
+            margin-top: 18px;
+            list-style: none;
+        }
+
+        .qa-checklist li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+
+            font-size: 13px;
+            line-height: 1.7;
+
+            color: var(--tinta);
+        }
+
+        .qa-checklist li::before {
+            content: "✓";
+
+            font-family: "JetBrains Mono", monospace;
+            font-weight: 700;
+
+            color: var(--verde-musgo);
+            flex-shrink: 0;
+        }
+
+        /* FOOTER */
+
+        footer {
+            position: relative;
+            z-index: 1;
+
+            margin-top: 58px;
+            padding: 22px 0 5px;
+
+            border-top: 1px solid rgba(15, 61, 46, 0.16);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .footer-brand {
+            font-family: "Newsreader", serif;
+            font-size: 21px;
+            font-style: italic;
+
+            color: var(--verde-profundo);
+        }
+
+        .footer-meta {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+
+            gap: 20px;
+
+            font-family: "JetBrains Mono", monospace;
+            font-size: 10px;
+
+            color: var(--verde-musgo);
+
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .footer-pass {
+            color: var(--verde-profundo);
+            background: var(--verde-sinal);
+
+            padding: 7px 10px;
+            border-radius: 4px;
+
+            font-weight: 700;
+        }
+
+        /* RESPONSIVO */
+
+        @media (max-width: 760px) {
+            body {
+                padding: 24px 16px;
+            }
+
+            .page {
+                min-height: calc(100vh - 48px);
+            }
+
+            header {
+                grid-template-columns: 70px minmax(0, 1fr);
+                gap: 18px;
+
+                padding-bottom: 28px;
+            }
+
+            .logo,
+            .logo img {
+                width: 62px;
+                height: 62px;
+            }
+
+            .eyebrow {
+                font-size: 9px;
+            }
+
+            .brand-name {
+                font-size: 23px;
+            }
+
+            .status {
+                grid-column: 2;
+                margin-top: -8px;
+            }
+
+            .hero {
+                padding: 48px 0 36px;
+            }
+
+            h1 {
+                font-size: clamp(52px, 14vw, 76px);
+            }
+
+            .hero-description {
+                font-size: 14px;
+            }
+
+            .concepts,
+            .example-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .concept {
+                min-height: 230px;
+            }
+
+            .api-section,
+            .example {
+                margin-top: 44px;
+            }
+
+            .api-panel {
+                padding: 22px;
+            }
+
+            .api-row {
+                grid-template-columns: 76px minmax(0, 1fr);
+                gap: 14px;
+            }
+
+            .qa-checklist {
+                grid-template-columns: 1fr;
+            }
+
+            footer {
+                align-items: flex-start;
+                flex-direction: column;
+                margin-top: 44px;
+            }
+
+            .footer-meta {
+                gap: 12px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .concept {
+                padding: 22px;
+            }
+
+            .concept h2 {
+                font-size: 29px;
+            }
+
+            .concept h2 span {
+                display: block;
+                margin: 8px 0 0;
+            }
+
+            .api-panel {
+                padding: 18px;
+            }
+
+            .api-row {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .method {
+                width: fit-content;
+                min-width: 76px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .concept {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="page">
+
+        <!-- HEADER -->
+        <header>
+            <div class="logo" aria-label="Logo da Hora do QA">
+                <img src="logo.png" alt="Logo Hora do QA" onerror="this.style.display='none'">
+            </div>
+
+            <div class="brand">
+                <span class="eyebrow">
+                    Software Quality / Fundamentos
+                </span>
+
+                <span class="brand-name">
+                    Hora do QA
+                </span>
+            </div>
+
+            <div class="status">
+                <span class="status-indicator"></span>
+                <span>STATUS: TESTED</span>
+            </div>
+        </header>
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-label">
+                Fundamentos de API
+            </div>
+
+            <h1>
+                Entendendo<br>
+                o CRUD
+            </h1>
+
+            <p class="hero-description">
+                Quatro operações fundamentais para manipular dados em uma aplicação.
+                <strong>Criar, consultar, atualizar e excluir</strong> são ações
+                presentes em praticamente todo sistema — e entender como funcionam
+                é essencial para quem testa APIs.
+            </p>
+        </section>
+
+        <!-- CONCEITOS -->
+        <section class="concepts" aria-label="As quatro operações do CRUD">
+
+            <!-- CREATE -->
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">OPERAÇÃO / 01</span>
+                    <span class="concept-status">CREATE</span>
+                </div>
+
+                <div>
+                    <h2>
+                        Criar
+                        <span>POST</span>
+                    </h2>
+
+                    <p>
+                        É a operação responsável por <strong>inserir um novo registro</strong>
+                        no sistema. Em uma API REST, normalmente usamos o método
+                        <strong>POST</strong> para enviar os dados que serão cadastrados.
+                    </p>
+                </div>
+            </article>
+
+            <!-- READ -->
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">OPERAÇÃO / 02</span>
+                    <span class="concept-status">READ</span>
+                </div>
+
+                <div>
+                    <h2>
+                        Consultar
+                        <span>GET</span>
+                    </h2>
+
+                    <p>
+                        Permite <strong>recuperar informações</strong> já armazenadas.
+                        O método <strong>GET</strong> pode retornar um único registro,
+                        uma lista de dados ou resultados filtrados, dependendo do endpoint.
+                    </p>
+                </div>
+            </article>
+
+            <!-- UPDATE -->
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">OPERAÇÃO / 03</span>
+                    <span class="concept-status">UPDATE</span>
+                </div>
+
+                <div>
+                    <h2>
+                        Atualizar
+                        <span>PUT / PATCH</span>
+                    </h2>
+
+                    <p>
+                        Serve para <strong>modificar um registro existente</strong>.
+                        Em APIs REST, <strong>PUT</strong> costuma representar a
+                        substituição do recurso, enquanto <strong>PATCH</strong> permite
+                        alterações parciais, conforme o contrato da API.
+                    </p>
+                </div>
+            </article>
+
+            <!-- DELETE -->
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">OPERAÇÃO / 04</span>
+                    <span class="concept-status">DELETE</span>
+                </div>
+
+                <div>
+                    <h2>
+                        Excluir
+                        <span>DELETE</span>
+                    </h2>
+
+                    <p>
+                        Responsável por <strong>remover um registro</strong> ou solicitar
+                        sua exclusão lógica. O método <strong>DELETE</strong> expressa
+                        essa intenção, mas o resultado depende das regras e da
+                        implementação do sistema.
+                    </p>
+                </div>
+            </article>
+        </section>
+
+        <!-- EXEMPLO DE API -->
+        <section class="api-section">
+            <div class="section-label">Aplicação prática / 01</div>
+
+            <h2 class="section-title">
+                CRUD na prática com uma API REST
+            </h2>
+
+            <p class="section-description">
+                Imagine uma loja virtual que precisa administrar seus produtos.
+                Cada operação CRUD corresponde a uma ação sobre os dados.
+                Em um projeto de testes, você pode validar essas operações usando
+                o ServeRest, uma API de demonstração voltada ao aprendizado de
+                testes de serviços web.
+            </p>
+
+            <div class="api-panel">
+                <div class="api-panel-header">
+                    <h3 class="api-panel-title">Recurso: Produtos</h3>
+                    <span class="api-panel-tag">REST API</span>
+                </div>
+
+                <div class="api-list">
+
+                    <div class="api-row">
+                        <span class="method">POST</span>
+
+                        <div class="api-content">
+                            <h3>Cadastrar um produto</h3>
+                            <p>
+                                Enviar os dados de um novo produto para a API e verificar
+                                se o cadastro foi realizado conforme o contrato.
+                            </p>
+                            <code>POST /produtos</code>
+                        </div>
+                    </div>
+
+                    <div class="api-row">
+                        <span class="method">GET</span>
+
+                        <div class="api-content">
+                            <h3>Consultar produtos</h3>
+                            <p>
+                                Recuperar os produtos cadastrados e validar os campos
+                                retornados, a paginação e os filtros disponíveis.
+                            </p>
+                            <code>GET /produtos</code>
+                        </div>
+                    </div>
+
+                    <div class="api-row">
+                        <span class="method">PUT</span>
+
+                        <div class="api-content">
+                            <h3>Atualizar um produto</h3>
+                            <p>
+                                Alterar os dados de um produto identificado por seu ID
+                                e confirmar se as mudanças foram persistidas.
+                            </p>
+                            <code>PUT /produtos/{id}</code>
+                        </div>
+                    </div>
+
+                    <div class="api-row">
+                        <span class="method">DELETE</span>
+
+                        <div class="api-content">
+                            <h3>Excluir um produto</h3>
+                            <p>
+                                Solicitar a exclusão de um produto e verificar se a API
+                                responde conforme esperado e se o registro deixa de estar
+                                disponível, de acordo com as regras do serviço.
+                            </p>
+                            <code>DELETE /produtos/{id}</code>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- EXEMPLOS DE REQUISIÇÃO -->
+        <section class="example">
+            <div class="section-label">Aplicação prática / 02</div>
+
+            <h2 class="section-title">
+                Como isso aparece nos testes?
+            </h2>
+
+            <p class="section-description">
+                Uma requisição HTTP contém informações que precisam ser enviadas
+                corretamente. Veja um exemplo de criação e outro de consulta.
+                Os caminhos abaixo são ilustrativos: confirme os endpoints,
+                os campos obrigatórios e as regras na documentação da API utilizada.
+            </p>
+
+            <div class="example-grid">
+
+                <article class="example-card">
+                    <h3>01. Criando um registro</h3>
+
+                    <p>
+                        O teste envia um corpo JSON com os dados do produto.
+                        Depois, verifica o código HTTP, a mensagem retornada e
+                        a existência do registro criado.
+                    </p>
+
+                    <div class="code-block">
+                        <pre><span class="comment">// POST /produtos</span>
+{
+  <span class="key">"nome"</span>: "Teclado QA",
+  <span class="key">"preco"</span>: 150,
+  <span class="key">"descricao"</span>: "Teclado mecânico",
+  <span class="key">"quantidade"</span>: 10
+}</pre>
+                    </div>
+                </article>
+
+                <article class="example-card">
+                    <h3>02. Consultando registros</h3>
+
+                    <p>
+                        Após o cadastro, o teste consulta a coleção de produtos
+                        ou o recurso específico, conforme os endpoints disponíveis.
+                        A resposta deve respeitar o contrato definido.
+                    </p>
+
+                    <div class="code-block">
+                        <pre><span class="comment">// GET /produtos</span>
+{
+  <span class="key">"quantidade"</span>: 1,
+  <span class="key">"produtos"</span>: [
+    {
+      <span class="key">"nome"</span>: "Teclado QA",
+      <span class="key">"preco"</span>: 150
+    }
+  ]
+}</pre>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- VISÃO DE QA -->
+        <section class="example">
+            <div class="section-label">Aplicação prática / 03</div>
+
+            <h2 class="section-title">
+                O olhar de quem testa
+            </h2>
+
+            <p class="section-description">
+                Testar CRUD não significa apenas verificar se a requisição retorna
+                sucesso. É importante validar os dados, as regras de negócio e
+                os cenários em que a operação não deve ser permitida.
+            </p>
+
+            <div class="qa-note">
+                <h3>Checklist de testes CRUD</h3>
+
+                <p>
+                    Para cada operação, valide tanto o <strong>caminho feliz</strong>
+                    quanto os cenários negativos e os limites definidos pelo sistema.
+                </p>
+
+                <ul class="qa-checklist">
+                    <li>Cadastro com dados válidos.</li>
+                    <li>Campos obrigatórios ausentes ou inválidos.</li>
+                    <li>Consulta de registros existentes.</li>
+                    <li>Consulta de ID inexistente.</li>
+                    <li>Atualização com dados válidos.</li>
+                    <li>Atualização de registro inexistente.</li>
+                    <li>Exclusão de registro existente.</li>
+                    <li>Exclusão de registro inexistente.</li>
+                    <li>Validação do status e do corpo HTTP.</li>
+                    <li>Persistência e consistência dos dados.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- RESUMO -->
+        <section class="example">
+            <div class="section-label">Quality notes / 004</div>
+
+            <h2 class="section-title">
+                Guarde esta diferença
+            </h2>
+
+            <p class="section-description">
+                CRUD descreve as quatro operações fundamentais sobre dados.
+                HTTP oferece métodos que frequentemente são usados para expressar
+                essas operações em APIs REST. A relação é comum, mas não é uma
+                equivalência rígida: o comportamento real depende do contrato
+                de cada endpoint.
+            </p>
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+            <div class="footer-brand">
+                Hora do QA
+            </div>
+
+            <div class="footer-meta">
+                <span>QA-REF / 005</span>
+                <span>API FUNDAMENTALS</span>
+                <span class="footer-pass">PASS</span>
+            </div>
+        </footer>
+
+    </main>
+</body>
+
+</html>
