@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Método GET — Hora do QA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+
+</head>
+
+<body>
+    <main class="page">
+        <!-- HEADER -->
+        <header>
+
+            <div class="logo" aria-label="Espaço reservado para o logo">
+                <img src="../assets/images/logo.png" alt="Logo">
+            </div>
+
+            <div class="brand">
+                <span class="eyebrow">
+                    Software Quality / HTTP
+                </span>
+
+                <span class="brand-name">
+                    Hora do QA
+                </span>
+            </div>
+
+            <div class="status">
+                <span class="status-indicator"></span>
+                <span>STATUS: TESTED</span>
+            </div>
+
+        </header>
+
+
+        <!-- HERO -->
+        <section class="hero">
+
+            <div class="hero-label">
+                Método HTTP
+            </div>
+
+            <h1>
+                GET
+            </h1>
+
+            <p class="hero-description">
+                O método GET é utilizado para <strong>consultar recursos</strong>
+                disponíveis em um servidor. Em APIs, é um dos métodos mais
+                utilizados para buscar informações sem solicitar uma alteração
+                no estado do recurso.
+            </p>
+
+        </section>
+
+
+        <!-- CONCEITOS -->
+        <section class="concepts">
+
+            <!-- O QUE É -->
+            <article class="concept">
+
+                <div class="concept-top">
+                    <span class="concept-number">
+                        CONCEITO / 01
+                    </span>
+
+                    <span class="concept-status">
+                        READ
+                    </span>
+                </div>
+
+                <div>
+
+                    <h2>
+                        O que é?
+                        <span>GET</span>
+                    </h2>
+
+                    <p>
+                        O <strong>GET solicita uma representação de um recurso</strong>.
+                        Ele é utilizado quando queremos consultar informações,
+                        como uma lista de usuários ou os dados de um usuário
+                        específico.
+                    </p>
+
+                </div>
+
+            </article>
+
+
+            <!-- EXEMPLO -->
+            <article class="concept">
+
+                <div class="concept-top">
+                    <span class="concept-number">
+                        EXEMPLO / 02
+                    </span>
+
+                    <span class="concept-status">
+                        REQUEST
+                    </span>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Requisição
+                        <span>HTTP</span>
+                    </h2>
+
+                    <p>
+                        Imagine uma API que disponibiliza usuários. Para consultar
+                        o usuário de ID <strong>10</strong>, podemos fazer:
+                    </p>
+
+                    <div class="code">
+                        <span class="method">GET</span>
+                        <span class="url">https://serverest.dev/usuarios/0uxuPY0cbmQhpEz1</span>
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- RESPOSTA -->
+            <article class="concept">
+
+                <div class="concept-top">
+                    <span class="concept-number">
+                        EXEMPLO / 03
+                    </span>
+
+                    <span class="concept-status">
+                        RESPONSE
+                    </span>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Resposta
+                        <span>200 OK</span>
+                    </h2>
+
+                    <p>
+                        Se o usuário existir, a API pode responder com o status
+                        <strong>200 OK</strong> e retornar os dados solicitados
+                        no corpo da resposta.
+                    </p>
+
+                    <div class="code">
+                        <span class="comment">// HTTP 200 OK</span><br>
+                        {<br>
+                        &nbsp;&nbsp;"nome": "Hora do QA",<br>
+                        &nbsp;&nbsp;"email": "horadoqa@teste.com"<br>
+                        &nbsp;&nbsp;"password": 1q2w3e4r",<br>
+                        &nbsp;&nbsp;"administrador": "true",<br>
+                        &nbsp;&nbsp;"id": 0uxuPY0cbmQhpEz1,<br>
+                        }
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- QA -->
+            <article class="concept">
+
+                <div class="concept-top">
+                    <span class="concept-number">
+                        QA / 04
+                    </span>
+
+                    <span class="concept-status">
+                        TEST
+                    </span>
+                </div>
+
+                <div>
+
+                    <h2>
+                        O que testar?
+                        <span>QA</span>
+                    </h2>
+
+                    <p>
+                        Ao testar um GET, valide principalmente o
+                        <strong>status code, corpo da resposta, estrutura dos
+                            dados, headers e tempo de resposta</strong>. Também é
+                        importante verificar como a API se comporta quando o
+                        recurso não existe.
+                    </p>
+
+                    <div class="code">
+                        <span class="method">GET</span>
+                        <span class="url">/usuarios/999</span><br><br>
+
+                        <span class="comment">// Esperado:</span><br>
+                        <span class="comment">// HTTP 404 Not Found</span>
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- QUERY PARAMS -->
+            <article class="concept">
+
+                <div class="concept-top">
+                    <span class="concept-number">
+                        EXEMPLO / 05
+                    </span>
+
+                    <span class="concept-status">
+                        FILTER
+                    </span>
+                </div>
+
+                <div>
+
+                    <h2>
+                        Query Params
+                        <span>filtros</span>
+                    </h2>
+
+                    <p>
+                        O GET também pode receber parâmetros na URL para
+                        <strong>filtrar, ordenar ou paginar resultados</strong>.
+                        Eles aparecem depois do caractere <strong>?</strong>.
+                    </p>
+
+                    <div class="code">
+                        <span class="method">GET</span>
+                        <span class="url"> https://serverest.dev/usuarios?administrador=true</span>
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- REGRA -->
+            <article class="concept">
+
+                <div class="concept-top">
+                    <span class="concept-number">
+                        REGRA / 06
+                    </span>
+
+                    <span class="concept-status">
+                        SAFE
+                    </span>
+                </div>
+
+                <div>
+
+                    <h2>
+                        GET não cria
+                        <span>consulta</span>
+                    </h2>
+
+                    <p>
+                        Uma característica importante é que o GET é destinado à
+                        <strong>consulta</strong>. Uma requisição GET não deve ser
+                        usada para criar, editar ou excluir dados como efeito
+                        pretendido da operação.
+                    </p>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer>
+
+            <div class="footer-brand">
+                Hora do QA
+            </div>
+
+            <div class="footer-meta">
+
+                <span>
+                    QA-HTTP / GET
+                </span>
+
+                <span>
+                    API NOTES
+                </span>
+
+                <span class="footer-pass">
+                    PASS
+                </span>
+
+            </div>
+
+        </footer>
+
+    </main>
+</body>
+
+</html>

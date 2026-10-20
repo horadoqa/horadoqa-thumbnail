@@ -2,7 +2,7 @@
 
 Os **métodos HTTP** indicam qual ação o cliente quer realizar sobre um recurso de uma API ou servidor.
 
- | Método | O que faz | Exemplo |
+| Método | O que faz | Exemplo |
 | --- | --- | --- |
 | **GET** | Busca/consulta dados | Buscar um usuário |
 | **POST** | Cria um novo recurso ou envia dados para processamento | Criar um usuário |
@@ -80,7 +80,7 @@ DELETE /usuarios/10
 
  Uma forma fácil de memorizar:
 
- > **GET = pegar**\
+> **GET = pegar**\
 >  **POST = criar/enviar**\
 >  **PUT = substituir**\
 >  **PATCH = alterar parcialmente**\
