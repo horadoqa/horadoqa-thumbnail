@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Stack Web — Hora do QA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap"
+    rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+  
+</head>
+
+<body>
+  <main class="page">
+    <!-- =========================
+     HEADER
+========================== -->
+
+    <header>
+
+      <div class="logo" aria-label="Espaço reservado para o logo">
+        <img src="../assets/images/logo.png" alt="Logo">
+      </div>
+
+      <div class="brand">
+
+        <span class="eyebrow">
+          Software Quality / Glossário
+        </span>
+
+        <span class="brand-name">
+          Hora do QA
+        </span>
+
+      </div>
+
+      <div class="status">
+
+        <span class="status-indicator"></span>
+
+        <span>
+          STATUS: CONNECTED
+        </span>
+
+      </div>
+
+    </header>
+
+    <!-- =========================
+     HERO
+========================== -->
+
+    <section class="hero">
+
+      <div class="hero-label">
+        Arquitetura de aplicações
+      </div>
+
+      <h1>
+        Front-end,<br>
+        Back-end &amp; Banco
+      </h1>
+
+      <p class="hero-description">
+        Um sistema web normalmente é dividido em diferentes camadas.
+        O front-end apresenta a aplicação para o usuário, o back-end
+        concentra regras e processa as requisições, enquanto o banco
+        de dados armazena as informações. Em um e-commerce, essas
+        partes trabalham juntas para transformar uma ação na tela
+        em uma operação real no sistema.
+      </p>
+
+    </section>
+
+    <!-- =========================
+     CONCEITOS
+========================== -->
+
+    <section class="concepts">
+
+      <!-- FRONT-END -->
+
+      <article class="concept">
+
+        <div class="concept-top">
+
+          <span class="concept-number">
+            CAMADA / 01
+          </span>
+
+          <span class="concept-status">
+            UI
+          </span>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Front-end
+            <span>interface do usuário</span>
+          </h2>
+
+          <p>
+            É a parte da aplicação que o usuário <strong>visualiza e
+              utiliza</strong>. Em um e-commerce, pode apresentar produtos,
+            carrinho, formulários, login, pedidos e mensagens de erro.
+            Ele conversa com o back-end para obter e enviar dados.
+          </p>
+
+        </div>
+
+      </article>
+
+      <!-- BACK-END -->
+
+      <article class="concept">
+
+        <div class="concept-top">
+
+          <span class="concept-number">
+            CAMADA / 02
+          </span>
+
+          <span class="concept-status">
+            API
+          </span>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Back-end
+            <span>regras e processamento</span>
+          </h2>
+
+          <p>
+            É a camada responsável pelo <strong>processamento das
+              requisições e regras de negócio</strong>. Uma API pode
+            receber uma requisição para consultar produtos, cadastrar
+            usuários, autenticar clientes ou registrar pedidos.
+          </p>
+
+        </div>
+
+      </article>
+
+      <!-- BANCO -->
+
+      <article class="concept">
+
+        <div class="concept-top">
+
+          <span class="concept-number">
+            CAMADA / 03
+          </span>
+
+          <span class="concept-status">
+            DATA
+          </span>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Banco de dados
+            <span>persistência</span>
+          </h2>
+
+          <p>
+            É onde os dados da aplicação são <strong>armazenados e
+              consultados</strong>. Em um e-commerce, podem existir
+            informações de usuários, produtos, carrinhos, pedidos
+            e outros registros necessários para o funcionamento
+            do sistema.
+          </p>
+
+        </div>
+
+      </article>
+
+    </section>
+
+    <!-- =========================
+     ARQUITETURA
+========================== -->
+
+    <section class="architecture">
+
+      <div class="architecture-title">
+        Como as camadas ficam interligadas
+      </div>
+
+      <div class="architecture-flow">
+
+        <!-- FRONT -->
+
+        <div class="architecture-box">
+
+          <span class="architecture-icon">
+            CAMADA / 01
+          </span>
+
+          <h3>
+            Front-end
+          </h3>
+
+          <p>
+            O usuário interage com a aplicação e gera uma ação.
+          </p>
+
+        </div>
+
+        <div class="architecture-arrow">
+          →
+        </div>
+
+        <!-- API -->
+
+        <div class="architecture-box">
+
+          <span class="architecture-icon">
+            CAMADA / 02
+          </span>
+
+          <h3>
+            Back-end / API
+          </h3>
+
+          <p>
+            Recebe a requisição, aplica regras e decide o que precisa
+            ser processado.
+          </p>
+
+        </div>
+
+        <div class="architecture-arrow">
+          →
+        </div>
+
+        <!-- DATABASE -->
+
+        <div class="architecture-box">
+
+          <span class="architecture-icon">
+            CAMADA / 03
+          </span>
+
+          <h3>
+            Banco de dados
+          </h3>
+
+          <p>
+            Armazena ou consulta os dados necessários para completar
+            a operação.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =========================
+     SERVEREST
+========================== -->
+
+    <section class="serverest">
+
+      <article class="serverest-card">
+
+        <span class="serverest-label">
+          Modelo / E-commerce
+        </span>
+
+        <h3>
+          Serverest
+        </h3>
+
+        <p>
+          O Serverest pode ser utilizado como um exemplo didático
+          de uma aplicação de e-commerce para entender o relacionamento
+          entre usuários, produtos, carrinho e pedidos através de uma API.
+        </p>
+
+        <span class="endpoint">
+          API → recursos do e-commerce
+        </span>
+
+      </article>
+
+      <article class="serverest-card">
+
+        <span class="serverest-label">
+          Exemplo / Recurso
+        </span>
+
+        <h3>
+          Produtos
+        </h3>
+
+        <p>
+          Imagine que o front-end precisa exibir os produtos disponíveis.
+          Ele solicita os dados ao back-end. A API consulta as informações
+          armazenadas e devolve uma resposta que pode ser apresentada
+          na interface.
+        </p>
+
+        <span class="endpoint">
+          GET /produtos
+        </span>
+
+      </article>
+
+    </section>
+
+    <!-- =========================
+     FLUXO E-COMMERCE
+========================== -->
+
+    <section class="commerce">
+
+      <span class="commerce-label">
+        Exemplo / Jornada de compra
+      </span>
+
+      <h2>
+        O que acontece quando o usuário compra um produto?
+      </h2>
+
+      <p class="commerce-description">
+        A mesma ação pode atravessar todas as camadas da aplicação.
+        O usuário vê um produto no front-end, a aplicação solicita
+        informações ao back-end, o back-end consulta o banco e,
+        depois, devolve o resultado para a interface.
+      </p>
+
+      <div class="commerce-flow">
+
+        <article class="commerce-step">
+
+          <span class="commerce-step-number">
+            01 / FRONT-END
+          </span>
+
+          <h3>
+            Usuário
+          </h3>
+
+          <p>
+            O usuário acessa a loja e clica em "Adicionar ao carrinho".
+          </p>
+
+        </article>
+
+        <article class="commerce-step">
+
+          <span class="commerce-step-number">
+            02 / API
+          </span>
+
+          <h3>
+            Requisição
+          </h3>
+
+          <p>
+            O front-end envia uma requisição para a API informando
+            o produto e a operação desejada.
+          </p>
+
+        </article>
+
+        <article class="commerce-step">
+
+          <span class="commerce-step-number">
+            03 / DATABASE
+          </span>
+
+          <h3>
+            Persistência
+          </h3>
+
+          <p>
+            O back-end consulta ou atualiza os dados necessários
+            no banco de dados.
+          </p>
+
+        </article>
+
+        <article class="commerce-step">
+
+          <span class="commerce-step-number">
+            04 / RESPONSE
+          </span>
+
+          <h3>
+            Resultado
+          </h3>
+
+          <p>
+            A API devolve uma resposta e o front-end atualiza a tela
+            para o usuário.
+          </p>
+
+        </article>
+
+      </div>
+
+    </section>
+
+    <!-- =========================
+     EXEMPLO DAS CAMADAS
+========================== -->
+
+    <section class="layers">
+
+      <!-- FRONT-END -->
+
+      <article class="layer">
+
+        <span class="layer-number">
+          FRONT-END
+        </span>
+
+        <h3>
+          O que o usuário vê
+        </h3>
+
+        <p>
+          A interface apresenta produtos, preços, imagens, carrinho,
+          login e informações dos pedidos. Ela não precisa conhecer
+          diretamente como os dados são armazenados.
+        </p>
+
+        <span class="layer-code">
+          Usuário → Interface
+        </span>
+
+      </article>
+
+      <!-- BACK-END -->
+
+      <article class="layer">
+
+        <span class="layer-number">
+          BACK-END
+        </span>
+
+        <h3>
+          O que processa
+        </h3>
+
+        <p>
+          A API recebe a requisição, valida os dados, aplica regras
+          de negócio e conversa com outros serviços ou com o banco
+          de dados.
+        </p>
+
+        <span class="layer-code">
+          Request → Regra → Response
+        </span>
+
+      </article>
+
+      <!-- DATABASE -->
+
+      <article class="layer">
+
+        <span class="layer-number">
+          BANCO DE DADOS
+        </span>
+
+        <h3>
+          O que fica armazenado
+        </h3>
+
+        <p>
+          Informações persistentes como usuários, produtos e pedidos
+          podem ser armazenadas para que continuem disponíveis mesmo
+          depois que o usuário encerra a sessão.
+        </p>
+
+        <span class="layer-code">
+          Dados → Persistência
+        </span>
+
+      </article>
+
+    </section>
+
+    <!-- =========================
+     QA
+========================== -->
+
+    <section class="qa-section">
+
+      <span class="qa-label">
+        QA / Visão sistêmica
+      </span>
+
+      <h2>
+        Onde o QA entra nessa arquitetura?
+      </h2>
+
+      <p>
+        O QA pode testar cada camada individualmente e também validar
+        a integração entre elas. Em um e-commerce, isso significa
+        verificar desde o comportamento da interface até a resposta
+        da API e a persistência correta das informações.
+      </p>
+
+      <div class="qa-checks">
+
+        <div class="qa-check">
+
+          <strong>
+            FRONT-END
+          </strong>
+
+          <span>
+            Validar campos, botões, mensagens, navegação e comportamento
+            visual da aplicação.
+          </span>
+
+        </div>
+
+        <div class="qa-check">
+
+          <strong>
+            API
+          </strong>
+
+          <span>
+            Validar endpoints, métodos HTTP, Status Codes, payloads,
+            autenticação e regras de negócio.
+          </span>
+
+        </div>
+
+        <div class="qa-check">
+
+          <strong>
+            DATABASE
+          </strong>
+
+          <span>
+            Validar se os dados foram criados, alterados ou removidos
+            corretamente quando aplicável.
+          </span>
+
+        </div>
+
+        <div class="qa-check">
+
+          <strong>
+            INTEGRAÇÃO
+          </strong>
+
+          <span>
+            Garantir que o dado enviado pelo front-end seja corretamente
+            processado pelo back-end.
+          </span>
+
+        </div>
+
+        <div class="qa-check">
+
+          <strong>
+            E2E
+          </strong>
+
+          <span>
+            Validar uma jornada completa, como cadastrar usuário,
+            escolher produto e realizar uma compra.
+          </span>
+
+        </div>
+
+        <div class="qa-check">
+
+          <strong>
+            REGRA
+          </strong>
+
+          <span>
+            Verificar se o sistema respeita as regras de negócio
+            em todos os pontos da jornada.
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =========================
+     FOOTER
+========================== -->
+
+    <footer>
+
+      <div class="footer-brand">
+        Hora do QA
+      </div>
+
+      <div class="footer-meta">
+
+        <span>
+          QA-REF / STACK-003
+        </span>
+
+        <span>
+          QUALITY NOTES
+        </span>
+
+        <span class="footer-pass">
+          PASS
+        </span>
+
+      </div>
+
+    </footer>
+
+  </main>
+</body>
+
+</html>
