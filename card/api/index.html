@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>API — Hora do QA</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap"
+    rel="stylesheet">
+
+ <link rel="stylesheet" href="style.css" />
+
+</head>
+
+
+<body>
+
+  <main class="page">
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header>
+
+      <div class="logo" aria-label="Espaço reservado para o logo">
+        <img src="../assets/images/logo.png" alt="Logo">
+      </div>
+
+      <div class="brand">
+
+        <span class="eyebrow">
+          Software Quality / Glossário
+        </span>
+
+        <span class="brand-name">
+          Hora do QA
+        </span>
+
+      </div>
+
+      <div class="status">
+
+        <span class="status-indicator"></span>
+
+        <span>
+          STATUS: CONNECTED
+        </span>
+
+      </div>
+
+    </header>
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="hero">
+
+      <div class="hero-label">
+        Conceito fundamental
+      </div>
+
+      <h1>
+        O que é<br>
+        uma API?
+      </h1>
+
+      <p class="hero-description">
+        API é uma forma padronizada de permitir que diferentes sistemas
+        conversem entre si. Ela define como uma aplicação pode solicitar
+        informações ou executar ações em outra aplicação, sem precisar
+        conhecer como ela foi construída internamente.
+      </p>
+
+    </section>
+
+
+    <!-- =========================
+         CONCEITOS
+    ========================== -->
+
+    <section class="concepts">
+
+
+      <!-- API -->
+
+      <article class="concept">
+
+        <div class="concept-top">
+
+          <span class="concept-number">
+            CONCEITO / 01
+          </span>
+
+          <span class="concept-status">
+            INTERFACE
+          </span>
+
+        </div>
+
+        <div>
+
+          <h2>
+            API
+            <span>Application Programming Interface</span>
+          </h2>
+
+          <p>
+            Uma <strong>API é uma interface de comunicação</strong> entre
+            sistemas. Ela disponibiliza regras e operações que permitem
+            que uma aplicação solicite dados ou serviços de outra.
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <!-- REQUEST -->
+
+      <article class="concept">
+
+        <div class="concept-top">
+
+          <span class="concept-number">
+            CONCEITO / 02
+          </span>
+
+          <span class="concept-status">
+            REQUEST
+          </span>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Requisição
+            <span>request</span>
+          </h2>
+
+          <p>
+            É o <strong>pedido enviado para a API</strong>. A aplicação
+            informa o que deseja fazer, utilizando métodos como
+            GET, POST, PUT ou DELETE, além de parâmetros, cabeçalhos
+            e, quando necessário, um corpo com dados.
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <!-- RESPONSE -->
+
+      <article class="concept">
+
+        <div class="concept-top">
+
+          <span class="concept-number">
+            CONCEITO / 03
+          </span>
+
+          <span class="concept-status">
+            RESPONSE
+          </span>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Resposta
+            <span>response</span>
+          </h2>
+
+          <p>
+            É o <strong>retorno da API</strong> depois que uma requisição
+            é processada. A resposta normalmente contém um código de
+            status, cabeçalhos e, quando aplicável, os dados solicitados
+            ou informações sobre o resultado da operação.
+          </p>
+
+        </div>
+
+      </article>
+
+
+      <!-- PURPOSE -->
+
+      <article class="concept">
+
+        <div class="concept-top">
+
+          <span class="concept-number">
+            CONCEITO / 04
+          </span>
+
+          <span class="concept-status">
+            PURPOSE
+          </span>
+
+        </div>
+
+        <div>
+
+          <h2>
+            Para que serve?
+            <span>integration</span>
+          </h2>
+
+          <p>
+            Uma API serve para <strong>integrar sistemas e compartilhar
+              funcionalidades ou dados</strong>. Aplicativos, sites,
+            sistemas internos e serviços externos podem se comunicar
+            sem precisar acessar diretamente o banco de dados ou o
+            código interno uns dos outros.
+          </p>
+
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <!-- =========================
+         COMO UMA API FUNCIONA
+         CARDS COM CORES INVERTIDAS
+    ========================== -->
+
+    <section class="flow">
+
+      <div class="flow-title">
+        Como uma API funciona
+      </div>
+
+
+      <div class="flow-content">
+
+
+        <!-- CLIENTE -->
+
+        <div class="flow-box">
+
+          <strong>
+            Cliente
+          </strong>
+
+          <span>
+            Aplicação que precisa de uma informação
+            ou deseja executar uma ação.
+          </span>
+
+        </div>
+
+
+        <div class="arrow">
+          →
+        </div>
+
+
+        <!-- API -->
+
+        <div class="flow-box">
+
+          <strong>
+            API
+          </strong>
+
+          <span>
+            Recebe a requisição, aplica regras e
+            encaminha o processamento necessário.
+          </span>
+
+        </div>
+
+
+        <div class="arrow">
+          →
+        </div>
+
+
+        <!-- SERVIDOR -->
+
+        <div class="flow-box">
+
+          <strong>
+            Servidor
+          </strong>
+
+          <span>
+            Processa a operação e devolve uma
+            resposta para o cliente.
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         EXEMPLOS
+    ========================== -->
+
+    <section class="example">
+
+
+      <!-- EXEMPLO 01 -->
+
+      <article class="example-card">
+
+        <span class="example-label">
+          Exemplo / 01
+        </span>
+
+        <h3>
+          Consultar um usuário
+        </h3>
+
+        <p>
+          Um aplicativo precisa mostrar os dados de um usuário.
+          Em vez de acessar diretamente o banco de dados, ele envia
+          uma requisição para a API.
+        </p>
+
+        <span class="endpoint">
+          GET /usuarios/123
+        </span>
+
+      </article>
+
+
+      <!-- EXEMPLO 02 -->
+
+      <article class="example-card">
+
+        <span class="example-label">
+          Exemplo / 02
+        </span>
+
+        <h3>
+          O que o QA verifica?
+        </h3>
+
+        <p>
+          O QA pode validar se a API retorna o status correto,
+          os dados esperados, mensagens de erro adequadas,
+          regras de negócio, autenticação e comportamento para
+          diferentes entradas.
+        </p>
+
+        <span class="endpoint">
+          200 OK / 404 NOT FOUND
+        </span>
+
+      </article>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+      <div class="footer-brand">
+        Hora do QA
+      </div>
+
+      <div class="footer-meta">
+
+        <span>
+          QA-REF / API-001
+        </span>
+
+        <span>
+          QUALITY NOTES
+        </span>
+
+        <span class="footer-pass">
+          PASS
+        </span>
+
+      </div>
+
+    </footer>
+
+  </main>
+
+</body>
+
+</html>
