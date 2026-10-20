@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Aprenda a utilizar commits semânticos para padronizar mensagens Git, organizar o histórico e automatizar o versionamento.">
+
+    <title>Commit Semântico — Um histórico que comunica</title>
+
+    <link href="../assets/css/style.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500;0,6..72,400;0,6..72,500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <main class="page">
+
+        <!-- HEADER -->
+        <header>
+            <div class="logo">
+                <img src="../assets/images/logo.png" alt="Logo">
+            </div>
+
+            <div class="brand">
+                <span class="eyebrow">Engenharia de software</span>
+                <span class="brand-name">Quality by Design</span>
+            </div>
+
+            <div class="status">
+                <span class="status-indicator"></span>
+                <span>Boas práticas de desenvolvimento</span>
+            </div>
+        </header>
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-label">
+                Git e padronização de mensagens
+            </div>
+
+            <h1>
+                Commit Semântico —<br>
+                Um histórico que comunica.
+            </h1>
+
+            <p class="hero-description">
+                O Commit Semântico é uma convenção para escrever mensagens
+                de commit de forma padronizada, clara e descritiva.
+                Baseado no Conventional Commits, ajuda a compreender
+                alterações no código, facilita revisões e permite automatizar
+                processos como a geração de versões e changelogs.
+            </p>
+        </section>
+
+        <!-- CONCEITOS -->
+        <section class="concepts" aria-label="Fundamentos do commit semântico">
+
+            <!-- 01 -->
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">CONCEITO / 01</span>
+                    <span class="concept-status">Estrutura</span>
+                </div>
+
+                <div>
+                    <h2>Como funciona?</h2>
+
+                    <p>
+                        Uma mensagem de commit semântico segue uma estrutura
+                        padronizada que identifica o tipo da alteração,
+                        o escopo opcional e uma descrição objetiva.
+                    </p>
+
+                    <pre><code>tipo(escopo): descrição da alteração</code></pre>
+
+                    <p>
+                        <strong>Tipo:</strong> natureza da mudança.
+                        <strong>Escopo:</strong> módulo afetado.
+                        <strong>Descrição:</strong> resumo da alteração.
+                    </p>
+
+                    <pre><code>feat(auth): adiciona autenticação com Google</code></pre>
+                </div>
+            </article>
+
+            <!-- 02 -->
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">CONCEITO / 02</span>
+                    <span class="concept-status">Classificação</span>
+                </div>
+
+                <div>
+                    <h2>Principais tipos de commit</h2>
+
+                    <p>
+                        Cada tipo comunica a intenção da mudança e ajuda
+                        a identificar rapidamente o propósito de uma alteração.
+                    </p>
+
+                    <ul>
+                        <li><strong>feat:</strong> nova funcionalidade.</li>
+                        <li><strong>fix:</strong> correção de defeito.</li>
+                        <li><strong>docs:</strong> documentação.</li>
+                        <li><strong>style:</strong> formatação sem alterar a lógica.</li>
+                        <li><strong>refactor:</strong> reorganização interna do código.</li>
+                        <li><strong>test:</strong> criação ou alteração de testes.</li>
+                        <li><strong>perf:</strong> melhoria de desempenho.</li>
+                        <li><strong>build:</strong> ferramentas e dependências de build.</li>
+                        <li><strong>ci:</strong> integração contínua.</li>
+                        <li><strong>chore:</strong> manutenção geral.</li>
+                        <li><strong>revert:</strong> reversão de um commit.</li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- 03 -->
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">CONCEITO / 03</span>
+                    <span class="concept-status">Aplicação</span>
+                </div>
+
+                <div>
+                    <h2>Exemplos práticos</h2>
+
+                    <p>
+                        O tipo e o escopo ajudam a compreender a mudança
+                        sem precisar analisar imediatamente todo o código.
+                    </p>
+
+                    <pre><code>feat(usuario): adiciona cadastro de usuários</code></pre>
+                    <p>Implementa uma nova funcionalidade.</p>
+
+                    <pre><code>fix(login): corrige validação de senha</code></pre>
+                    <p>Corrige um problema existente.</p>
+
+                    <pre><code>docs(readme): atualiza instruções de instalação</code></pre>
+                    <p>Atualiza a documentação do projeto.</p>
+
+                    <pre><code>refactor(api): simplifica tratamento de erros</code></pre>
+                    <p>Melhora a estrutura interna sem alterar o comportamento externo.</p>
+
+                    <pre><code>test(pagamento): adiciona testes de reembolso</code></pre>
+                    <p>Adiciona verificações para validar o comportamento do sistema.</p>
+                </div>
+            </article>
+
+            <!-- 04 -->
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">CONCEITO / 04</span>
+                    <span class="concept-status">Detalhamento</span>
+                </div>
+
+                <div>
+                    <h2>Descrição detalhada</h2>
+
+                    <p>
+                        Quando a primeira linha não é suficiente, a mensagem
+                        pode incluir um corpo explicativo e um rodapé com
+                        referências a tarefas ou alterações incompatíveis.
+                    </p>
+
+                    <pre><code>feat(pagamento): adiciona suporte a Pix
+
+Implementa a criação de cobranças via Pix
+e permite consultar o status do pagamento.
+
+Closes #123</code></pre>
+
+                    <p>
+                        A primeira linha resume a mudança, o corpo apresenta
+                        detalhes e o rodapé referencia uma issue relacionada.
+                    </p>
+
+                    <p>
+                        Uma mudança incompatível pode ser indicada com
+                        <strong>!</strong> após o tipo ou com
+                        <strong>BREAKING CHANGE:</strong> no rodapé.
+                    </p>
+
+                    <pre><code>feat(api)!: altera formato da resposta de usuários</code></pre>
+                </div>
+            </article>
+
+            <!-- 05 -->
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">CONCEITO / 05</span>
+                    <span class="concept-status">Versionamento</span>
+                </div>
+
+                <div>
+                    <h2>Commit semântico e SemVer</h2>
+
+                    <p>
+                        Os commits podem apoiar a automação do versionamento
+                        semântico, conhecido como Semantic Versioning (SemVer).
+                    </p>
+
+                    <pre><code>MAJOR.MINOR.PATCH</code></pre>
+
+                    <ul>
+                        <li><strong>MAJOR:</strong> <p> mudanças incompatíveis.</p></li>
+                        <li><strong>MINOR:</strong> <p>novas funcionalidades compatíveis.</p></li>
+                        <li><strong>PATCH:</strong> <p>correções compatíveis.</p></li>
+                    </ul>
+
+                    <p>
+                        A relação convencional é <strong>fix → PATCH</strong>,
+                        <strong>feat → MINOR</strong> e
+                        <strong>BREAKING CHANGE → MAJOR</strong>.
+                        As regras efetivas dependem das ferramentas e
+                        configurações do projeto.
+                    </p>
+                </div>
+            </article>
+
+            <!-- 06 -->
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">CONCEITO / 06</span>
+                    <span class="concept-status">Consistência</span>
+                </div>
+
+                <div>
+                    <h2>Boas práticas</h2>
+
+                    <p>
+                        Mensagens consistentes tornam o histórico mais útil
+                        para desenvolvedores, revisores e ferramentas de automação.
+                    </p>
+
+                    <ul>
+                        <li><p>Utilize verbos que descrevam claramente a alteração.</p></li>
+                        <li><p>Evite mensagens genéricas, como "ajustes" ou "alterações".</p></li>
+                        <li><p>Prefira commits pequenos e com mudanças relacionadas.</p></li>
+                        <li><p>Utilize o escopo quando ele ajudar a identificar a área afetada.</p></li>
+                        <li><p>Mantenha um padrão consistente em toda a equipe.</p></li>
+                        <li><p>Descreva o que mudou, não apenas que o código foi modificado.</p></li>
+                    </ul>
+                </div>
+            </article>
+
+            <!-- 07 -->
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">CONCEITO / 07</span>
+                    <span class="concept-status">Prática</span>
+                </div>
+
+                <div>
+                    <h2>Como criar um commit semântico</h2>
+
+                    <p>
+                        O processo é o mesmo de um commit comum.
+                        A diferença está no padrão adotado para escrever
+                        a mensagem.
+                    </p>
+
+                    <pre><code>git add .
+git commit -m "feat(produto): adiciona filtro por categoria"</code></pre>
+
+                    <p>Para corrigir um problema:</p>
+
+                    <pre><code>git commit -m "fix(carrinho): corrige cálculo do frete"</code></pre>
+
+                    <p>Para atualizar a documentação:</p>
+
+                    <pre><code>git commit -m "docs(api): documenta endpoint de produtos"</code></pre>
+                </div>
+            </article>
+
+            <!-- FLUXO -->
+            <section class="bdd-flow" aria-labelledby="flow-title">
+                <h2 class="flow-label" id="flow-title">
+                    Fluxo de um commit semântico
+                </h2>
+
+                <div class="flow">
+
+                    <article class="flow-step">
+                        <span>ETAPA / 01</span>
+                        <h3>Identificar</h3>
+                        <p>
+                            Compreender a natureza da mudança e selecionar
+                            o tipo de commit adequado, como feat, fix ou docs.
+                        </p>
+                    </article>
+
+                    <article class="flow-step">
+                        <span>ETAPA / 02</span>
+                        <h3>Descrever</h3>
+                        <p>
+                            Definir o escopo quando necessário e escrever
+                            uma mensagem clara, objetiva e consistente.
+                        </p>
+                    </article>
+
+                    <article class="flow-step">
+                        <span>ETAPA / 03</span>
+                        <h3>Registrar e automatizar</h3>
+                        <p>
+                            Criar o commit, manter o histórico organizado
+                            e permitir automações conforme as regras do projeto.
+                        </p>
+                    </article>
+
+                </div>
+            </section>
+
+        </section>
+
+        <!-- MENSAGEM FINAL -->
+        <section class="closing">
+            <span class="eyebrow">Clareza e consistência no Git</span>
+
+            <h2>
+                Um commit explica.
+                Um histórico conecta.
+                Um padrão automatiza.
+            </h2>
+
+            <p class="closing-description">
+                O Commit Semântico transforma mensagens de alterações em
+                informações estruturadas. Com uma convenção consistente,
+                fica mais fácil revisar mudanças, entender decisões técnicas,
+                gerar changelogs e integrar o histórico do Git aos processos
+                de versionamento.
+            </p>
+
+            <p class="closing-question">
+                Antes de registrar sua próxima alteração:
+            </p>
+
+            <p class="closing-highlight">
+                pergunte o que mudou, onde mudou e por que mudou.
+            </p>
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+            <span class="footer-brand">Hora do QA</span>
+
+            <div class="footer-meta">
+                <span>Engenharia de software</span>
+                <span>Commit semântico</span>
+                <span class="footer-pass">Git / 002</span>
+            </div>
+        </footer>
+
+    </main>
+</body>
+
+</html>
