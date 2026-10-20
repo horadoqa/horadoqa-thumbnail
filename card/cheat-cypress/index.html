@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Comandos Cypress — Hora do QA</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Newsreader:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css" />
+
+</head>
+
+<body>
+
+    <main class="page">
+
+        <!-- HEADER -->
+        <header>
+
+            <div class="logo" aria-label="Logo Hora do QA">
+                <img src="../assets/images/logo.png" alt="Logo Hora do QA">
+            </div>
+
+            <div class="brand">
+                <span class="eyebrow">
+                    Software Quality / Guia prático
+                </span>
+
+                <span class="brand-name">
+                    Hora do QA
+                </span>
+            </div>
+
+            <div class="status">
+                <span class="status-indicator"></span>
+                <span>STATUS: READY</span>
+            </div>
+
+        </header>
+
+        <!-- HERO -->
+        <section class="hero">
+
+            <div class="hero-label">
+                Automação de testes
+            </div>
+
+            <h1>
+                Comandos<br>
+                Cypress
+            </h1>
+
+            <p class="hero-description">
+                Os principais comandos para preparar o ambiente, instalar o
+                Cypress e executar testes automatizados — do primeiro setup
+                à execução.
+            </p>
+
+        </section>
+
+        <!-- CARD ÚNICO COM TABELA -->
+        <section class="commands">
+
+            <div class="commands-top">
+                <span class="command-number">
+                    REFERÊNCIA / 01
+                </span>
+
+                <span class="command-status">
+                    CLI COMMANDS
+                </span>
+            </div>
+
+            <h2>Do setup à execução</h2>
+
+            <p class="commands-intro">
+                Consulte a sequência de comandos, sua finalidade e quando
+                utilizá-los durante a configuração e execução dos testes.
+            </p>
+
+            <div class="table-wrapper">
+
+                <table class="command-table">
+
+                    <thead>
+                        <tr>
+                            <th>Etapa</th>
+                            <th>Comando</th>
+                            <th>Descrição</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr>
+                            <td class="step" data-label="Etapa">01</td>
+                            <td class="command" data-label="Comando">
+                                <code>node -v</code>
+                            </td>
+                            <td data-label="Descrição">
+                                Verifica a versão instalada do <strong>Node.js</strong>
+                                e ajuda a confirmar se ele está disponível no terminal.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="step" data-label="Etapa">02</td>
+                            <td class="command" data-label="Comando">
+                                <code>npm init -y</code>
+                            </td>
+                            <td data-label="Descrição">
+                                Inicializa o projeto e cria o arquivo
+                                <strong>package.json</strong> com as configurações padrão.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="step" data-label="Etapa">03</td>
+                            <td class="command" data-label="Comando">
+                                <code>npm install cypress --save-dev</code>
+                            </td>
+                            <td data-label="Descrição">
+                                Instala o <strong>Cypress</strong> como dependência de
+                                desenvolvimento e registra o pacote no projeto.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="step" data-label="Etapa">04</td>
+                            <td class="command" data-label="Comando">
+                                <code>npx cypress open</code>
+                            </td>
+                            <td data-label="Descrição">
+                                Abre a interface gráfica do Cypress para configurar,
+                                selecionar e acompanhar testes de forma interativa.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="step" data-label="Etapa">05</td>
+                            <td class="command" data-label="Comando">
+                                <code>npx cypress run</code>
+                            </td>
+                            <td data-label="Descrição">
+                                Executa os testes pelo terminal, geralmente sem abrir
+                                a interface gráfica. É útil em pipelines de CI/CD.
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class="step" data-label="Etapa">06</td>
+                            <td class="command" data-label="Comando">
+                                <code>npm test</code>
+                            </td>
+                            <td data-label="Descrição">
+                                Executa o script <strong>test</strong> configurado no
+                                <strong>package.json</strong>. Para rodar o Cypress,
+                                adicione <code>"test": "cypress run"</code> à seção
+                                <code>"scripts"</code>.
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+
+            </div>
+
+            <!-- OBSERVAÇÃO SOBRE ARQUIVOS -->
+            <aside class="file-note">
+
+                <div class="file-note-title">
+                    Regra dos arquivos de teste
+                </div>
+
+                <p>
+                    Por padrão, os arquivos de teste JavaScript do Cypress utilizam
+                    a extensão <code>.cy.js</code>. 
+                    <br/ >
+                    Exemplos:
+                    <code>login.cy.js</code> e <code>cadastro.cy.js</code>.
+                </p>
+
+                <p>
+                    O Cypress identifica esses arquivos conforme os padrões de
+                    descoberta definidos na configuração do projeto. Mantenha os
+                    testes no diretório esperado, normalmente
+                    <code>cypress/e2e</code>.
+                </p>
+
+            </aside>
+
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+
+            <div class="footer-brand">
+                Hora do QA
+            </div>
+
+            <div class="footer-meta">
+                <span>QA-REF / 005</span>
+                <span>CYPRESS NOTES</span>
+                <span class="footer-pass">READY</span>
+            </div>
+
+        </footer>
+
+    </main>
+
+</body>
+
+</html>
