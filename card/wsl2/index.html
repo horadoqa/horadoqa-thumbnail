@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Conheça o WSL2 com Ubuntu 26.04 LTS, da instalação à configuração do ambiente Linux no Windows.">
+
+    <title>WSL2 com Ubuntu 26 — Do Windows ao Linux</title>
+
+    <link href="../assets/css/style.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500;0,6..72,400;0,6..72,500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <main class="page">
+
+        <!-- HEADER -->
+        <header>
+            <div class="logo">
+                <img src="../assets/images/logo.png" alt="Logo">
+            </div>
+
+            <div class="brand">
+                <span class="eyebrow">Ambientes de desenvolvimento</span>
+                <span class="brand-name">Linux on Windows</span>
+            </div>
+
+            <div class="status">
+                <span class="status-indicator"></span>
+                <span>Ambiente configurável</span>
+            </div>
+        </header>
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-label">
+                Fundamentos de WSL2
+            </div>
+
+            <h1>
+                WSL2 com Ubuntu 26.04 —<br>
+                Do Windows ao Linux.
+            </h1>
+
+            <p class="hero-description">
+                O Windows Subsystem for Linux 2 (WSL2) permite executar
+                um ambiente Linux integrado ao Windows, sem a necessidade
+                de configurar uma máquina virtual tradicional manualmente.
+                Com o Ubuntu 26.04 LTS, é possível utilizar o terminal,
+                instalar ferramentas, desenvolver aplicações e executar
+                serviços Linux diretamente no computador.
+            </p>
+        </section>
+
+        <!-- CONCEITOS -->
+        <section class="concepts" aria-label="Principais conceitos do WSL2">
+
+            <!-- 01 -->
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">CONCEITO / 01</span>
+                    <span class="concept-status">Fundamentos</span>
+                </div>
+
+                <div>
+                    <h2>O que é o WSL2?</h2>
+                    <p>
+                        É a segunda geração do <strong>Windows Subsystem for Linux</strong>,
+                        que utiliza um kernel Linux real em uma arquitetura
+                        de máquina virtual leve, permitindo executar distribuições
+                        Linux com integração aos recursos do Windows.
+                    </p>
+                </div>
+            </article>
+
+            <!-- 02 -->
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">CONCEITO / 02</span>
+                    <span class="concept-status">Distribuição</span>
+                </div>
+
+                <div>
+                    <h2>Ubuntu 26.04 LTS</h2>
+                    <p>
+                        É uma distribuição Linux de suporte prolongado,
+                        adequada para desenvolvimento, administração de sistemas
+                        e automação. No WSL2, fornece um ambiente Linux com
+                        gerenciador de pacotes, terminal e ferramentas próprias.
+                    </p>
+                </div>
+            </article>
+
+            <!-- 03 -->
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">CONCEITO / 03</span>
+                    <span class="concept-status">Requisitos</span>
+                </div>
+
+                <div>
+                    <h2>Preparação do Windows</h2>
+                    <p>
+                        Antes da instalação, verifique a compatibilidade
+                        da versão do Windows, a virtualização de hardware
+                        e os recursos necessários. O WSL2 depende dos
+                        componentes de virtualização disponibilizados
+                        pelo Windows.
+                    </p>
+                </div>
+            </article>
+
+            <!-- 04 -->
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">CONCEITO / 04</span>
+                    <span class="concept-status">Instalação</span>
+                </div>
+
+                <div>
+                    <h2>Instalar o WSL2</h2>
+                    <p>
+                        No PowerShell executado como administrador,
+                        utilize <strong>wsl --install</strong> para instalar
+                        os componentes necessários. Para consultar as
+                        distribuições disponíveis, utilize
+                        <strong>wsl --list --online</strong>.
+                    </p>
+                </div>
+            </article>
+
+            <!-- 05 -->
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">CONCEITO / 05</span>
+                    <span class="concept-status">Configuração</span>
+                </div>
+
+                <div>
+                    <h2>Selecionar o Ubuntu 26.04</h2>
+                    <p>
+                        Instale a distribuição identificada pelo nome
+                        disponível na listagem oficial. Caso a versão
+                        desejada esteja disponível, utilize
+                        <strong>wsl --install -d Ubuntu-26.04</strong>.
+                        O identificador deve corresponder exatamente
+                        ao nome oferecido pelo sistema.
+                    </p>
+                </div>
+            </article>
+
+            <!-- 06 -->
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">CONCEITO / 06</span>
+                    <span class="concept-status">Primeiro acesso</span>
+                </div>
+
+                <div>
+                    <h2>Usuário e atualização</h2>
+                    <p>
+                        Na primeira inicialização, configure o usuário
+                        Linux e sua senha. Em seguida, atualize os índices
+                        dos pacotes e instale as atualizações disponíveis
+                        utilizando <strong>sudo apt update</strong> e
+                        <strong>sudo apt upgrade</strong>.
+                    </p>
+                </div>
+            </article>
+
+            <!-- 07 -->
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">CONCEITO / 07</span>
+                    <span class="concept-status">Desenvolvimento</span>
+                </div>
+
+                <div>
+                    <h2>Ferramentas essenciais</h2>
+                    <p>
+                        Prepare o ambiente com ferramentas como
+                        <strong>Git, curl, build-essential e Python 3</strong>,
+                        conforme as necessidades do projeto. O APT facilita
+                        a instalação e a manutenção dos pacotes no Ubuntu.
+                    </p>
+                </div>
+            </article>
+
+            <!-- 08 -->
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">CONCEITO / 08</span>
+                    <span class="concept-status">Integração</span>
+                </div>
+
+                <div>
+                    <h2>Arquivos e aplicações</h2>
+                    <p>
+                        O WSL2 permite acessar arquivos do Windows por meio
+                        de caminhos como <strong>/mnt/c</strong> e abrir
+                        arquivos do ambiente Linux pelo Windows Explorer,
+                        utilizando <strong>explorer.exe .</strong>.
+                        Para projetos Linux, prefira armazenar os arquivos
+                        no sistema de arquivos da própria distribuição.
+                    </p>
+                </div>
+            </article>
+
+            <!-- 09 -->
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">CONCEITO / 09</span>
+                    <span class="concept-status">Administração</span>
+                </div>
+
+                <div>
+                    <h2>Gerenciar distribuições</h2>
+                    <p>
+                        Os comandos <strong>wsl --list --verbose</strong>,
+                        <strong>wsl --status</strong> e
+                        <strong>wsl --shutdown</strong> ajudam a verificar
+                        as distribuições instaladas, conferir o estado
+                        do WSL e encerrar suas instâncias em execução.
+                    </p>
+                </div>
+            </article>
+
+            <!-- 10 -->
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">CONCEITO / 10</span>
+                    <span class="concept-status">Manutenção</span>
+                </div>
+
+                <div>
+                    <h2>Boas práticas e segurança</h2>
+                    <p>
+                        Mantenha o Windows e o WSL atualizados, utilize
+                        permissões adequadas, evite executar comandos
+                        desconhecidos com privilégios administrativos
+                        e mantenha cópias de segurança dos projetos
+                        e das configurações importantes.
+                    </p>
+                </div>
+            </article>
+
+            <!-- FLUXO DO WSL2 -->
+            <section class="bdd-flow" aria-labelledby="flow-title">
+                <h2 class="flow-label" id="flow-title">
+                    Fluxo de implantação do WSL2
+                </h2>
+
+                <div class="flow">
+
+                    <article class="flow-step">
+                        <span>ETAPA / 01</span>
+                        <h3>Instalar</h3>
+                        <p>
+                            Verificar os requisitos, habilitar os componentes
+                            necessários e instalar o WSL2 e a distribuição
+                            Ubuntu compatível.
+                        </p>
+                    </article>
+
+                    <article class="flow-step">
+                        <span>ETAPA / 02</span>
+                        <h3>Configurar</h3>
+                        <p>
+                            Criar o usuário Linux, atualizar o sistema,
+                            instalar as ferramentas e organizar
+                            o diretório de trabalho.
+                        </p>
+                    </article>
+
+                    <article class="flow-step">
+                        <span>ETAPA / 03</span>
+                        <h3>Desenvolver</h3>
+                        <p>
+                            Executar aplicações, gerenciar dependências,
+                            integrar ferramentas do Windows e manter
+                            o ambiente atualizado.
+                        </p>
+                    </article>
+
+                </div>
+            </section>
+
+        </section>
+
+        <!-- COMANDOS ESSENCIAIS -->
+        <section class="closing">
+            <span class="eyebrow">Referência rápida de terminal</span>
+
+            <h2>
+                Instalar.
+                Configurar.
+                Desenvolver.
+            </h2>
+
+            <p class="closing-description">
+                Os comandos abaixo ajudam a realizar as operações mais
+                comuns de instalação, verificação e manutenção do WSL2.
+                Os comandos wsl são executados no PowerShell ou no
+                Prompt de Comando do Windows; os comandos apt são
+                executados dentro do Ubuntu.
+            </p>
+
+            <p class="closing-question">
+                No PowerShell — como administrador:
+            </p>
+
+            <p class="closing-highlight">
+                wsl --install
+            </p>
+
+            <p class="closing-question">
+                Dentro do Ubuntu:
+            </p>
+
+            <p class="closing-highlight">
+                sudo apt update && sudo apt upgrade
+            </p>
+
+            <p class="closing-question">
+                Para verificar a versão e o estado das distribuições:
+            </p>
+
+            <p class="closing-highlight">
+                wsl --list --verbose
+            </p>
+
+            <p class="closing-description">
+                Observação: a disponibilidade e o nome exato da distribuição
+                Ubuntu 26.04 dependem do catálogo apresentado pelo comando
+                wsl --list --online. Confirme a identificação antes de
+                executar a instalação específica.
+            </p>
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+            <span class="footer-brand">Hora do QA</span>
+
+            <div class="footer-meta">
+                <span>Engenharia de software</span>
+                <span>WSL2 / Ubuntu 26.04</span>
+                <span class="footer-pass">Ambiente / 002</span>
+            </div>
+        </footer>
+
+    </main>
+</body>
+
+</html>
