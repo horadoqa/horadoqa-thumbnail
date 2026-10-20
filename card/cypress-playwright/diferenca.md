@@ -1,8 +1,8 @@
-Playwright X Cypress
+# Playwright X Cypress
 
 Em se falando de **automação de testes E2E**, a diferença principal é que o **Playwright** e o **Cypress** seguem arquiteturas bem diferentes.
 
- - **Playwright**: controla o navegador de forma mais direta, usando automação via CDP/WebSocket e suportando Chromium, Firefox e WebKit.
+- **Playwright**: controla o navegador de forma mais direta, usando automação via CDP/WebSocket e suportando Chromium, Firefox e WebKit.
 - **Cypress**: roda boa parte da aplicação de teste dentro do próprio contexto do navegador, o que facilita bastante a interação e o debugging.
 
  Na prática:
