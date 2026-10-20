@@ -148,7 +148,7 @@ header {
 }
 
 .hero-label::before {
-  content: "BDD";
+  content: "ARTIGO";
 
   color: var(--marfim);
   background: var(--verde-profundo);
