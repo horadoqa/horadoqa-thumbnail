@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Conheça os principais seletores utilizados em testes automatizados com Cypress e aprenda a localizar elementos HTML de forma estável e confiável.">
+
+    <title>Seletores no Cypress — Localização de elementos</title>
+
+    <link href="../assets/css/style.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500;0,6..72,400;0,6..72,500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <main class="page">
+
+        <!-- HEADER -->
+        <header>
+            <div class="logo">
+                <img src="../assets/images/logo.png" alt="Logo">
+            </div>
+
+            <div class="brand">
+                <span class="eyebrow">Engenharia de qualidade</span>
+                <span class="brand-name">Quality by Design</span>
+            </div>
+
+            <div class="status">
+                <span class="status-indicator"></span>
+                <span>Automação de testes</span>
+            </div>
+        </header>
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-label">
+                Fundamentos de automação com Cypress
+            </div>
+
+            <h1>
+                Seletores no Cypress —<br>
+                Localizar para validar.
+            </h1>
+
+            <p class="hero-description">
+                Os seletores permitem localizar elementos HTML para
+                interagir com eles durante os testes automatizados.
+                Escolher estratégias estáveis e específicas ajuda a
+                reduzir falhas desnecessárias, aumentar a confiabilidade
+                dos testes e facilitar a manutenção da automação.
+            </p>
+        </section>
+
+        <!-- INTRODUÇÃO -->
+        <section class="concepts" aria-label="Fundamentos dos seletores">
+
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">FUNDAMENTO / 01</span>
+                    <span class="concept-status">Conceito</span>
+                </div>
+
+                <div>
+                    <h2>O que são seletores?</h2>
+                    <p>
+                        São expressões utilizadas para <strong>identificar
+                        elementos da página</strong>, como campos de texto,
+                        botões, links e caixas de seleção. No Cypress,
+                        comandos como <code>cy.get()</code> utilizam
+                        seletores CSS para localizar esses elementos.
+                    </p>
+                </div>
+            </article>
+
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">FUNDAMENTO / 02</span>
+                    <span class="concept-status">Exemplo HTML</span>
+                </div>
+
+                <div>
+                    <h2>Um campo de e-mail</h2>
+                    <p>
+                        Um único elemento pode possuir diversos atributos
+                        que permitem sua localização. O segredo está em
+                        escolher aquele que oferece a melhor combinação
+                        de <strong>estabilidade, clareza e especificidade</strong>.
+                    </p>
+
+                    <pre><code>&lt;input
+  type="email"
+  data-test="username"
+  id="username"
+  name="username"
+  placeholder="seu@email.com"
+  autocomplete="email"
+  required
+&gt;</code></pre>
+                </div>
+            </article>
+
+            <!-- SELETORES -->
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">SELETOR / 01</span>
+                    <span class="concept-status">Recomendado</span>
+                </div>
+
+                <div>
+                    <h2>data-test</h2>
+                    <p>
+                        Atributo definido especificamente para facilitar
+                        a localização de elementos nos testes. Quando
+                        mantido estável pela equipe, reduz a dependência
+                        de alterações no layout e nas classes de estilo.
+                    </p>
+
+                    <pre><code>cy.get('[data-test="username"]')</code></pre>
+
+                    <p>
+                        <strong>Indicação:</strong> opção preferencial
+                        para elementos que precisam ser identificados
+                        de forma consistente na automação.
+                    </p>
+                </div>
+            </article>
+
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">SELETOR / 02</span>
+                    <span class="concept-status">Identificação</span>
+                </div>
+
+                <div>
+                    <h2>id</h2>
+                    <p>
+                        Utiliza o identificador do elemento HTML.
+                        Em condições normais, o atributo deve ser único
+                        na página, permitindo uma busca direta e simples.
+                    </p>
+
+                    <pre><code>cy.get('#username')</code></pre>
+
+                    <p>
+                        <strong>Atenção:</strong> pode ser uma boa escolha
+                        quando o identificador é estável e não depende
+                        de convenções internas sujeitas a mudanças.
+                    </p>
+                </div>
+            </article>
+
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">SELETOR / 03</span>
+                    <span class="concept-status">Formulários</span>
+                </div>
+
+                <div>
+                    <h2>name</h2>
+                    <p>
+                        Localiza elementos pelo atributo <code>name</code>,
+                        frequentemente utilizado em campos de formulários
+                        para identificar os dados enviados pela aplicação.
+                    </p>
+
+                    <pre><code>cy.get('[name="username"]')</code></pre>
+
+                    <p>
+                        <strong>Indicação:</strong> alternativa útil quando
+                        o atributo é previsível, estável e identifica
+                        corretamente o campo desejado.
+                    </p>
+                </div>
+            </article>
+
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">SELETOR / 04</span>
+                    <span class="concept-status">Flexibilidade</span>
+                </div>
+
+                <div>
+                    <h2>Seletores CSS</h2>
+                    <p>
+                        Permitem localizar elementos por tag, atributo,
+                        classe, identificador e combinações de critérios.
+                        Oferecem flexibilidade, mas seletores muito
+                        dependentes da estrutura ou da apresentação
+                        podem exigir manutenção frequente.
+                    </p>
+
+                    <pre><code>cy.get('input[type="email"]')</code></pre>
+
+                    <p>
+                        <strong>Indicação:</strong> quando os atributos
+                        disponíveis são adequados e a expressão identifica
+                        o elemento com precisão.
+                    </p>
+                </div>
+            </article>
+
+            <!-- COMPARAÇÃO -->
+            <section class="bdd-flow" aria-labelledby="comparison-title">
+                <h2 class="flow-label" id="comparison-title">
+                    Comparativo dos seletores
+                </h2>
+
+                <div class="flow">
+
+                    <article class="flow-step">
+                        <span>OPÇÃO / 01</span>
+                        <h3>data-test</h3>
+                        <p>
+                            Criado para testes automatizados. Favorece
+                            a estabilidade quando sua manutenção é
+                            tratada como parte do desenvolvimento.
+                        </p>
+                    </article>
+
+                    <article class="flow-step">
+                        <span>OPÇÃO / 02</span>
+                        <h3>id e name</h3>
+                        <p>
+                            São alternativas simples e válidas quando
+                            os atributos têm significado claro e
+                            permanecem estáveis entre versões.
+                        </p>
+                    </article>
+
+                    <article class="flow-step">
+                        <span>OPÇÃO / 03</span>
+                        <h3>CSS</h3>
+                        <p>
+                            Oferece diferentes formas de localização.
+                            A confiabilidade depende dos critérios
+                            escolhidos e da estrutura da página.
+                        </p>
+                    </article>
+
+                </div>
+            </section>
+
+            <!-- EXEMPLO CYPRESS -->
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">NA PRÁTICA / 01</span>
+                    <span class="concept-status">Interação</span>
+                </div>
+
+                <div>
+                    <h2>Localizar e interagir</h2>
+                    <p>
+                        Depois de localizar o campo, o Cypress pode
+                        utilizá-lo para executar ações e verificar
+                        comportamentos esperados.
+                    </p>
+
+                    <pre><code>cy.get('[data-test="username"]')
+  .should('be.visible')
+  .type('qa@exemplo.com')
+  .should('have.value', 'qa@exemplo.com')</code></pre>
+
+                    <p>
+                        Nesse exemplo, o teste localiza o campo,
+                        verifica sua visibilidade, digita um endereço
+                        de e-mail e confirma o valor preenchido.
+                    </p>
+                </div>
+            </article>
+
+            <!-- BOAS PRÁTICAS -->
+            <section class="bdd-flow" aria-labelledby="practices-title">
+                <h2 class="flow-label" id="practices-title">
+                    Boas práticas na escolha dos seletores
+                </h2>
+
+                <div class="flow">
+
+                    <article class="flow-step">
+                        <span>PRÁTICA / 01</span>
+                        <h3>Priorize a estabilidade</h3>
+                        <p>
+                            Prefira atributos dedicados aos testes,
+                            como <code>data-test</code>, e estabeleça
+                            convenções consistentes com a equipe.
+                        </p>
+                    </article>
+
+                    <article class="flow-step">
+                        <span>PRÁTICA / 02</span>
+                        <h3>Seja específico</h3>
+                        <p>
+                            Escolha critérios que identifiquem
+                            o elemento correto e evitem resultados
+                            ambíguos ou múltiplas correspondências.
+                        </p>
+                    </article>
+
+                    <article class="flow-step">
+                        <span>PRÁTICA / 03</span>
+                        <h3>Evite dependências visuais</h3>
+                        <p>
+                            Não dependa de classes usadas apenas
+                            para estilização quando houver uma
+                            alternativa mais estável e apropriada.
+                        </p>
+                    </article>
+
+                </div>
+            </section>
+
+            <!-- ALERTA -->
+            <article class="concept">
+                <div class="concept-top">
+                    <span class="concept-number">ATENÇÃO / 01</span>
+                    <span class="concept-status">Manutenção</span>
+                </div>
+
+                <div>
+                    <h2>Estabilidade não é garantia absoluta</h2>
+                    <p>
+                        Nenhum seletor é imune a mudanças. Um atributo
+                        <code>data-test</code> também pode deixar de existir
+                        ou ter seu valor alterado. A confiabilidade depende
+                        de critérios bem definidos, manutenção do código
+                        e testes que identifiquem problemas de forma clara.
+                    </p>
+                </div>
+            </article>
+
+        </section>
+        <br/>
+
+        <!-- FLUXO DE ESCOLHA -->
+        <section class="bdd-flow" aria-labelledby="flow-title">
+            <h2 class="flow-label" id="flow-title">
+                Fluxo de escolha de um seletor
+            </h2>
+
+            <div class="flow">
+
+                <article class="flow-step">
+                    <span>ETAPA / 01</span>
+                    <h3>Identificar</h3>
+                    <p>
+                        Inspecionar o HTML e identificar os atributos
+                        disponíveis no elemento que será testado.
+                    </p>
+                </article>
+
+                <article class="flow-step">
+                    <span>ETAPA / 02</span>
+                    <h3>Selecionar</h3>
+                    <p>
+                        Priorizar um atributo estável e escolher
+                        um seletor CSS específico para o elemento.
+                    </p>
+                </article>
+
+                <article class="flow-step">
+                    <span>ETAPA / 03</span>
+                    <h3>Validar</h3>
+                    <p>
+                        Confirmar que o elemento correto foi encontrado
+                        e verificar seu comportamento durante o teste.
+                    </p>
+                </article>
+
+            </div>
+        </section>
+
+        <!-- MENSAGEM FINAL -->
+        <section class="closing">
+            <span class="eyebrow">Automação com confiabilidade</span>
+
+            <h2>
+                Localizar com precisão.
+                Interagir com consistência.
+                Validar com confiança.
+            </h2>
+
+            <p class="closing-description">
+                A escolha dos seletores influencia diretamente
+                a manutenção e a confiabilidade dos testes automatizados.
+                Atributos estáveis, critérios específicos e convenções
+                bem definidas ajudam a reduzir falhas causadas por
+                mudanças na estrutura ou na aparência da aplicação.
+            </p>
+
+            <p class="closing-question">
+                Antes de automatizar uma interação, pergunte:
+            </p>
+
+            <p class="closing-highlight">
+                este seletor identifica o elemento certo sem depender
+                de detalhes que podem mudar?
+            </p>
+        </section>
+
+        <!-- FOOTER -->
+        <footer>
+            <span class="footer-brand">Hora do QA</span>
+
+            <div class="footer-meta">
+                <span>Engenharia de software</span>
+                <span>Seletores no Cypress</span>
+                <span class="footer-pass">Qualidade / 002</span>
+            </div>
+        </footer>
+
+    </main>
+</body>
+
+</html>
